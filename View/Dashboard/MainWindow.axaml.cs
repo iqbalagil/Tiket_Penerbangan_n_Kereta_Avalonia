@@ -22,8 +22,8 @@ public partial class MainWindow : Window
         this.AttachDevTools();
 #endif
 
-        this.DataContext = ((App)Application.Current).AppHost.Services.GetRequiredService<MainWindowViewModel>;
-        LoadUsers();
+        DataContext = ((App)Application.Current).AppHost.Services.GetRequiredService<MainWindowViewModel>();
+        //LoadUsers();
     }
 
     private async void LoadUsers()

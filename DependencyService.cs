@@ -20,6 +20,7 @@ namespace Tiket_Penerbangan_n_Kereta
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddSingleton<DataServicesApp>();
+            services.AddSingleton<IRegisterService, RegisterService>();
             services.AddSingleton<ILoginService, LoginService>();
             return services;
         }
@@ -28,6 +29,7 @@ namespace Tiket_Penerbangan_n_Kereta
         {
 
             services.AddSingleton<MainWindowViewModel>();
+            services.AddSingleton<RegisterViewModels>();
             services.AddSingleton<LoginViewModel>();
             return services;
         }
