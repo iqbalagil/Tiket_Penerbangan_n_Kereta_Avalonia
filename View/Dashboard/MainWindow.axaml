@@ -3,8 +3,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                 mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="1080"
-        xmlns:vm="clr-namespace:Tiket_Penerbangan_n_Kereta.Dashboard"
-        x:Class="Tiket_Penerbangan_n_Kereta.Dashboard.MainWindow"
+        xmlns:vm="clr-namespace:Tiket_Penerbangan_n_Kereta.View.Dashboard"
+        xmlns:material="using:Material.Icons.Avalonia"
+		x:Class="Tiket_Penerbangan_n_Kereta.View.Dashboard.MainWindow"
         Title="MainWindow"
 		WindowState="FullScreen"
         x:DataType="vm:MainWindowViewModel"
@@ -42,9 +43,15 @@
 					Spacing="0"
 					Margin="0">
 
-				        <Button Name="MinimizedCommand"  Width="30" Background="{DynamicResource PrimaryColor}" Command="{Binding MinimizeCommand}" Height="25"/>
-				        <Button Name="MaximizeCommand" Width="30" Background="{DynamicResource PrimaryColor}" Command="{Binding MaximizeCommand}" Height="25"/>
-				        <Button Name="ExitCommand" Width="30" Background="{DynamicResource PrimaryColor}" Command="{Binding ClosedCommand}" Height="25"/>
+				        <Button Name="MinimizedCommand"  Width="30" Background="{DynamicResource PrimaryColor}" Command="{Binding MinimizeCommand}" Height="25">
+							<material:MaterialIcon Kind="Minimize"/>
+						</Button>
+				        <Button Name="MaximizeCommand" Width="30" Background="{DynamicResource PrimaryColor}" Command="{Binding MaximizeCommand}" Height="25">
+							<material:MaterialIcon Kind="Maximize"/>
+						</Button>
+				        <Button Name="ExitCommand" Width="30" Background="{DynamicResource PrimaryColor}" Command="{Binding ClosedCommand}" Height="25">
+							<material:MaterialIcon Kind="Close"/>
+						</Button>
 
 			    </StackPanel>
 			</Border>
@@ -57,25 +64,21 @@
 					Spacing="16"
 					Orientation="Vertical"
 					HorizontalAlignment="Center">
-					<Button Width="40"
-							Name="DashboardMenu" Background="{DynamicResource PrimaryColor2}" Height="40" Padding="10" CornerRadius="8">
-						<Button.Styles>
-							<Style Selector="Button:pointerover/template/ContentPresenter">
-								<Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
-							</Style>
-							<Style Selector="Button:pressed/template/ContentPresenter">
-								<Setter Property="Background" Value="{DynamicResource DarkenColorBlue}"/>
-							</Style>
-							<Style Selector=":pressed/template/ContentPresenter">
-								<Setter Property="RenderTransform" Value="scale(0.98)" />
-							</Style>
-						</Button.Styles>
-					</Button>
+					
+					<Button Classes="blueButton"/>
+					<Button Classes="blueButton"/>
+					<Button Classes="blueButton"/>
+					<Button Classes="blueButton"/>
+					<Button Classes="blueButton"/>
+
 				</StackPanel>
 
 				
 			</Border>
-			<Panel >
+			<Panel
+				Margin="10"
+				Width="{Binding Bounds.Width, RelativeSource={RelativeSource AncestorType=Window}}">
+
 				
 			</Panel>
 

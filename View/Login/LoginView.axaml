@@ -1,0 +1,47 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="clr-namespace:Tiket_Penerbangan_n_Kereta.Models"
+			 mc:Ignorable="d" d:DesignWidth="1080" d:DesignHeight="1080"
+             x:DataType="vm:LoginViewModel"
+			 x:Class="Tiket_Penerbangan_n_Kereta.LoginView"
+			 x:CompileBindings="True"
+			 >
+	<DockPanel>
+		<Panel 
+			Background="{DynamicResource PrimaryColor2}"
+			DockPanel.Dock="Left"
+			Width="{Binding Bounds.Width, RelativeSource={RelativeSource AncestorType=Window}}"
+			>
+			<Image/>
+		</Panel>
+		<Panel
+			DockPanel.Dock="Right"
+			Background="{DynamicResource PrimaryColor}"
+			Width="780">
+			
+			<Grid
+				ShowGridLines="True"
+				DockPanel.Dock="Top"
+				ColumnDefinitions="auto,auto,auto" RowDefinitions="*,3,*,3,*,3,*,*,*" Margin="50,50">
+				<Label FontSize="21" FontWeight="SemiBold" FontFamily="Poppins">Log in</Label>
+				<TextBox Text="{Binding Username}" Classes="inputField" Watermark="Email" Width="300" Grid.Column="0"/>
+				<TextBox Text="{Binding Password}" Classes="inputField" Watermark="Password" Width="300" Grid.Column="0" Grid.Row="1"/>
+				<StackPanel Height="20" Orientation="Horizontal" VerticalAlignment="Top" Grid.Column="0" Grid.Row="2" Margin="0 30 0 0">
+					<CheckBox/>
+					<TextBlock>Remember me</TextBlock>
+				</StackPanel>
+				<Button Command="" Classes="buttonCustom" Width="300" Height="45" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2" Margin="0 10 0 0">
+					Log in
+					<Button.Transitions>
+						<Transitions>
+							<DoubleTransition Property="Opacity" Duration="0:0:0.5"/>
+						</Transitions>
+					</Button.Transitions>
+				</Button>
+			</Grid>
+		</Panel>
+	</DockPanel>
+
+</UserControl>

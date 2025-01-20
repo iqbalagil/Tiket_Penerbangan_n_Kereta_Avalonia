@@ -3,14 +3,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="Tiket_Penerbangan_n_Kereta.axa"
+        xmlns:vm="clr-namespace:Tiket_Penerbangan_n_Kereta.Services"
+		x:DataType="vm:DataServicesApp"
+		x:CompileBindings="True"
+		x:Class="Tiket_Penerbangan_n_Kereta.Dashboard.UserInterface"
         Title="UserInterface"
         ExtendClientAreaChromeHints="NoChrome"
         ExtendClientAreaTitleBarHeightHint="-1"
         ExtendClientAreaToDecorationsHint="True"
         CanResize="True">
-    
-    <Panel>
 
+	<Panel>
+        <DataGrid AutoGenerateColumns="True"/>
     </Panel>
 </Window>

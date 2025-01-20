@@ -1,0 +1,109 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Design.PreviewWith>
+    <Border Padding="20">
+		<Button Classes="buttonCustom">custom</Button>
+    </Border>
+  </Design.PreviewWith>
+
+
+	<Style Selector="ComboBox.changeLocation">
+		<Setter Property="Padding" Value="0"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Border>
+					<Grid>
+						<ContentPresenter Name="PART_ContentPresenter"
+							 Content="{TemplateBinding SelectionBoxItem}"
+							 ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+							 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							 VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+						<Popup Name="PART_Popup"
+							   Placement="Bottom"
+							   IsOpen="{TemplateBinding IsDropDownOpen}"
+							   DataContext="{TemplateBinding DataContext}">
+							<Border Background="Gray"
+									BorderBrush="{TemplateBinding BorderBrush}"
+									BorderThickness="{TemplateBinding BorderThickness}">
+								<ScrollViewer>
+									<ItemsPresenter Name="PART_ItemsPresenter" />
+								</ScrollViewer>
+							</Border>
+						</Popup>
+
+						<ToggleButton Name="PART_ToggleButton"
+									  Classes="dropdown"
+									  Grid.Column="1"
+									  IsChecked="{TemplateBinding IsDropDownOpen}"
+									  ClickMode="Press"
+									  Focusable="False"
+									  Background="Transparent"
+									  BorderBrush="Transparent">
+							<ToggleButton.Styles>
+								<Style Selector="ToggleButton.dropdown:focus">
+									<Setter Property="Background" Value="Transparent"/>
+									<Setter Property="BorderBrush" Value="Transparent"/>
+								</Style>
+							</ToggleButton.Styles>
+							<Path Data="M0,0 L4,4 L8,0 Z"
+								  Fill="Transparent"
+								  Width="8"
+								  Height="8"
+								  HorizontalAlignment="Center"
+								  VerticalAlignment="Center"
+								  Margin="5" />
+						</ToggleButton>
+					</Grid>
+				</Border>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+
+
+	<Style Selector="TextBox.inputField[UseFloatingWatermark=True]:empty/template/TextBlock#PART_FloatingWatermark">
+		<Setter Property="Foreground" Value="Gray"/>
+		<Setter Property="RenderTransform">
+			<Setter.Value>
+				<TranslateTransform Y="1"/>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="FontSize" Value="16"/>
+		<Setter Property="Opacity" Value="0"/>
+	</Style>
+
+	<Style Selector="TextBox.inputField[UseFloatingWatermark=True]:not(:empty)/template/TextBlock#PART_FloatingWatermark">
+		<Setter Property="Foreground" Value="{DynamicResource SecondaryColor}"/>
+		<Setter Property="RenderTransform">
+			<Setter.Value>
+				<TranslateTransform Y="0"/>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="FontSize" Value="12"/>
+		<Setter Property="Opacity" Value="1"/>
+	</Style>
+
+	<Style Selector="TextBox.inputField">
+		<Setter Property="Width" Value="400"/>
+		<Setter Property="Height" Value="40"/>
+	</Style>
+	
+	<Style Selector="Button.buttonCustom">
+		<Setter Property="Padding" Value="10"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="CornerRadius" Value="8"/>
+		<Setter Property="Background" Value="{DynamicResource PrimaryColor2}"/>
+	</Style>
+
+	<Style Selector="Button.buttonCustom:pointerover/template/ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
+		<Setter Property="Opacity" Value="1"/>
+	</Style>
+
+	<Style Selector="Button.buttonCustom:pressed/template/ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
+		<Setter Property="Opacity" Value="0.5"/>
+	</Style>
+	
+</Styles>

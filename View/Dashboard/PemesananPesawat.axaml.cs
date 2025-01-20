@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace Tiket_Penerbangan_n_Kereta;
 
-public partial class axa : Window
+public partial class PemesananPesawat : UserControl
 {
-    public axa()
+    public PemesananPesawat()
     {
         InitializeComponent();
     }

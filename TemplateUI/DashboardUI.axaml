@@ -1,0 +1,59 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		>
+  <Design.PreviewWith>
+    <Border Padding="20">
+		<ComboBox Classes="changeLocation"/>
+	</Border>
+  </Design.PreviewWith>
+	
+	<Style Selector="Button.blueButton">
+		<Setter Property="Width" Value="40"/>
+		<Setter Property="Height" Value="40"/>
+		<Setter Property="Background" Value="{DynamicResource PrimaryColor2}"/>
+		<Setter Property="Padding" Value="10"/>
+		<Setter Property="CornerRadius" Value="8"/>
+	</Style>
+	
+	<Style Selector="Button.blueButton:pointerover/template/ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
+	</Style>
+
+	<Style Selector="Button.blueButton:pressed/template/ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource DarkColorBlue}"/>
+		<Setter Property="RenderTransform" Value="scale(0.98)"/>
+	</Style>
+	
+	<Style Selector="TextBox.searchField[UseFloatingWatermark=True]:empty/template/TextBlock#PART_FloatingWatermark">
+		<Setter Property="Foreground" Value="Gray"/>
+		<Setter Property="RenderTransform">
+			<Setter.Value>
+				<TranslateTransform Y="1"/>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="FontSize" Value="16"/>
+		<Setter Property="Opacity" Value="0"/>
+	</Style>
+	
+	<Style Selector="TextBox.searchField[UseFloatingWatermark=True]:not(:empty)/template/TextBlock#PART_FloatingWatermark">
+		<Setter Property="Foreground" Value="{DynamicResource SecondaryColor}"/>
+		<Setter Property="RenderTransform">
+			<Setter.Value>
+				<TranslateTransform Y="0"/>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="FontSize" Value="12"/>
+		<Setter Property="Opacity" Value="1"/>
+	</Style>
+	
+	<Style Selector="TextBox.searchField">
+		<Setter Property="Width" Value="400"/>
+		<Setter Property="Height" Value="40"/>
+		<Setter Property="Watermark" Value="Search"/>
+	</Style>
+
+	<Style Selector="ComboBox.changeLocation:focus/template/ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource PrimaryColor}"/>
+	</Style>
+	
+</Styles>

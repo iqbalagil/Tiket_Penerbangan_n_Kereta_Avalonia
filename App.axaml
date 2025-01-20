@@ -7,12 +7,16 @@
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-				<ResourceInclude Source="/DynamicColor.axaml"/>
+				<ResourceInclude Source="/TemplateUI/DynamicColor.axaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>
 	
     <Application.Styles>
         <FluentTheme />
-    </Application.Styles>
+		<StyleInclude Source="avares://Material.Icons.Avalonia/MaterialIconStyles.axaml"/>
+		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+		<StyleInclude Source="/TemplateUI/DashboardUI.axaml"/>
+		<StyleInclude Source="/TemplateUI/TemplateAirlanes.axaml"/>
+	</Application.Styles>
 </Application>
