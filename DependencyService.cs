@@ -28,7 +28,7 @@ namespace Tiket_Penerbangan_n_Kereta
         public static IServiceCollection AddViewModels(this IServiceCollection services)
         {
 
-            services.AddSingleton<MainWindowViewModel>();
+            services.AddSingleton<DashboardViewModel>();
             services.AddSingleton<RegisterViewModels>();
             services.AddSingleton<LoginViewModel>();
             return services;
@@ -36,7 +36,7 @@ namespace Tiket_Penerbangan_n_Kereta
 
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddSingleton<MainWindow>();
+            services.AddSingleton<WindowDashboard>();
             return services;
         }
     }

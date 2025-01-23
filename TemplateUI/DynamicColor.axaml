@@ -7,4 +7,5 @@
 		<SolidColorBrush x:Key="SecondaryColor2" Color="#0e1012" />
 		
 		<SolidColorBrush x:Key="DarkColorBlue" Color="#0666cc"/>
+		<SolidColorBrush x:Key="DarkColorWhite" Color="#F8FAFB"/>
 </ResourceDictionary>

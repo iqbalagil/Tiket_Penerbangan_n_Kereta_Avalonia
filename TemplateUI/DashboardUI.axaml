@@ -3,7 +3,11 @@
 		>
   <Design.PreviewWith>
     <Border Padding="20">
-		<ComboBox Classes="changeLocation"/>
+		<ListBox FontFamily="Poppins"
+		 Margin="5"
+		Classes="dashboardPanel">
+			<TextBlock>Testing</TextBlock>
+		</ListBox>
 	</Border>
   </Design.PreviewWith>
 	
@@ -54,6 +58,21 @@
 
 	<Style Selector="ComboBox.changeLocation:focus/template/ContentPresenter">
 		<Setter Property="Background" Value="{DynamicResource PrimaryColor}"/>
+	</Style>
+
+	<Style Selector="ListBox.dashboardPanel">
+		<Setter Property="Background" Value="#F8FAFB"/>
+		<Setter Property="Foreground" Value="Black"/>
+	</Style>
+
+	<Style Selector="ListBox.dashboardPanel:focus/template/ContentPresenter">
+		<Setter Property="Background" Value="#F8FAFB"/>
+		<Setter Property="Foreground" Value="Black"/>
+	</Style>
+
+	<Style Selector="ListBox.dashboardPanel:pointerover/template/ContentPresenter">
+		<Setter Property="Background" Value="#F8FAFB"/>
+		<Setter Property="Foreground" Value="Black"/>
 	</Style>
 	
 </Styles>

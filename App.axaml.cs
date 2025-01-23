@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Tiket_Penerbangan_n_Kereta.Dashboard;
+using Tiket_Penerbangan_n_Kereta.View.Dashboard;
 using Tiket_Penerbangan_n_Kereta.Data;
 using Tiket_Penerbangan_n_Kereta.Models;
 using Tiket_Penerbangan_n_Kereta.Services;
@@ -37,7 +37,7 @@ public partial class App : Application
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = AppHost.Services.GetRequiredService<MainWindow>();
+            desktop.MainWindow = AppHost.Services.GetRequiredService<WindowDashboard>();
             desktop.MainWindow.DataContext = AppHost.Services.GetRequiredService<DataServicesApp>();
         }
 
