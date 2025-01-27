@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="App.axaml" value="Tiket_Penerbangan_n_Kereta.csproj" />
+        <entry key="LoginRegisterView.axaml" value="Tiket_Penerbangan_n_Kereta.csproj" />
+        <entry key="TemplateUI/DashboardUI.axaml" value="Tiket_Penerbangan_n_Kereta.csproj" />
+        <entry key="TemplateUI/TemplateAirlanes.axaml" value="Tiket_Penerbangan_n_Kereta.csproj" />
+        <entry key="View/Dashboard/PemesananPesawat.axaml" value="Tiket_Penerbangan_n_Kereta.csproj" />
+        <entry key="View/Dashboard/PemesananPesawatView.axaml" value="Tiket_Penerbangan_n_Kereta.csproj" />
+        <entry key="View/Dashboard/UserInterfaceView.axaml" value="Tiket_Penerbangan_n_Kereta.csproj" />
+        <entry key="View/Dashboard/WindowDashboard.axaml" value="Tiket_Penerbangan_n_Kereta.csproj" />
+        <entry key="View/Dashboard/WindowDashboardView.axaml" value="Tiket_Penerbangan_n_Kereta.csproj" />
+        <entry key="View/Login/LoginView.axaml" value="Tiket_Penerbangan_n_Kereta.csproj" />
+        <entry key="View/Register/RegisterView.axaml" value="Tiket_Penerbangan_n_Kereta.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
