@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Tiket_Penerbangan_n_Kereta.Data;
-using Tiket_Penerbangan_n_Kereta.Models;
+using Tiket_Penerbangan_n_Kereta.ViewModel;
 using Tiket_Penerbangan_n_Kereta.Services;
 using Tiket_Penerbangan_n_Kereta.View.Dashboard;
+using Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard;
 
 namespace Tiket_Penerbangan_n_Kereta
 {
@@ -27,7 +28,8 @@ namespace Tiket_Penerbangan_n_Kereta
 
         public static IServiceCollection AddViewModels(this IServiceCollection services)
         {
-
+            services.AddSingleton<ViewModelBase>();
+            services.AddSingleton<PemesananPesawatViewModel>();
             services.AddSingleton<DashboardViewModel>();
             services.AddSingleton<RegisterViewModels>();
             services.AddSingleton<LoginViewModel>();
@@ -36,7 +38,7 @@ namespace Tiket_Penerbangan_n_Kereta
 
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddSingleton<WindowDashboard>();
+            services.AddSingleton<WindowDashboardView>();
             return services;
         }
     }

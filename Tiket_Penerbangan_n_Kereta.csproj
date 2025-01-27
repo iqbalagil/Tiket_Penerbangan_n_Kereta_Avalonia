@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="View\Dashboard\WindowDashboard.axaml.cs">
+    <Compile Update="View\Dashboard\WindowDashboardView.axaml.cs">
       <DependentUpon>WindowDashboard.axaml</DependentUpon>
     </Compile>
   </ItemGroup>

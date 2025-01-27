@@ -3,11 +3,7 @@
 		>
   <Design.PreviewWith>
     <Border Padding="20">
-		<ListBox FontFamily="Poppins"
-		 Margin="5"
-		Classes="dashboardPanel">
-			<TextBlock>Testing</TextBlock>
-		</ListBox>
+		<TextBox Classes="inputField"/>
 	</Border>
   </Design.PreviewWith>
 	
@@ -25,7 +21,6 @@
 
 	<Style Selector="Button.blueButton:pressed/template/ContentPresenter">
 		<Setter Property="Background" Value="{DynamicResource DarkColorBlue}"/>
-		<Setter Property="RenderTransform" Value="scale(0.98)"/>
 	</Style>
 	
 	<Style Selector="TextBox.searchField[UseFloatingWatermark=True]:empty/template/TextBlock#PART_FloatingWatermark">

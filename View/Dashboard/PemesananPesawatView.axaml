@@ -1,0 +1,22 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1080" d:DesignHeight="1080"
+             x:Class="Tiket_Penerbangan_n_Kereta.View.Dashboard.PemesananPesawatView"
+			 x:CompileBindings="True">
+	
+	<Border  Opacity="10"  CornerRadius="8" Margin="10 50 10 0"  VerticalAlignment="Top" Background="WhiteSmoke" >
+		<StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center">
+			<Grid ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="Auto,Auto,Auto">
+				<ComboBox  Width="250" Height="40" Classes="changeLocation"  Grid.Row="0" Grid.Column="0" Margin="5">
+				</ComboBox>
+				<ComboBox  Width="250" Height="40" Classes="changeLocation"  Grid.Row="0" Grid.Column="1" Margin="5">
+					
+				</ComboBox>
+				<TextBox Width="350" Classes="searchField" Grid.Row="0" Grid.Column="2" Margin="5"/>
+			</Grid>
+		</StackPanel>
+	</Border>
+
+</UserControl>

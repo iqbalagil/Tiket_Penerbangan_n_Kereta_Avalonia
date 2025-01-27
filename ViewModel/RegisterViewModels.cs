@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tiket_Penerbangan_n_Kereta.Services;
 
-namespace Tiket_Penerbangan_n_Kereta.Models
+namespace Tiket_Penerbangan_n_Kereta.ViewModel
 {
     public partial class RegisterViewModels : ObservableObject
     {

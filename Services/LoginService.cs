@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tiket_Penerbangan_n_Kereta.Models;
+using Tiket_Penerbangan_n_Kereta.ViewModel.Data;
 
 namespace Tiket_Penerbangan_n_Kereta.Services
 {

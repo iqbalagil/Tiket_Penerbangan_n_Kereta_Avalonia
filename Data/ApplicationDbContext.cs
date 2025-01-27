@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Tiket_Penerbangan_n_Kereta.Models;
+using Tiket_Penerbangan_n_Kereta.ViewModel;
+using Tiket_Penerbangan_n_Kereta.ViewModel.Data;
 
 namespace Tiket_Penerbangan_n_Kereta.Data
 {

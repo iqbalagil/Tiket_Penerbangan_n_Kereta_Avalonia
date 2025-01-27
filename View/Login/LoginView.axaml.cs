@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
-using Tiket_Penerbangan_n_Kereta.Models;
+using Tiket_Penerbangan_n_Kereta.ViewModel;
 
 namespace Tiket_Penerbangan_n_Kereta;
 
