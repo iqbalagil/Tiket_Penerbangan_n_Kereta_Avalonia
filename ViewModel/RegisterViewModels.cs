@@ -26,8 +26,18 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel
         [RelayCommand]
         public async Task RegisterAsync()
         {
-            if (Password != VerifyPassword) return;
+            if (Password != VerifyPassword)
+            {
+                RegisterMessage = "Password and Verify Password must be the same";
+            }
+
+            if (await _registerService.UsernameExists(Username))
+            {
+                RegisterMessage = "Username already exists";
+            }
+            
             var result = await _registerService.RegisterAsync(Username, Email, Password);
+            RegisterMessage = result ? "Registration Succed" : "Registration Failed";
         }
     }
 }

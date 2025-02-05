@@ -2,8 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia.Media;
 using Tiket_Penerbangan_n_Kereta.Data;
 using Tiket_Penerbangan_n_Kereta.ViewModel.Data;
 
@@ -11,54 +14,45 @@ namespace Tiket_Penerbangan_n_Kereta.Services
 {
     public class DataServicesApp
     {
-        private readonly ApplicationDbContext _context;
-
-        public DataServicesApp(ApplicationDbContext context)
+        private readonly HttpClient _http;
+    
+        public DataServicesApp(HttpClient http)
         {
-            _context = context;
+            _http = http;
+        }
+    
+        public async Task<IEnumerable<Penumpang>> GetPenumpang()
+        {
+            return await _http.GetFromJsonAsync<IEnumerable<Penumpang>>("api/Penumpang/GetPenumpang");
         }
 
-        public async Task<List<UserData>> GetUsersAsync()
+        public async Task<Penumpang> GetPenumpangData(string username, string password)
         {
-            return await _context.UserData.ToListAsync();
+            var penumpang = await _http.GetFromJsonAsync<IEnumerable<Penumpang>>("api/Penumpang/GetPenumpang");
+            return penumpang.FirstOrDefault(x => x.Username == username & BCrypt.Net.BCrypt.Verify(password, x.Password));
+        }
+    
+        public async Task<Penumpang> GetPenumpangById(int id)
+        {
+            return await _http.GetFromJsonAsync<Penumpang>($"api/Penumpang/GetPenumpangs/{id}");
+        }
+    
+        public async Task<Penumpang> CreatePenumpang(Penumpang penumpang)
+        {
+            var response = await _http.PostAsJsonAsync("api/Penumpang/PostPenumpang", penumpang);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<Penumpang>();
         }
 
-        public async Task AddUserAsync(UserData userData)
+        public async Task UpdatePenumpangAsync(int id, Penumpang penumpang)
         {
-            userData.Password = BCrypt.Net.BCrypt.HashPassword(userData.Password);
-            _context.UserData.Add(userData);
-            await _context.SaveChangesAsync();
-        }
-        public async Task UpdateUserAsync(UserData userData)
-        {
-            userData.Password = BCrypt.Net.BCrypt.HashPassword(userData.Password);
-            _context.Entry(userData).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            var response = await _http.PutAsJsonAsync($"api/Penumpang/PutPenumpang/{id}", penumpang);
+            response.EnsureSuccessStatusCode();
         }
 
-        public async Task DeleteUserAsync(int id)
+        public async Task DeletePenumpang(int id)
         {
-            var user = await _context.UserData.FindAsync(id);
-            if (user != null)
-            {
-                _context.UserData.Remove(user);
-                await _context.SaveChangesAsync();
-            }
-        }
-
-        public bool VerifyPassword(string password, string hash)
-        {
-            return BCrypt.Net.BCrypt.Verify(password, hash);
-        }
-
-        public async Task<UserData> LoginAsync(string username, string password)
-        {
-            var user = await _context.UserData.SingleOrDefaultAsync(u => u.Username == username);
-            if (user != null && VerifyPassword(password, user.Password))
-            {
-                return user;
-            }
-            return null;
+            var response = await _http.DeleteAsync($"api/Penumpang/DeletePenumpang/{id}");
         }
     }
 }

@@ -1,23 +1,30 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using System;
+using Microsoft.Extensions.DependencyInjection;
 using Tiket_Penerbangan_n_Kereta.ViewModel;
 
 namespace Tiket_Penerbangan_n_Kereta
 {
     public class ViewLocator : IDataTemplate
     {
+        private readonly IServiceProvider _service;
 
+        public ViewLocator(IServiceProvider service)
+        {
+            _service = service;
+        }
         public Control Build(object data)
         {
-            var name = data.GetType().FullName!.Replace("ViewModel","View");
+            var name = data.GetType().AssemblyQualifiedName!.Replace("ViewModel","View");
             var type = Type.GetType(name);
-            
-            if (type != null)
-            {
-                return (Control)Activator.CreateInstance(type)!;
-            }
 
+            var view = ActivatorUtilities.CreateInstance(_service, type) as Control;
+            if (view != null)
+            {
+                view.DataContext = data;
+                return view;
+            }
             return new TextBlock { Text = "Not Found: " + name };
         }
 

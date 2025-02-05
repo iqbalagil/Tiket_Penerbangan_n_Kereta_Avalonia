@@ -1,34 +1,37 @@
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using Avalonia.Media;
 using Microsoft.EntityFrameworkCore;
 using Tiket_Penerbangan_n_Kereta.Data;
+using Tiket_Penerbangan_n_Kereta.Services;
 using Tiket_Penerbangan_n_Kereta.ViewModel.Data;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard;
 
 public class UserInterfaceViewModel : ViewModelBase
 {
-   private readonly ApplicationDbContext _context;
-   private ObservableCollection<UserData> _datas;
+    private readonly ApplicationDbContext _context;
+    private ObservableCollection<Penumpang> _data;
 
-   public ObservableCollection<UserData> Datas
-   {
-      get => _datas;
-      set => SetProperty(ref _datas, value);
-   }
+    public ObservableCollection<Penumpang> Data
+    {
+        get => _data;
+        set => SetProperty(ref _data, value);
+    }
 
-   public UserInterfaceViewModel(ApplicationDbContext context)
-   {
-      _context = context;
-      Datas = new ObservableCollection<UserData>();
-      LoadData();
-   }
+    public UserInterfaceViewModel(ApplicationDbContext context)
+    {
+        _context = context;
+        Data = new ObservableCollection<Penumpang>();
+        
+    }
 
-   private async void LoadData()
-   {
-      var data = await _context.UserData.ToListAsync();
-      foreach (var item in data)
-      {
-         Datas.Add(item);  
-      }
-   }
+    private async void LoadData()
+    {
+        var data = await _context.Penumpang.ToListAsync();
+        foreach (var item in data)
+        {
+            Data.Add(item);
+        }
+    }
 }

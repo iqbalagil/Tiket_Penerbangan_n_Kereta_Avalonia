@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia.Controls;
 using Tiket_Penerbangan_n_Kereta.Services;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel
@@ -15,6 +16,7 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel
         [ObservableProperty] private string _username;
         [ObservableProperty] private string _password;
         [ObservableProperty] private string _loginMessage;
+        [ObservableProperty] private Window? _currentWindow;
 
         public LoginViewModel(ILoginService loginService)
         {
@@ -25,7 +27,9 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel
         public async Task LoginAsync()
         {
             var result = await _loginService.Auth(Username, Password);
-
         }
+        
+        
+        
     }
 }

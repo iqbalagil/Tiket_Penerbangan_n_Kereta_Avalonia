@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Tiket_Penerbangan_n_Kereta.Data;
 using Tiket_Penerbangan_n_Kereta.ViewModel;
@@ -14,25 +15,34 @@ namespace Tiket_Penerbangan_n_Kereta
         {
             services.AddDbContext<ApplicationDbContext>(options =>
 
-                options.UseSqlServer(connectionString));
+                options.UseSqlite(connectionString), ServiceLifetime.Scoped);
             return services;
         }
 
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.AddSingleton<DataServicesApp>();
-            services.AddSingleton<IRegisterService, RegisterService>();
-            services.AddSingleton<ILoginService, LoginService>();
+            services.AddScoped<DataServicesApp>();
+            services.AddScoped<IRegisterService, RegisterService>();
+            services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<ViewLocator>();
             return services;
         }
 
         public static IServiceCollection AddViewModels(this IServiceCollection services)
+        {            
+            services.AddScoped<ViewModelBase>();
+            services.AddScoped<PemesananPesawatViewModel>();
+            services.AddScoped<DashboardViewModel>();
+            services.AddScoped<RegisterViewModels>();
+            services.AddScoped<LoginViewModel>();
+            services.AddScoped<UserInterfaceViewModel>();
+            return services;
+        }
+
+        public static IServiceCollection AddView(this IServiceCollection services)
         {
-            services.AddSingleton<ViewModelBase>();
-            services.AddSingleton<PemesananPesawatViewModel>();
-            services.AddSingleton<DashboardViewModel>();
-            services.AddSingleton<RegisterViewModels>();
-            services.AddSingleton<LoginViewModel>();
+            services.AddScoped<PemesananPesawatView>();
+            services.AddScoped<UserInterfaceView>();
             return services;
         }
 

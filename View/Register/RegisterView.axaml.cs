@@ -6,7 +6,7 @@ using Tiket_Penerbangan_n_Kereta.ViewModel;
 
 namespace Tiket_Penerbangan_n_Kereta;
 
-public partial class RegisterView : UserControl
+public partial class RegisterView : Window
 {
     public RegisterView()
     {

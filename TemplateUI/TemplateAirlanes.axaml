@@ -2,9 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <Design.PreviewWith>
     <Border Padding="20">
-		<ComboBox Classes="changeLocation">
-			<ComboBoxItem>BGA</ComboBoxItem>
-		</ComboBox>
+		<Button Classes="hrefLink">Test</Button>
     </Border>
   </Design.PreviewWith>
 
@@ -76,7 +74,21 @@
 		 </Setter> 
 	</Style>
 
-	
+	<Style Selector="Button.hrefLink">
+		<Setter Property="Template">
+			<ControlTemplate>
+				<TextBlock Text="{TemplateBinding Content}" Foreground="{StaticResource SystemAccentColor}" TextDecorations="Underline">
+					<TextBlock.Styles>
+						<Style Selector="TextBlock:pointrover/template/ContentPresenter">
+							<Setter Property="Foreground" Value="{StaticResource SystemAccentColorLight1}"/>
+						</Style>
+					</TextBlock.Styles>
+				</TextBlock>
+			</ControlTemplate>
+		</Setter>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderThickness" Value="0"/>
+	</Style>
 
 <Style Selector="ComboBox.changeLocation:dropdownopen/template/ContentPresenter">
 	<Setter Property="Background" Value="WhiteSmoke"/>

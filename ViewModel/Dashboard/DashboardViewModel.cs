@@ -4,22 +4,45 @@ using System.ComponentModel;
 using System.Reflection.Emit;
 using System.Text;
 using System.Text.RegularExpressions;
+using Avalonia;
 using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Material.Icons;
+using Material.Icons.Avalonia;
+using Microsoft.Extensions.DependencyInjection;
+using Tiket_Penerbangan_n_Kereta.Services;
 using Tiket_Penerbangan_n_Kereta.ViewModel;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard
 {
     public partial class DashboardViewModel : ViewModelBase
     {
+        private IServiceProvider _service;
+
+        public DashboardViewModel(IServiceProvider service)
+        {
+            _service = service;
+        } 
+        
         [ObservableProperty] private bool _isOpenPane = true;
 
         [ObservableProperty] private ViewModelBase _currentPage = new PemesananPesawatViewModel();
 
+        [ObservableProperty] private ListViewTemplate? _selectedListItem;
+        partial void OnSelectedListItemChanged(ListViewTemplate? value)
+        {
+            if (value?.ModelType is Type modelType)
+            {
+                var viewModel = _service.GetRequiredService(modelType) as ViewModelBase;
+                if (viewModel != null) CurrentPage = viewModel;
+            }
+        }
         public ObservableCollection<ListViewTemplate> Items { get; } = new()
         {
-            new ListViewTemplate(typeof(PemesananPesawatViewModel)),
+            new ListViewTemplate(typeof(PemesananPesawatViewModel), "Pemesanan Pesawat", "Airplane"),
+            new ListViewTemplate(typeof(UserInterfaceViewModel), "User Interface", "Person"),
+            new ListViewTemplate(typeof(DataAnalyticalViewModel), "Data Analytical", "DataUsage")
         };
 
         [RelayCommand]
@@ -45,14 +68,16 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard
 
     public class ListViewTemplate
         {
-            public ListViewTemplate(Type type)
+            public ListViewTemplate(Type type, string label, string icon)
             {
                 ModelType = type;
-                Label = type.Name.Replace("ViewModel",AddSpaceToSentence("") );
+                Label = type.Name.Replace(type.Name,label);
+                ListItemIcon = (MaterialIconKind)Enum.Parse(typeof(MaterialIconKind),icon);
             }
 
             public string Label { get; }
             public Type ModelType { get; }
+            public MaterialIconKind ListItemIcon { get; }
 
             private string AddSpaceToSentence(string text)
             {

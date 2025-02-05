@@ -29,9 +29,9 @@
 				FontSize="16"
 				VerticalAlignment="Center"
 				Padding="5"
-				FontFamily="Poppins"
-				FontWeight="SemiBold"
-				Text="Dashboard"/>
+				FontFamily="Montserrat"
+				FontWeight="Medium"
+				Text="airlanes"/>
 
 				<StackPanel
 					Orientation="Horizontal">
@@ -52,6 +52,7 @@
 					<Button
 						Width="40" Height="40" CornerRadius="6"
 						Background="{DynamicResource PrimaryColor}"
+						Classes="closeBtn"
 						CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
 						Command="{Binding CloseWindowCommand}">
 						<material:MaterialIcon Kind="Close"/>
@@ -60,6 +61,7 @@
 			</flex:FlexPanel>
 		</Border>
 		<SplitView
+			Margin="10"
 			IsPaneOpen="{Binding IsOpenPane}"
 			OpenPaneLength="250"
 			DisplayMode="CompactInline"
@@ -67,19 +69,22 @@
 			Grid.Row="1">
 			<SplitView.Pane>
 				<StackPanel
-					Spacing="5"
-					Margin="2 8 0 0">
+					Spacing="5">
 					<Button Classes="blueButton"
+					        Margin="3 7"
 							Command="{Binding IsTogglePaneCommand}">
 						<material:MaterialIcon Kind="Menu"/>
 					</Button>
 					<ListBox FontFamily="Poppins"
-							 Margin="5"
+							 VerticalAlignment="Center"
 							Classes="dashboardPanel"
-							 ItemsSource="{Binding Items}">
+							 Margin="5 0 -100 0"
+							 ItemsSource="{Binding Items}"
+							 SelectedItem="{Binding SelectedListItem}">
 						<ListBox.ItemTemplate>
 							<DataTemplate DataType="{x:Type  vm:ListViewTemplate}">
-								<StackPanel Spacing="15" Orientation="Horizontal">
+								<StackPanel Spacing="18"  VerticalAlignment="Center" Orientation="Horizontal">
+									<material:MaterialIcon Kind="{Binding ListItemIcon}"/>
 									<TextBlock Text="{Binding Label}"/>
 								</StackPanel>
 							</DataTemplate>
@@ -90,13 +95,13 @@
 
 			<SplitView.Content>
 				<Border
-					Background="White">
+					CornerRadius="12 12 0 0"
+					Background="#f5f5f5"
+					Margin="10">
 					<TransitioningContentControl Content="{Binding CurrentPage}"/>
 				</Border>
 			</SplitView.Content>
 		</SplitView>
-		
-		
 		
 	</Grid>
 

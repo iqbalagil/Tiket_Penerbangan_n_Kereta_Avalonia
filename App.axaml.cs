@@ -1,10 +1,14 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Tiket_Penerbangan_n_Kereta.Data;
 using Tiket_Penerbangan_n_Kereta.View.Dashboard;
 using Tiket_Penerbangan_n_Kereta.Services;
+using Tiket_Penerbangan_n_Kereta.View;
+using Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard;
 
 namespace Tiket_Penerbangan_n_Kereta;
 
@@ -20,11 +24,11 @@ public partial class App : Application
     {
         AppHost = Host.CreateDefaultBuilder().ConfigureServices((context, services) =>
         {
-            services.AddDatabase(@"Server=(local)\TIKEXPRESS;database=tiketPenerbangan;User ID=iqbal;Password=akuiqbal;
-            TrustServerCertificate=True")
+            services.AddDatabase("Data Source=Penerbangan.db")
             .AddServices()
             .AddViewModels()
-            .AddApplication();
+            .AddApplication()
+            .AddView();
 
         }).Build();
 
