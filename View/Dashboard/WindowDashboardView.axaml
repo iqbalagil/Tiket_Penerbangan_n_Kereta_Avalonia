@@ -78,7 +78,6 @@
 					<ListBox FontFamily="Poppins"
 							 VerticalAlignment="Center"
 							Classes="dashboardPanel"
-							 Margin="5 0 -100 0"
 							 ItemsSource="{Binding Items}"
 							 SelectedItem="{Binding SelectedListItem}">
 						<ListBox.ItemTemplate>

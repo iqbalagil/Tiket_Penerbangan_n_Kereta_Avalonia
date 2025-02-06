@@ -1,8 +1,9 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:material="using:Material.Icons.Avalonia">
   <Design.PreviewWith>
-    <Border Padding="20">
-		<Button Classes="hrefLink">Test</Button>
+    <Border Background="White" Padding="20">
+	    <Button Classes="primaryButton">test</Button>
     </Border>
   </Design.PreviewWith>
 
@@ -124,7 +125,7 @@
 	<Style Selector="Button.buttonCustom">
 		<Setter Property="Padding" Value="10"/>
 		<Setter Property="HorizontalContentAlignment" Value="Center"/>
-		<Setter Property="CornerRadius" Value="8"/>
+		<Setter Property="CornerRadius" Value="4"/>
 		<Setter Property="Background" Value="{DynamicResource PrimaryColor2}"/>
 	</Style>
 
@@ -136,6 +137,77 @@
 	<Style Selector="Button.buttonCustom:pressed/template/ContentPresenter">
 		<Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
 		<Setter Property="Opacity" Value="0.5"/>
+	</Style>
+	
+	<Style Selector="Button.buttonCreate">
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Border
+					Background="{DynamicResource PrimaryColor2}"
+					CornerRadius="4"
+					Padding="{TemplateBinding Padding}"
+					BorderThickness="2"
+					Margin="10"
+					>
+					<StackPanel Orientation="Horizontal"
+					            HorizontalAlignment="Center"
+					            VerticalAlignment="Center"
+					            Spacing="5">
+						<material:MaterialIcon Kind="Plus" 
+						                       Foreground="{DynamicResource PrimaryColor}" />
+						<ContentPresenter
+							Content="{TemplateBinding Content}"
+							ContentTemplate="{TemplateBinding ContentTemplate}"/>
+					</StackPanel>
+				</Border>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+	
+	<Style Selector="Button.buttonGlow:pointerover/template/Border">
+		<Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
+	</Style>
+	
+	<Style Selector="DataGrid.costumData">
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Border BorderBrush="{TemplateBinding BorderBrush}" Background="DimGray">
+					<ScrollViewer>
+						<ItemsPresenter/>
+					</ScrollViewer>
+				</Border>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+	
+	<Style Selector="Button.primaryButton">
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Border
+					Padding="{TemplateBinding Padding}"
+					Background="White"
+					Margin="10"
+					CornerRadius="4"
+					BoxShadow="0 0.5 0.8 DimGray"
+					BorderThickness="2">
+					<ContentPresenter
+						Content="{TemplateBinding Content}"
+						ContentTemplate="{TemplateBinding ContentTemplate}"/>
+				</Border>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+	
+	<Style Selector="Button.primaryButton:pressed/template/Border">
+		<Setter Property="Background" Value="DimGray"/>
+	</Style>
+	
+	<Style Selector="Button.primaryButton:pointerover/template/Border">
+		<Setter Property="Background" Value="LightGray"/>
+	</Style>
+	
+	<Style Selector="Border.card">
+		<Setter Property="BoxShadow" Value="0 0.5 0.8 DimGray"/>
 	</Style>
 	
 </Styles>

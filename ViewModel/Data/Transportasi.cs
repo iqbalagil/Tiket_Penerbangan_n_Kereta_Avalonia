@@ -9,6 +9,8 @@ public class Transportasi
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int IdTransportasi { get; set; }
     [Required]
+    public byte[] Imagedata { get; set; }
+    [Required]
     public string Kode { get; set; }
     [Required]
     public int JumlahKursi { get; set; }

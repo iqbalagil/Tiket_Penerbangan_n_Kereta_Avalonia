@@ -31,6 +31,8 @@ namespace Tiket_Penerbangan_n_Kereta
         public static IServiceCollection AddViewModels(this IServiceCollection services)
         {            
             services.AddScoped<ViewModelBase>();
+            services.AddScoped<CreateMaskapaiViewModel>();
+            services.AddScoped<MaskapaiViewModel>();
             services.AddScoped<PemesananPesawatViewModel>();
             services.AddScoped<DashboardViewModel>();
             services.AddScoped<RegisterViewModels>();

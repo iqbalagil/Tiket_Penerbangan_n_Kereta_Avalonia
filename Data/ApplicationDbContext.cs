@@ -12,7 +12,6 @@ namespace Tiket_Penerbangan_n_Kereta.Data
     {
         public DbSet<Penumpang> Penumpang { get; set; }
         public DbSet<Pemesanan> Pemesanan { get; set; }
-        public DbSet<File> Files { get; set; }
         public DbSet<Petugas> Petugas { get; set; }
         public DbSet<Rute> Rute { get; set; }
         public DbSet<Transportasi> Transportasi { get; set; }

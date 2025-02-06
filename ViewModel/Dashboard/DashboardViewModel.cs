@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Reflection.Emit;
 using System.Text;
-using System.Text.RegularExpressions;
-using Avalonia;
 using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Material.Icons;
-using Material.Icons.Avalonia;
 using Microsoft.Extensions.DependencyInjection;
-using Tiket_Penerbangan_n_Kereta.Services;
-using Tiket_Penerbangan_n_Kereta.ViewModel;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard
 {
@@ -40,7 +33,8 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard
         }
         public ObservableCollection<ListViewTemplate> Items { get; } = new()
         {
-            new ListViewTemplate(typeof(PemesananPesawatViewModel), "Pemesanan Pesawat", "Airplane"),
+            new ListViewTemplate(typeof(MaskapaiViewModel), "Maskapai", "Airplane"),
+            new ListViewTemplate(typeof(PemesananPesawatViewModel), "Pemesanan Pesawat", "Ticket"),
             new ListViewTemplate(typeof(UserInterfaceViewModel), "User Interface", "Person"),
             new ListViewTemplate(typeof(DataAnalyticalViewModel), "Data Analytical", "DataUsage")
         };
