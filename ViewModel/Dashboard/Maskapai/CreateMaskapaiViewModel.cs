@@ -1,11 +1,13 @@
+using System;
 using System.Collections.ObjectModel;
+using Azure;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Tiket_Penerbangan_n_Kereta.ViewModel.Data;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard;
 
-public partial class CreateMaskapaiViewModel : ViewModelBase
+public partial class CreateMaskapaiViewModel : PageViewModelBase
 {
     [ObservableProperty] private string _maskapaiName = string.Empty;
     [ObservableProperty] private string _descMaskapai = string.Empty;
@@ -23,4 +25,17 @@ public partial class CreateMaskapaiViewModel : ViewModelBase
         
         typeTransportasi.Add(newMaskapai);
     }
+
+    public override bool CanNavigateNext
+    {
+        get => true; 
+        set => throw new NotSupportedException();
+    }
+
+    public override bool CanNavigatePrevious
+    {
+        get => false;
+        set => throw new NotSupportedException();
+    }
+    
 }

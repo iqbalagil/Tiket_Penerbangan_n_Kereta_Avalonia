@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,5 +17,5 @@ public class Transportasi
     public int JumlahKursi { get; set; }
     public string Keterangan { get; set; }
     [ForeignKey(nameof(TypeTransportasi))]
-    public int IdTypeTransportasi { get; set; }
+    public string NamaType { get; set; }
 }

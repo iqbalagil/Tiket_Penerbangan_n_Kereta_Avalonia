@@ -5,6 +5,7 @@ using Tiket_Penerbangan_n_Kereta.Data;
 using Tiket_Penerbangan_n_Kereta.ViewModel;
 using Tiket_Penerbangan_n_Kereta.Services;
 using Tiket_Penerbangan_n_Kereta.View.Dashboard;
+using Tiket_Penerbangan_n_Kereta.View.Dashboard.Maskapai;
 using Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard;
 
 namespace Tiket_Penerbangan_n_Kereta
@@ -21,6 +22,7 @@ namespace Tiket_Penerbangan_n_Kereta
 
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
+            services.AddHttpClient();
             services.AddScoped<DataServicesApp>();
             services.AddScoped<IRegisterService, RegisterService>();
             services.AddScoped<ILoginService, LoginService>();
@@ -29,7 +31,8 @@ namespace Tiket_Penerbangan_n_Kereta
         }
 
         public static IServiceCollection AddViewModels(this IServiceCollection services)
-        {            
+        {
+            services.AddScoped<MainMaskapaiViewModel>();
             services.AddScoped<ViewModelBase>();
             services.AddScoped<CreateMaskapaiViewModel>();
             services.AddScoped<MaskapaiViewModel>();
@@ -43,8 +46,11 @@ namespace Tiket_Penerbangan_n_Kereta
 
         public static IServiceCollection AddView(this IServiceCollection services)
         {
+            services.AddScoped<MainMaskapaiView>();
             services.AddScoped<PemesananPesawatView>();
             services.AddScoped<UserInterfaceView>();
+            services.AddScoped<MaskapaiView>();
+            services.AddScoped<CreateMaskapaiView>();
             return services;
         }
 

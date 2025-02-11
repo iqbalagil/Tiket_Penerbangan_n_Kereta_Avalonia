@@ -36,6 +36,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.1" />
     <PackageReference Include="ReactiveUI" Version="20.1.63" />
     <PackageReference Include="Russkyc.AvaloniaAutoGrid" Version="1.0.0" />
   </ItemGroup>
@@ -43,6 +44,14 @@
   <ItemGroup>
     <Compile Update="View\Dashboard\WindowDashboardView.axaml.cs">
       <DependentUpon>WindowDashboard.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\Dashboard\Maskapai\MaskapaiView.axaml.cs">
+      <DependentUpon>MaskapaiView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Dashboard\Maskapai\CreateMaskapaiView.axaml.cs">
+      <DependentUpon>CreateMaskapaiView.axaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   

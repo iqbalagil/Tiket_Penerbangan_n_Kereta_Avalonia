@@ -8,17 +8,19 @@
              x:Class="Tiket_Penerbangan_n_Kereta.View.Dashboard.MaskapaiView"
              x:DataType="vm:MaskapaiViewModel"
              x:CompileBindings="True">
+    
     <DockPanel>
         <Border DockPanel.Dock="Top">
             <felx:FlexPanel
                     JustifyContent="SpaceBetween">
                 <TextBlock  Margin="10" FontSize="20"
                             TextAlignment="Center" FontFamily="Poppins">Maskapai</TextBlock>
-                        <Button Classes="buttonCreate" Content="Create Maskapai" Command="{Binding CreateMaskapaiPageCommand}"/>
+                        <Button Classes="buttonCreate" Content="Create Maskapai" DataContext="{Binding MainMaskapaiViewModel}" Command="{Binding }" />
                 </felx:FlexPanel>
         </Border>
         <Border DockPanel.Dock="Bottom" Background="White">
             <ScrollViewer >
+                
                 <StackPanel Orientation="Vertical">
                     <DataGrid></DataGrid>
                     <Border Background="{DynamicResource PrimaryColor}"
@@ -54,6 +56,7 @@
                                 </ComboBox>
                             </ItemsControl>
                             <Button Classes="primaryButton" Content="Upload File" Command="{Binding UploadImageCommand}"/>
+                            <TextBlock Text="{Binding }"/>
                             <Button Classes="primaryButton" Content="Submit"/>
                         </StackPanel>
                     </ItemsControl>
@@ -61,6 +64,7 @@
                 </StackPanel>
             </ScrollViewer>
         </Border>
+        
     </DockPanel>
-    
+
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using System;
+using Avalonia.Logging;
 using Avalonia.ReactiveUI;
 
 namespace Tiket_Penerbangan_n_Kereta;
@@ -19,5 +20,5 @@ class Program
             .UsePlatformDetect()
             .WithInterFont()
             .UseReactiveUI()
-            .LogToTrace();
+            .LogToTrace(LogEventLevel.Debug, LogArea.Property, LogArea.Layout);
 }
