@@ -1,47 +1,71 @@
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reactive.Concurrency;
 using System.Threading.Tasks;
-using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Interactivity;
-using Avalonia.Media.Imaging;
 using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using ReactiveUI;
 using Tiket_Penerbangan_n_Kereta.Data;
-using Tiket_Penerbangan_n_Kereta.View.Dashboard;
 using Tiket_Penerbangan_n_Kereta.ViewModel.Data;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard;
 
-public partial class MaskapaiViewModel : PageViewModelBase
+public partial class MaskapaiViewModel : ViewModelBase, IPageViewModel
 {
-    private Transportasi _transportasi;
     private ApplicationDbContext _context;
     
     [ObservableProperty] private string _kode;
     [ObservableProperty] private int _jumlahKursi;
     [ObservableProperty] private string desc;
     [ObservableProperty] private byte[] _imageData;
-    [ObservableProperty] private List<string> _selectedTypeTransportasi;
-    [ObservableProperty] private string nameFile;
+    [ObservableProperty] private string _selectedItem;
 
-    public MaskapaiViewModel()
+    [ObservableProperty] private ObservableCollection<string> _selectedTypeTransportasi;
+    
+    [ObservableProperty] private string nameFile;
+    public ObservableCollection<int> AvailableNumbers { get; } = new(Enumerable.Range(1, 34));
+
+    public MaskapaiViewModel(ApplicationDbContext context)
     {
-        SelectedTypeTransportasi = _context.Set<TypeTransportasi>().Select(t => t.NamaType).ToList();
+        _context = context;
+        LoadDataAsync();
+    }
+
+    private async Task LoadDataAsync()
+    {
+        var typeTransportasi = await _context.TypeTransportasi
+            .Select(t => t.NamaType)
+            .ToListAsync();
+            SelectedTypeTransportasi = new ObservableCollection<string>(typeTransportasi);
     }
     
     [RelayCommand]
-    private void SubmitData()
+    private async Task<bool> SubmitData()
     {
-        _transportasi.Kode = Kode;
-        _transportasi.JumlahKursi = JumlahKursi;
-        _transportasi.Keterangan = Desc;
-        _transportasi.Imagedata = _imageData;
+        var transport = new Transportasi();
+
+        transport.Kode = Kode;
+        transport.Keterangan = Desc;
+        transport.JumlahKursi = JumlahKursi;
+        transport.Imagedata = ImageData;
+        transport.NamaType = SelectedItem;
+
+        try
+        {
+            _context.Transportasi.Add(transport);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
     }
     
     [RelayCommand]
@@ -78,17 +102,9 @@ public partial class MaskapaiViewModel : PageViewModelBase
         }
     }
 
-    [ObservableProperty] private MainMaskapaiViewModel _mainMaskapaiViewModel;
 
-    public override bool CanNavigateNext
-    {
-        get => true;
-        set => throw new NotSupportedException();
-    }
 
-    public override bool CanNavigatePrevious
-    {
-        get => true;
-        set => throw new NotSupportedException();
-    }
+    public bool CanNavigateNext => true;
+
+    public bool CanNavigatePrevious => false;
 }

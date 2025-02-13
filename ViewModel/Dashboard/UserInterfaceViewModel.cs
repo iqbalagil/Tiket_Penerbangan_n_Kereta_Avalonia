@@ -23,15 +23,5 @@ public class UserInterfaceViewModel : ViewModelBase
     {
         _context = context;
         Data = new ObservableCollection<Penumpang>();
-        
-    }
-
-    private async void LoadData()
-    {
-        var data = await _context.Penumpang.ToListAsync();
-        foreach (var item in data)
-        {
-            Data.Add(item);
-        }
     }
 }

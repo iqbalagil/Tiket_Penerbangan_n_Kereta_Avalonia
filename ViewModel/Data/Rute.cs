@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -15,6 +16,9 @@ public class Rute
     public string RuteAwal { get; set; }
     [Required]
     public string RuteAkhri { get; set; }
-    [ForeignKey(nameof(Transportasi))]
+    
     public int IdTransportasi { get; set; }
+    public Transportasi Transportasi { get; set; }
+    
+    public List<Pemesanan> Pemesanans { get; set; }
 }

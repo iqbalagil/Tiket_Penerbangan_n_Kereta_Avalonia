@@ -9,9 +9,6 @@
              x:CompileBindings="True"
              x:DataType="vm:DataAnalyticalViewModel">
     
-    <UserControl.DataContext>
-        <vm:DataAnalyticalViewModel/>
-    </UserControl.DataContext>
     <Grid RowDefinitions="Auto,*">
        <StackPanel VerticalAlignment="Center"
                    HorizontalAlignment="Left"

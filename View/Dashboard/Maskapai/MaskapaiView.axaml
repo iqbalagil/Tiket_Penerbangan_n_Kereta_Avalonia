@@ -10,15 +10,17 @@
              x:CompileBindings="True">
     
     <DockPanel>
-        <Border DockPanel.Dock="Top">
+        <Border DockPanel.Dock="Top"
+                Background="#ffff">
             <felx:FlexPanel
                     JustifyContent="SpaceBetween">
                 <TextBlock  Margin="10" FontSize="20"
                             TextAlignment="Center" FontFamily="Poppins">Maskapai</TextBlock>
-                        <Button Classes="buttonCreate" Content="Create Maskapai" DataContext="{Binding MainMaskapaiViewModel}" Command="{Binding }" />
+                        <Button Classes="buttonCreate" Content="Create Maskapai"
+                                Command="{Binding NavigateNextPage, RelativeSource={RelativeSource AncestorType=vm:MainMaskapaiViewModel}}"/>
                 </felx:FlexPanel>
         </Border>
-        <Border DockPanel.Dock="Bottom" Background="White">
+        <Border DockPanel.Dock="Bottom" Background="Transparent">
             <ScrollViewer >
                 
                 <StackPanel Orientation="Vertical">
@@ -29,15 +31,15 @@
                             Padding="10"
                             Margin="10">
                     <ItemsControl>
-                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*"
-                              ShowGridLines="True">
+                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*">
                             <ItemsControl Grid.Row="0" Padding="10">
                                 <TextBlock Text="Kode" Margin="0 0 0  10"/>
                                 <TextBox Classes="inputField" Text="{Binding Kode }" Width="350"/>
                             </ItemsControl>
                             <ItemsControl Grid.Column="1" Grid.Row="0" Padding="10">
                                 <TextBlock Text="Jumlah Kursi" Margin="0 0 0 10"/>
-                                <ComboBox Width="360"  Height="40"/>
+                                <ComboBox Width="360"  Height="40" SelectedItem="{Binding JumlahKursi}"
+                                          ItemsSource="{Binding AvailableNumbers}"/>
                             </ItemsControl>
                         </Grid>
                         <StackPanel Orientation="Vertical">
@@ -49,15 +51,19 @@
                             </ItemsControl>
                             <ItemsControl Padding="10">
                                 <TextBlock Text="Jenis Maskapai" Margin="0 0  0 10"/>
-                                <ComboBox Width="350">
-                                    <ComboBoxItem>
-                                        sdsdsdsd
-                                    </ComboBoxItem>
+                                <ComboBox Width="350" SelectedItem="{Binding SelectedItem}"
+                                          ItemsSource="{Binding SelectedTypeTransportasi}">
                                 </ComboBox>
                             </ItemsControl>
                             <Button Classes="primaryButton" Content="Upload File" Command="{Binding UploadImageCommand}"/>
                             <TextBlock Text="{Binding }"/>
-                            <Button Classes="primaryButton" Content="Submit"/>
+                            <Button Classes="primaryButton" Content="Submit" Command="{Binding SubmitDataCommand}">
+                                <FlyoutBase.AttachedFlyout>
+                                    <Flyout>
+                                        <TextBlock Text="Jumlah Kursi value need to be filled"/>
+                                    </Flyout>
+                                </FlyoutBase.AttachedFlyout>
+                            </Button>
                         </StackPanel>
                     </ItemsControl>
                     </Border>

@@ -1,41 +1,38 @@
 using System;
-using System.Collections.ObjectModel;
-using Azure;
+using System.Threading.Tasks;
+using Azure.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Tiket_Penerbangan_n_Kereta.Data;
 using Tiket_Penerbangan_n_Kereta.ViewModel.Data;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard;
 
-public partial class CreateMaskapaiViewModel : PageViewModelBase
+public partial class CreateMaskapaiViewModel : ViewModelBase, IPageViewModel
 {
     [ObservableProperty] private string _maskapaiName = string.Empty;
     [ObservableProperty] private string _descMaskapai = string.Empty;
 
-    public ObservableCollection<TypeTransportasi> typeTransportasi;
+    private ApplicationDbContext _context;
 
     [RelayCommand]
-    private void CreateMaskapai()
+    private async Task<bool> CreateMaskapai()
     {
         var newMaskapai = new TypeTransportasi
         {
             NamaType = _maskapaiName,
             Keterangan = _descMaskapai
         };
-        
-        typeTransportasi.Add(newMaskapai);
+
+        _context.TypeTransportasi.Add(newMaskapai);
+
+        await _context.SaveChangesAsync();
+        return true;
     }
 
-    public override bool CanNavigateNext
-    {
-        get => true; 
-        set => throw new NotSupportedException();
-    }
+    [ObservableProperty] private MainMaskapaiViewModel _mainMaskapaiViewModel;
 
-    public override bool CanNavigatePrevious
-    {
-        get => false;
-        set => throw new NotSupportedException();
-    }
-    
+    public bool CanNavigateNext => true;
+    public bool CanNavigatePrevious => false;
+
 }

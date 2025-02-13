@@ -14,6 +14,5 @@ public partial class UserInterfaceView : UserControl
     public UserInterfaceView()
     {
         InitializeComponent();
-        // DataContext = ((App)Application.Current).AppHost.Services.GetRequiredService<UserInterfaceViewModel>();
     }
 }

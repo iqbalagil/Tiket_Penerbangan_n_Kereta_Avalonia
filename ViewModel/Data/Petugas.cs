@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -17,13 +18,8 @@ public class Petugas
     public string Nama { get; set; }
     [ForeignKey(nameof(idRole))]
     public int idRole { get; set; }
-   
-    public Role Roles { get; set; }
+    public Roles Roles { get; set; }
+
+    public List<Pemesanan> Pemesanans { get; set; }
     
-    
-    public enum  Role
-    {
-        SuperAdmin,
-        Petugas
-    }
 }

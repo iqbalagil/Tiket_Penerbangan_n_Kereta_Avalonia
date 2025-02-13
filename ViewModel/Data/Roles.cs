@@ -4,15 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel.Data;
 
-[Table("TypeTransportasi")]
-public class TypeTransportasi
+[Table("Roles")]
+public class Roles
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int IdTypeTransportasi { get; set; }
+    public int IdRole { get; set; }
     [Required]
-    public string NamaType { get; set; }
-    public string Keterangan { get; set; }
-    [Required]
-    public List<Transportasi> Transports { get; set; }
+    public string RoleName { get; set; }
+    public List<Petugas> Petugas { get; set; }
 }

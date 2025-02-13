@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel.Data
 {
+    [Table("Penumpang")]
     public class Penumpang
     {
         [Key]
@@ -24,7 +25,9 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel.Data
         public string AlamatPenumpang { get; set; }
         public DateTime TanggalLahir { get; set; }
         public string NoTelepon { get; set; }
-        
+
+        public List<Pemesanan> Pemesanans { get; set; }
+
     }
 
     public enum Gender

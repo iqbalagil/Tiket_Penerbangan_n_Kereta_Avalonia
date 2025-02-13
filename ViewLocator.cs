@@ -12,7 +12,7 @@ namespace Tiket_Penerbangan_n_Kereta
 
         public ViewLocator(IServiceProvider service)
         {
-            _service = service;
+            _service = service ?? throw new ArgumentNullException(nameof(service));
         }
         public Control Build(object data)
         {

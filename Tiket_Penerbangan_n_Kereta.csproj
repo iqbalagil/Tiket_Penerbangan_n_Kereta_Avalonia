@@ -53,6 +53,10 @@
       <DependentUpon>CreateMaskapaiView.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Dashboard\Pemesanan\PemesananPesawatView.axaml.cs">
+      <DependentUpon>PemesananPesawatView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   
 </Project>

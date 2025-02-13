@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel.Data;
 
+[Table("Transportasi")]
 public class Transportasi
 {
     [Key]
@@ -15,7 +16,14 @@ public class Transportasi
     public string Kode { get; set; }
     [Required]
     public int JumlahKursi { get; set; }
+
     public string Keterangan { get; set; }
-    [ForeignKey(nameof(TypeTransportasi))]
+    
+    public int IdTypeTransportasi { get; set; }
+    
+    public TypeTransportasi TypeTransportasi { get; set; }
+    
     public string NamaType { get; set; }
+    
+    public List<Rute> Rutes { get; set; }
 }

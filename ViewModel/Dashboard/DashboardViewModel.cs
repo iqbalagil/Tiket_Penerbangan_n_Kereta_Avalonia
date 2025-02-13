@@ -1,26 +1,29 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Text;
 using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Material.Icons;
 using Microsoft.Extensions.DependencyInjection;
+using Tiket_Penerbangan_n_Kereta.Data;
+using Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard.Pemesanan;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard
 {
     public partial class DashboardViewModel : ViewModelBase
     {
         private IServiceProvider _service;
+        private static ApplicationDbContext _context;
 
-        public DashboardViewModel(IServiceProvider service)
+        public DashboardViewModel(IServiceProvider service, ApplicationDbContext context)
         {
+            _context = context;
             _service = service;
         } 
         
         [ObservableProperty] private bool _isOpenPane = true;
 
-        [ObservableProperty] private ViewModelBase _currentPage = new PemesananPesawatViewModel();
+        [ObservableProperty] private ViewModelBase _currentPage = new PemesananPesawatViewModel(_context);
 
         [ObservableProperty] private ListViewTemplate? _selectedListItem;
         partial void OnSelectedListItemChanged(ListViewTemplate? value)
@@ -33,7 +36,7 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard
         }
         public ObservableCollection<ListViewTemplate> Items { get; } = new()
         {
-            new ListViewTemplate(typeof(MainMaskapaiViewModel), "Maskapai", "Airplane"),
+            new ListViewTemplate(typeof(MaskapaiViewModel), "Maskapai", "Airplane"),
             new ListViewTemplate(typeof(PemesananPesawatViewModel), "Pemesanan Pesawat", "Ticket"),
             new ListViewTemplate(typeof(UserInterfaceViewModel), "User Interface", "Person"),
             new ListViewTemplate(typeof(DataAnalyticalViewModel), "Data Analytical", "DataUsage")
@@ -73,22 +76,6 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard
             public Type ModelType { get; }
             public MaterialIconKind ListItemIcon { get; }
 
-            private string AddSpaceToSentence(string text)
-            {
-                if (string.IsNullOrEmpty(text)) return text;
-
-                StringBuilder newText = new StringBuilder();
-                newText.Append(text[0]);
-                for (int i = 1; i < text.Length; i++)
-                {
-                    if (char.IsUpper(text[i]) && text[i - 1] != ' ')
-                    {
-                        newText.Append(' ');
-                    }
-                    newText.Append(text[i]);
-                }
-
-                return newText.ToString();
-            }
+            
         }
 }

@@ -1,0 +1,135 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard.Pemesanan"
+             xmlns:material = "clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:flex="clr-namespace:Avalonia.Flexbox;assembly=Avalonia.Flexbox"
+             mc:Ignorable="d" d:DesignWidth="1080" d:DesignHeight="1080"
+             x:DataType="vm:PemesananPesawatViewModel"
+             x:Class="Tiket_Penerbangan_n_Kereta.View.Dashboard.Pemesanan.PemesananPesawatView"
+			 x:CompileBindings="True">
+	<DockPanel
+		Background="#ffff">
+		<Border
+			DockPanel.Dock="Top"
+			Classes="card"
+			Background="White"
+			Margin="10"
+			CornerRadius="4"
+			VerticalAlignment="Center">
+			<flex:FlexPanel JustifyContent="SpaceBetween">
+				<Grid
+                				ShowGridLines="False"
+                				ColumnDefinitions="Auto, Auto, Auto, Auto, Auto">
+                				<Border Grid.Column="0"
+                				        Margin="10"
+                				        Background="{DynamicResource PrimaryColor}" Padding="10"
+                				        CornerRadius="4">
+                					<StackPanel Orientation="Vertical"
+                					            Spacing="10">
+                						<TextBlock Text="From" FontSize="11" FontWeight="Light"/>
+                						<ComboBox FontWeight="Bold">
+                							<ComboBoxItem/>
+                						</ComboBox>
+                					</StackPanel>
+                				</Border>
+                				<Button Grid.Column="1" Classes="primaryButton">
+                					<material:MaterialIcon Kind="ArrowLeftRight"/>
+                				</Button>
+                				<Border Grid.Column="2"
+                				        Margin="10"
+                				        CornerRadius="4"
+                				        Background="{DynamicResource PrimaryColor}" Padding="10">
+                					<StackPanel Orientation="Vertical"
+                					            Spacing="10">
+                						<TextBlock Text="To" FontSize="11" FontWeight="Light" />
+                						<ComboBox>
+                							<ComboBoxItem/>
+                						</ComboBox>
+                					</StackPanel>
+                				</Border>
+                				<Border Grid.Column="3"
+                				        Margin="10"
+                				        Padding="10" CornerRadius="4" Background="{DynamicResource PrimaryColor}">
+                					<StackPanel Orientation="Vertical" Spacing="10">
+                						<TextBlock Text="Departure" FontSize="11" FontWeight="Light"/>
+                						<ComboBox>
+                							<ComboBoxItem/>
+                						</ComboBox>
+                					</StackPanel>
+                				</Border>
+                				<Border Grid.Column="4" Margin="10"
+                				        Padding="10" Background="{DynamicResource PrimaryColor}" CornerRadius="4">
+                					<StackPanel Spacing="10" Orientation="Vertical">
+                						<TextBlock Text="Penumpang" FontSize="11" FontWeight="Light"/>
+                						<ComboBox>
+                							<ComboBoxItem/>
+                						</ComboBox>
+                					</StackPanel>
+                				</Border>
+                			</Grid>
+				<Border Padding="0 20 0 0">
+					<Button Classes="primaryButtonCenter" Content="Search" Width="150" HorizontalContentAlignment="Center"/>
+				</Border>
+			</flex:FlexPanel>
+			
+		</Border>
+		<Border DockPanel.Dock="Bottom" Padding="10">
+			<ScrollViewer>
+				
+				<ItemsRepeater ItemsSource="{Binding PemesananList}" >
+					<ItemsRepeater.ItemTemplate>
+						<DataTemplate >
+							<Grid RowDefinitions="Auto, Auto, Auto" Margin="0 0 0 25 ">
+								<Border Grid.Row="0" Background="{DynamicResource PrimaryColor2}"
+								        Padding="10" Margin="10 0 10 0" CornerRadius="4">
+									<flex:FlexPanel JustifyContent="SpaceBetween" VerticalAlignment="Center">
+										<StackPanel Name="Pesawat" Orientation="Horizontal" >
+											<PathIcon/>
+											<TextBlock Foreground="{DynamicResource PrimaryColor}" Text="{Binding _namaPesawat}" TextAlignment="Center"/>
+										</StackPanel>
+										<StackPanel Orientation="Horizontal">
+											<TextBlock Foreground="{DynamicResource PrimaryColor}" Text="{Binding _hargaPesawat}" FontSize="18"/>
+											<TextBlock Foreground="{DynamicResource PrimaryColor}" Text="/tax"/>
+										</StackPanel>
+									</flex:FlexPanel>
+								</Border>
+								<Border Grid.Row="1" Background="{DynamicResource PrimaryColor}"
+								        Padding="10" Margin="10 0 10 0" CornerRadius="4">
+									<Grid ShowGridLines="True" ColumnDefinitions="*, *,*">
+										<StackPanel Orientation="Vertical" VerticalAlignment="Center">
+											<TextBlock Text="{Binding _jamBerangkat}" HorizontalAlignment="Center" FontSize="42"/>
+											<TextBlock Text="{Binding _tempatSekarang}" FontSize="14" HorizontalAlignment="Center"/>
+										</StackPanel>
+										<StackPanel Grid.Column="1">
+											<Border Padding="10" Background="{DynamicResource PrimaryColor}" HorizontalAlignment="Center"
+											        VerticalAlignment="Center" Margin="10">
+												<StackPanel Orientation="Vertical">
+														<StackPanel Orientation="Horizontal" Spacing="10">
+															<material:MaterialIcon Kind="DotsHorizontal" Width="30" Height="50"/>
+															<material:MaterialIcon Kind="AirplaneTakeoff"/>
+															<material:MaterialIcon Kind="DotsHorizontal" Width="30" Height="50"/>
+														</StackPanel>
+													<TextBlock Text="{Binding _tempatTujuan}" HorizontalAlignment="Center"/>
+												</StackPanel>
+											</Border>
+										</StackPanel>
+										<StackPanel Grid.Column="2" VerticalAlignment="Center">
+											<TextBlock Text="{Binding _jamTiba}" FontSize="42" HorizontalAlignment="Center"/>
+											<TextBlock Text="{Binding _tempatTiba}" FontSize="14" HorizontalAlignment="Center"/>
+										</StackPanel>
+									</Grid>
+								</Border>
+								<Button Grid.Row="2" Margin="10 0 10 0" Content="Pilih Tiket" 
+								        Padding="10" Foreground="{DynamicResource PrimaryColor}" HorizontalAlignment="Stretch" Classes="buttonBlue"/>
+							</Grid>
+						</DataTemplate>
+					</ItemsRepeater.ItemTemplate>
+				</ItemsRepeater>
+				
+				</ScrollViewer>
+			</Border>
+	</DockPanel>
+
+</UserControl>
