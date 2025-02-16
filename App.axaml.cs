@@ -1,5 +1,7 @@
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -39,12 +41,19 @@ public partial class App : Application
 
             }).Build();
 
+        var dataValidationPluginsRemove =
+            BindingPlugins.DataValidators.OfType<DataAnnotationsValidationPlugin>().ToArray();
+
+        foreach (var plugin in dataValidationPluginsRemove)
+        {
+            BindingPlugins.DataValidators.Remove(plugin);
+        }
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = AppHost.Services.GetRequiredService<WindowDashboardView>();
         }
-
+        
         base.OnFrameworkInitializationCompleted();
     }
 }

@@ -9,6 +9,7 @@ using Tiket_Penerbangan_n_Kereta.View.Dashboard;
 using Tiket_Penerbangan_n_Kereta.View.Dashboard.Maskapai;
 using Tiket_Penerbangan_n_Kereta.View.Dashboard.Pemesanan;
 using Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard;
+using Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard.Maskapai;
 using Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard.Pemesanan;
 
 namespace Tiket_Penerbangan_n_Kereta

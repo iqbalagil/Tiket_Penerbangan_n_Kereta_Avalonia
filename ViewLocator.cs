@@ -19,13 +19,14 @@ namespace Tiket_Penerbangan_n_Kereta
             var name = data.GetType().AssemblyQualifiedName!.Replace("ViewModel","View");
             var type = Type.GetType(name);
 
-            var view = ActivatorUtilities.CreateInstance(_service, type) as Control;
-            if (view != null)
+            if (type != null)
             {
-                view.DataContext = data;
-                return view;
+                return (Control)Activator.CreateInstance(type);
             }
-            return new TextBlock { Text = "Not Found: " + name };
+            else
+            {
+                return new TextBlock { Text = "Not Found" + name };
+            }
         }
 
         public bool Match(object data)

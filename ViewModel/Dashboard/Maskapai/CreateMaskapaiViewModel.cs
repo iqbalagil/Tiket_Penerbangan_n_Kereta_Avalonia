@@ -1,14 +1,14 @@
 using System;
 using System.Threading.Tasks;
-using Azure.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Tiket_Penerbangan_n_Kereta.Data;
+using Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard.Maskapai;
 using Tiket_Penerbangan_n_Kereta.ViewModel.Data;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard;
 
-public partial class CreateMaskapaiViewModel : ViewModelBase, IPageViewModel
+public partial class CreateMaskapaiViewModel : PageViewModelBase
 {
     [ObservableProperty] private string _maskapaiName;
     [ObservableProperty] private string _descMaskapai;
@@ -35,7 +35,16 @@ public partial class CreateMaskapaiViewModel : ViewModelBase, IPageViewModel
         return true;
     }
 
-    public bool CanNavigateNext => true;
-    public bool CanNavigatePrevious => false;
+    public override bool CanNavigateNext
+    {
+        get => true;
+        set => throw new NotSupportedException();
+    }
+
+    public override bool CanNavigatePrevious
+    {
+        get => false;
+        set => throw new NotSupportedException();
+    }
 
 }
