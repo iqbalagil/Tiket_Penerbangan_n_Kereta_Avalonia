@@ -2,10 +2,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:sukiUI="clr-namespace:SukiUI;assembly=SukiUI"
              xmlns:vm="clr-namespace:Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard"
+             xmlns:controls="clr-namespace:SukiUI.Controls;assembly=SukiUI"
              x:DataType="vm:MainMaskapaiViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Tiket_Penerbangan_n_Kereta.View.Dashboard.Maskapai.MainMaskapaiView"
              x:CompileBindings="True">
-    <TransitioningContentControl Content="{Binding CurrentPage }"/>
+    <ContentControl.Styles>
+        <sukiUI:SukiTheme ThemeColor="Blue"/>
+    </ContentControl.Styles>
+    
+    <controls:GlassCard Width="500">
+        <controls:GroupBox Header="Stepper">
+            <StackPanel Spacing="15">
+                <controls:Stepper Steps="{Binding Steps}" Index="{Binding CurrentIndex}"/>
+            </StackPanel>
+        </controls:GroupBox>
+    </controls:GlassCard>
+    
+
+    
 </UserControl>

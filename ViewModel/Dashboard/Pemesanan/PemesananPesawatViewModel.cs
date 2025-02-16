@@ -29,7 +29,7 @@ public partial class PemesananPesawatViewModel : ViewModelBase
             new PemesananViewModel
             {
                 _namaPesawat = "Garuda Indonesia",
-                _imagePesawat = new byte[] { }, // Dummy empty image data
+                _imagePesawat = new byte[] { },
                 _hargaPesawat = 500000,
                 _jamBerangkat = "08:00",
                 _jamTiba = "10:00",

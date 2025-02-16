@@ -11,6 +11,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
 using ReactiveUI;
 using Tiket_Penerbangan_n_Kereta.Data;
+using Tiket_Penerbangan_n_Kereta.Services;
 using Tiket_Penerbangan_n_Kereta.ViewModel.Data;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard;
@@ -25,6 +26,8 @@ public partial class MaskapaiViewModel : ViewModelBase, IPageViewModel
     [ObservableProperty] private byte[] _imageData;
     [ObservableProperty] private string _selectedItem;
 
+    [ObservableProperty] private ViewModelBase _createMaskapaiPage;
+
     [ObservableProperty] private ObservableCollection<string> _selectedTypeTransportasi;
     
     [ObservableProperty] private string nameFile;
@@ -36,29 +39,52 @@ public partial class MaskapaiViewModel : ViewModelBase, IPageViewModel
         LoadDataAsync();
     }
 
+
     private async Task LoadDataAsync()
     {
         var typeTransportasi = await _context.TypeTransportasi
             .Select(t => t.NamaType)
             .ToListAsync();
+        
             SelectedTypeTransportasi = new ObservableCollection<string>(typeTransportasi);
+    }
+
+    [RelayCommand]
+    private void CreateMasakapaiShow()
+    {
+        CreateMaskapaiPage = new CreateMaskapaiViewModel(DashboardViewModel._context);
     }
     
     [RelayCommand]
     private async Task<bool> SubmitData()
     {
-        var transport = new Transportasi();
 
-        transport.Kode = Kode;
-        transport.Keterangan = Desc;
-        transport.JumlahKursi = JumlahKursi;
-        transport.Imagedata = ImageData;
-        transport.NamaType = SelectedItem;
+        if (ImageData == null || ImageData.Length == 0)
+        {
+            Console.WriteLine("Image data is required");
+            return false;
+        }
 
+        var typeTransportasi =  _context.TypeTransportasi
+            .FirstOrDefault(t => t.NamaType == SelectedItem);
+        
+        if (typeTransportasi == null) return false;
+        
+        var transport = new Transportasi
+        {
+            Kode = Kode,
+            Keterangan = Desc,
+            JumlahKursi = JumlahKursi,
+            Imagedata = ImageData,
+            NamaType = SelectedItem,
+            IdTypeTransportasi = typeTransportasi.IdTypeTransportasi
+        };
+        
         try
         {
             _context.Transportasi.Add(transport);
             await _context.SaveChangesAsync();
+            NavigationState.IsSucces = true;
             return true;
         }
         catch (Exception ex)
@@ -73,7 +99,7 @@ public partial class MaskapaiViewModel : ViewModelBase, IPageViewModel
     {
         var window = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
 
-        if (window is null || window.StorageProvider is null) return;
+        if (window is null || window.StorageProvider == null) return;
         
         var files = await window.StorageProvider.OpenFilePickerAsync(
             new FilePickerOpenOptions
@@ -99,6 +125,11 @@ public partial class MaskapaiViewModel : ViewModelBase, IPageViewModel
             using var memoryStream = new MemoryStream();
             await stream.CopyToAsync(memoryStream); 
             ImageData = memoryStream.ToArray();
+        }
+        else
+        {
+            Console.WriteLine("No Image Selected");
+            ImageData = null;
         }
     }
 

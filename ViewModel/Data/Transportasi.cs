@@ -19,6 +19,7 @@ public class Transportasi
 
     public string Keterangan { get; set; }
     
+    [ForeignKey("TypeTransportasi")]
     public int IdTypeTransportasi { get; set; }
     
     public TypeTransportasi TypeTransportasi { get; set; }

@@ -13,7 +13,7 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard
     public partial class DashboardViewModel : ViewModelBase
     {
         private IServiceProvider _service;
-        private static ApplicationDbContext _context;
+        public static ApplicationDbContext _context;
 
         public DashboardViewModel(IServiceProvider service, ApplicationDbContext context)
         {
@@ -36,7 +36,7 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard
         }
         public ObservableCollection<ListViewTemplate> Items { get; } = new()
         {
-            new ListViewTemplate(typeof(MaskapaiViewModel), "Maskapai", "Airplane"),
+            new ListViewTemplate(typeof(MainMaskapaiViewModel), "Maskapai", "Airplane"),
             new ListViewTemplate(typeof(PemesananPesawatViewModel), "Pemesanan Pesawat", "Ticket"),
             new ListViewTemplate(typeof(UserInterfaceViewModel), "User Interface", "Person"),
             new ListViewTemplate(typeof(DataAnalyticalViewModel), "Data Analytical", "DataUsage")

@@ -10,18 +10,23 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard;
 
 public partial class CreateMaskapaiViewModel : ViewModelBase, IPageViewModel
 {
-    [ObservableProperty] private string _maskapaiName = string.Empty;
-    [ObservableProperty] private string _descMaskapai = string.Empty;
+    [ObservableProperty] private string _maskapaiName;
+    [ObservableProperty] private string _descMaskapai;
 
     private ApplicationDbContext _context;
+
+    public CreateMaskapaiViewModel(ApplicationDbContext context)
+    {
+        _context = context;
+    }
 
     [RelayCommand]
     private async Task<bool> CreateMaskapai()
     {
         var newMaskapai = new TypeTransportasi
         {
-            NamaType = _maskapaiName,
-            Keterangan = _descMaskapai
+            NamaType = MaskapaiName,
+            Keterangan = DescMaskapai
         };
 
         _context.TypeTransportasi.Add(newMaskapai);
@@ -29,8 +34,6 @@ public partial class CreateMaskapaiViewModel : ViewModelBase, IPageViewModel
         await _context.SaveChangesAsync();
         return true;
     }
-
-    [ObservableProperty] private MainMaskapaiViewModel _mainMaskapaiViewModel;
 
     public bool CanNavigateNext => true;
     public bool CanNavigatePrevious => false;

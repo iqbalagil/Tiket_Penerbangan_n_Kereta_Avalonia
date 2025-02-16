@@ -55,7 +55,7 @@ namespace Tiket_Penerbangan_n_Kereta.Data
             builder.Entity<Transportasi>()
                 .HasOne(t => t.TypeTransportasi)
                 .WithMany(k => k.Transports)
-                .HasForeignKey(t => t.IdTypeTransportasi);
+                .HasForeignKey(fk => fk.IdTypeTransportasi);
 
             builder
                 .Entity<Transportasi>()

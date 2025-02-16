@@ -21,18 +21,12 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel.Data
         [Required]
         public string Password { get; set; }
         public string Nama { get; set; }
-        public Gender JenisKelamin { get; set; }
+        public char JenisKelamin { get; set; }
         public string AlamatPenumpang { get; set; }
         public DateTime TanggalLahir { get; set; }
         public string NoTelepon { get; set; }
 
         public List<Pemesanan> Pemesanans { get; set; }
 
-    }
-
-    public enum Gender
-    {
-        Male,
-        Female
     }
 }

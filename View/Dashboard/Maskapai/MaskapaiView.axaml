@@ -15,16 +15,17 @@
             <felx:FlexPanel
                     JustifyContent="SpaceBetween">
                 <TextBlock  Margin="10" FontSize="20"
-                            TextAlignment="Center" FontFamily="Poppins">Maskapai</TextBlock>
+                            TextAlignment="Center" FontFamily="Poppins"></TextBlock>
                         <Button Classes="buttonCreate" Content="Create Maskapai"
-                                Command="{Binding NavigateNextPage, RelativeSource={RelativeSource AncestorType=vm:MainMaskapaiViewModel}}"/>
+                                Command="{Binding CreateMasakapaiShowCommand}"/>
                 </felx:FlexPanel>
         </Border>
         <Border DockPanel.Dock="Bottom" Background="Transparent">
             <ScrollViewer >
-                
                 <StackPanel Orientation="Vertical">
-                    <DataGrid></DataGrid>
+                    <Border>
+                        <TransitioningContentControl Content="{Binding CreateMaskapaiPage}"/>
+                    </Border>
                     <Border Background="{DynamicResource PrimaryColor}"
                             Classes="card"
                             CornerRadius="4"
@@ -51,18 +52,14 @@
                             </ItemsControl>
                             <ItemsControl Padding="10">
                                 <TextBlock Text="Jenis Maskapai" Margin="0 0  0 10"/>
-                                <ComboBox Width="350" SelectedItem="{Binding SelectedItem}"
-                                          ItemsSource="{Binding SelectedTypeTransportasi}">
-                                </ComboBox>
+                                    <ComboBox Width="350" SelectedItem="{Binding SelectedItem}"
+                                              ItemsSource="{Binding SelectedTypeTransportasi}">
+                                    </ComboBox>
                             </ItemsControl>
                             <Button Classes="primaryButton" Content="Upload File" Command="{Binding UploadImageCommand}"/>
-                            <TextBlock Text="{Binding }"/>
-                            <Button Classes="primaryButton" Content="Submit" Command="{Binding SubmitDataCommand}">
-                                <FlyoutBase.AttachedFlyout>
-                                    <Flyout>
-                                        <TextBlock Text="Jumlah Kursi value need to be filled"/>
-                                    </Flyout>
-                                </FlyoutBase.AttachedFlyout>
+                            <TextBlock Margin="10" Padding="10" Text="{Binding NameFile }"/>
+                            <Button Classes="buttonCustom" Margin="10" Padding="10" Width="100" Height="40"
+                                    Content="Submit" Command="{Binding SubmitDataCommand}">
                             </Button>
                         </StackPanel>
                     </ItemsControl>

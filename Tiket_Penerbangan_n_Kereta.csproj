@@ -39,6 +39,7 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.1" />
     <PackageReference Include="ReactiveUI" Version="20.1.63" />
     <PackageReference Include="Russkyc.AvaloniaAutoGrid" Version="1.0.0" />
+    <PackageReference Include="SukiUI" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

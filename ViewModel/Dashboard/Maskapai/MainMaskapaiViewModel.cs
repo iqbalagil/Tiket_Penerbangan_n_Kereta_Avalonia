@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -8,7 +9,9 @@ using CommunityToolkit.Mvvm.Input;
 using DynamicData;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
+using Tiket_Penerbangan_n_Kereta.Services;
 using Tiket_Penerbangan_n_Kereta.View.Dashboard;
+using Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard.Pemesanan;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard;
 
@@ -21,14 +24,24 @@ public interface IPageViewModel
 public partial class MainMaskapaiViewModel : ViewModelBase
 {
     private readonly IServiceProvider _service;
-    private int _currentIndex = 0;
+    [ObservableProperty] private int _currentIndex = 1;
 
-    [ObservableProperty] private ViewModelBase _currentPage;
+    public IEnumerable<string> Steps { get; } =
+        ["First Step", "Second Step", "Third Step"];
+    
+    
+    private ViewModelBase _currentPage;
+
+    public ViewModelBase CurrentPage
+    {
+        get => _currentPage;
+        set => SetProperty(ref _currentPage, value);
+    }
 
     public ObservableCollection<ListPageModel> Models { get; } = new()
     {
-        new ListPageModel(typeof(MaskapaiViewModel)),
-        new ListPageModel(typeof(CreateMaskapaiViewModel))
+        new ListPageModel(typeof(MaskapaiViewModel), "Buat Maskapai"),
+        new ListPageModel(typeof(CreatePemesananViewModel), "Buat Model Pemesanan")
     };
 
     public ICommand NavigateNextPage { get; }
@@ -75,7 +88,7 @@ public partial class MainMaskapaiViewModel : ViewModelBase
         }
     }
 
-    private bool CanNavigateNext() => _currentIndex < Models.Count - 1;
+    private bool CanNavigateNext() => _currentIndex < Models.Count - 1 && NavigationState.IsSucces;
 
     private bool CanNavigatePrevious() => _currentIndex > 0;
 
@@ -83,11 +96,12 @@ public partial class MainMaskapaiViewModel : ViewModelBase
 
 public class ListPageModel
 {
-    public ListPageModel(Type type)
+    public ListPageModel(Type type, string label)
     {
         ModelType = type;
+        Label = type.Name.Replace(type.Name, label);
     }
     
     public Type ModelType { get; }
-
+    public string Label { get; }
 }

@@ -32,21 +32,21 @@
 				<StackPanel
 					Orientation="Horizontal">
 					<Button
-						Width="40" Height="40" CornerRadius="6"
+						Width="40" Height="40"
 						Background="{DynamicResource PrimaryColor}"
 						CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
 						Command="{Binding MinimizeWindowCommand}">
 						<material:MaterialIcon Kind="Minimize"/>
 					</Button>
 					<Button
-						Width="40" Height="40" CornerRadius="6"
+						Width="40" Height="40"
 						Background="{DynamicResource PrimaryColor}"
 						CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
 						Command="{Binding MaximizedWindowCommand}">
 						<material:MaterialIcon Kind="Maximize"/>
 					</Button>
 					<Button
-						Width="40" Height="40" CornerRadius="6"
+						Width="40" Height="40"
 						Background="{DynamicResource PrimaryColor}"
 						Classes="closeBtn"
 						CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
@@ -79,7 +79,7 @@
 						<ListBox.ItemTemplate>
 							<DataTemplate DataType="{x:Type  vm:ListViewTemplate}">
 								<StackPanel Spacing="18"  VerticalAlignment="Center" Orientation="Horizontal">
-									<material:MaterialIcon Kind="{Binding ListItemIcon}"/>
+									<material:MaterialIcon Margin="3 0 5 0" Kind="{Binding ListItemIcon}"/>
 									<TextBlock Text="{Binding Label}"/>
 								</StackPanel>
 							</DataTemplate>
