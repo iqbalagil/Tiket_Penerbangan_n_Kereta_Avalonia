@@ -6,7 +6,7 @@ using Tiket_Penerbangan_n_Kereta.ViewModel;
 
 namespace Tiket_Penerbangan_n_Kereta;
 
-public partial class LoginView : UserControl
+public partial class LoginView : Window
 {
     public LoginView()
     {

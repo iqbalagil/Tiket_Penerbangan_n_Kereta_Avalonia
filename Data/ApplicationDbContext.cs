@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia.Media;
 using Microsoft.EntityFrameworkCore;
 using Tiket_Penerbangan_n_Kereta.ViewModel.Data;
 
@@ -15,6 +16,7 @@ namespace Tiket_Penerbangan_n_Kereta.Data
         public DbSet<Pemesanan> Pemesanan { get; set; }
         public DbSet<Petugas> Petugas { get; set; }
         public DbSet<Rute> Rute { get; set; }
+        public DbSet<Roles> Role { get; set; }
         public DbSet<Transportasi> Transportasi { get; set; }
         public DbSet<TypeTransportasi> TypeTransportasi { get; set; }
         
@@ -32,6 +34,11 @@ namespace Tiket_Penerbangan_n_Kereta.Data
         {
             base.OnModelCreating(builder);
 
+            builder.Entity<Penumpang>()
+                .HasOne(r => r.Role)
+                .WithMany(p => p.Penumpangs)
+                .HasForeignKey(fk => fk.IdRole);
+            
             builder.Entity<Petugas>()
                 .HasOne(r => r.Roles)
                 .WithMany(p => p.Petugas)

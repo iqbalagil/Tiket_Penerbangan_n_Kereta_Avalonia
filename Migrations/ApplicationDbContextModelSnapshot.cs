@@ -77,7 +77,6 @@ namespace Tiket_Penerbangan_n_Kereta.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("AlamatPenumpang")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -85,22 +84,23 @@ namespace Tiket_Penerbangan_n_Kereta.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
-                    b.Property<char>("JenisKelamin")
+                    b.Property<int>("IdRole")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<char?>("JenisKelamin")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Nama")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NoTelepon")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("TanggalLahir")
+                    b.Property<DateTime?>("TanggalLahir")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Username")
@@ -108,6 +108,8 @@ namespace Tiket_Penerbangan_n_Kereta.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("IdPenumpang");
+
+                    b.HasIndex("IdRole");
 
                     b.ToTable("Penumpang");
                 });
@@ -269,6 +271,17 @@ namespace Tiket_Penerbangan_n_Kereta.Migrations
                     b.Navigation("Tujuan");
                 });
 
+            modelBuilder.Entity("Tiket_Penerbangan_n_Kereta.ViewModel.Data.Penumpang", b =>
+                {
+                    b.HasOne("Tiket_Penerbangan_n_Kereta.ViewModel.Data.Roles", "Role")
+                        .WithMany("Penumpangs")
+                        .HasForeignKey("IdRole")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("Tiket_Penerbangan_n_Kereta.ViewModel.Data.Petugas", b =>
                 {
                     b.HasOne("Tiket_Penerbangan_n_Kereta.ViewModel.Data.Roles", "Roles")
@@ -314,6 +327,8 @@ namespace Tiket_Penerbangan_n_Kereta.Migrations
 
             modelBuilder.Entity("Tiket_Penerbangan_n_Kereta.ViewModel.Data.Roles", b =>
                 {
+                    b.Navigation("Penumpangs");
+
                     b.Navigation("Petugas");
                 });
 

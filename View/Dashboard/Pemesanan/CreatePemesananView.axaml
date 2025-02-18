@@ -4,7 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Tiket_Penerbangan_n_Kereta.View.Dashboard.Pemesanan.CreatePemesananView">
-    <Border>
-        
+    <Border Background="{DynamicResource PrimaryColor}" CornerRadius="4"
+        Classes="card"
+        Padding="10"
+        Margin="10">
+        <Grid ShowGridLines="True" ColumnDefinitions="Auto, Auto" RowDefinitions="Auto, Auto">
+            <StackPanel Spacing="10" Margin="5">
+                <TextBlock Text="Kode Pesawat"/>
+                <TextBox Classes="inputField" Width="350"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="1" Spacing="10" Margin="5">
+                <TextBlock Text="Test"/>
+                <TextBox Classes="inputField" Width="350"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="0" Spacing="10" Margin="5">
+                <TextBlock Text="Tempat Awal"/>
+                <ComboBox Width="350" Height="40"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1" Spacing="10" Margin="5">
+                <TextBlock Text="Tempat Tujuan"/>
+                <ComboBox Width="350" Height="40"/>
+            </StackPanel>
+        </Grid>
     </Border>
 </UserControl>

@@ -2,6 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,18 +11,49 @@ using Tiket_Penerbangan_n_Kereta.Services;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel
 {
-    public partial class RegisterViewModels : ObservableObject
+    public partial class RegisterViewModels : ValidationUsingDataAnnotationsViewModel
     {
         private readonly IRegisterService _registerService;
-        [ObservableProperty] private string _username;
-        [ObservableProperty] private string _password;
-        [ObservableProperty] private string _email;
-        [ObservableProperty] private string _verifyPassword;
-        [ObservableProperty] private string _registerMessage;
+        private string _username;
+        
+        [Required]
+        public string Username
+        {
+            get => _username;
+            set => SetProperty(ref _username, value, true);
+        }
+        
+        private string _verifyPassword;
 
-        public RegisterViewModels(IRegisterService registerService)
+        [Required]
+        public string VerifyPassword
+        {
+            get => _verifyPassword;
+            set
+            {
+                if (string.IsNullOrEmpty(value)) ValidateProperty(_verifyPassword);
+                else SetProperty(ref _verifyPassword, value, true);
+
+            }
+        }
+
+        private string _registerMessage;
+
+         public string RegisterMessage
+         {
+             get => _registerMessage;
+             set => SetProperty(ref _registerMessage, value);
+         }
+
+         public IEnumerable<ValidationResult> GetValidationErrors()
+         {
+             return GetErrors();
+         }
+
+         public RegisterViewModels(IRegisterService registerService)
         {
             _registerService = registerService;
+            GetValidationErrors();
         }
 
         [RelayCommand]
@@ -39,5 +72,6 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel
             var result = await _registerService.RegisterAsync(Username, Email, Password);
             RegisterMessage = result ? "Registration Succed" : "Registration Failed";
         }
+
     }
 }

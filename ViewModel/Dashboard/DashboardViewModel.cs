@@ -39,8 +39,7 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard
         {
             new ListViewTemplate(typeof(MainMaskapaiViewModel), "Maskapai", "Airplane"),
             new ListViewTemplate(typeof(PemesananPesawatViewModel), "Pemesanan Pesawat", "Ticket"),
-            new ListViewTemplate(typeof(UserInterfaceViewModel), "User Interface", "Person"),
-            new ListViewTemplate(typeof(DataAnalyticalViewModel), "Data Analytical", "DataUsage")
+            new ListViewTemplate(typeof(UserInterfaceViewModel), "User Management", "Person"),
         };
 
         [RelayCommand]

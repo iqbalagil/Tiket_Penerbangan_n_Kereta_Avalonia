@@ -23,7 +23,7 @@ namespace Tiket_Penerbangan_n_Kereta.Services
 
         public async Task<AuthenticationResult> Auth(string username, string password)
         {
-            var user = await _data.GetPenumpangData(username, password);
+            var user = await _data.LoginAsync(username, password);
             if (user != null)
             {
                 return new AuthenticationResult

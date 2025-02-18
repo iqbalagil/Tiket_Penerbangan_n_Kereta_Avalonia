@@ -2,51 +2,57 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="1080"
+		mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="1080" d:Background="#ffff"
         xmlns:flex="clr-namespace:Avalonia.Flexbox;assembly=Avalonia.Flexbox"
 		xmlns:vm="clr-namespace:Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard"
         xmlns:material="using:Material.Icons.Avalonia"
 		x:Class="Tiket_Penerbangan_n_Kereta.View.Dashboard.WindowDashboardView"
         Title="Dashboard"
 		WindowState="Minimized"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaToDecorationsHint="False"
+        ExtendClientAreaTitleBarHeightHint="-1"
         x:DataType="vm:DashboardViewModel"
         x:CompileBindings="True"
         CanResize="True">
 	
 	<Grid RowDefinitions="Auto, *">
 		<Border Grid.Row="0"
+		        Margin="1"
 				Height="32"
 				CornerRadius="8"
-				Background="{DynamicResource PrimaryColor}">
+				Background="{DynamicResource PrimaryColor}"
+				BoxShadow="0 0.001 0.001 DimGray">
 
 			<flex:FlexPanel
 				JustifyContent="SpaceBetween">
-				<TextBlock
-				FontSize="16"
-				VerticalAlignment="Center"
-				Padding="5"
-				FontFamily="Montserrat"
-				FontWeight="Medium"
-				Text="airlanes"/>
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+				            Margin="5" Spacing="10">
+					<PathIcon
+						Data="{StaticResource icon_plane}" Foreground="{DynamicResource SecondaryColor2}"
+						Padding="5"/>
+					<TextBlock FontFamily="Poppins" FontSize="13" Text="Acetorrney"/>
+				</StackPanel>
 
 				<StackPanel
-					Orientation="Horizontal">
+					Orientation="Horizontal"
+					>
 					<Button
-						Width="40" Height="40"
+						Width="35" Height="35"
 						Background="{DynamicResource PrimaryColor}"
 						CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
 						Command="{Binding MinimizeWindowCommand}">
 						<material:MaterialIcon Kind="Minimize"/>
 					</Button>
 					<Button
-						Width="40" Height="40"
+						Width="35" Height="35"
 						Background="{DynamicResource PrimaryColor}"
 						CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
 						Command="{Binding MaximizedWindowCommand}">
 						<material:MaterialIcon Kind="Maximize"/>
 					</Button>
 					<Button
-						Width="40" Height="40"
+						Width="35" Height="35"
 						Background="{DynamicResource PrimaryColor}"
 						Classes="closeBtn"
 						CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
@@ -57,35 +63,47 @@
 			</flex:FlexPanel>
 		</Border>
 		<SplitView
-			Margin="10"
 			IsPaneOpen="{Binding IsOpenPane}"
 			OpenPaneLength="250"
 			DisplayMode="CompactInline"
 			CompactPaneLength="48"
 			Grid.Row="1">
 			<SplitView.Pane>
-				<StackPanel
-					Spacing="5">
-					<Button Classes="blueButton"
-					        Margin="3 7"
-							Command="{Binding IsTogglePaneCommand}">
-						<material:MaterialIcon Kind="Menu"/>
-					</Button>
-					<ListBox FontFamily="Poppins"
-							 VerticalAlignment="Center"
-							Classes="dashboardPanel"
-							 ItemsSource="{Binding Items}"
-							 SelectedItem="{Binding SelectedListItem}">
-						<ListBox.ItemTemplate>
-							<DataTemplate DataType="{x:Type  vm:ListViewTemplate}">
-								<StackPanel Spacing="18"  VerticalAlignment="Center" Orientation="Horizontal">
-									<material:MaterialIcon Margin="3 0 5 0" Kind="{Binding ListItemIcon}"/>
-									<TextBlock Text="{Binding Label}"/>
-								</StackPanel>
-							</DataTemplate>
-						</ListBox.ItemTemplate>
-					</ListBox>
-				</StackPanel>
+				<Border
+					Margin="1"
+					BoxShadow="0 0.001 0.001 DimGray"
+					Background="{DynamicResource PrimaryColor}"
+					CornerRadius="0 6 6 0">
+					<StackPanel>
+						<Button Classes="primaryButtonBlue"
+						        Background="{DynamicResource PrimaryColor}"
+						        Foreground="{DynamicResource PrimaryColor}"
+						        Width="52"
+						        HorizontalAlignment="Left"
+						        Margin="-3 7"
+						        Command="{Binding IsTogglePaneCommand}">
+							<material:MaterialIcon Kind="ViewDashboard"/>
+						</Button>
+						<ListBox FontFamily="Poppins"
+						         Background="{DynamicResource PrimaryColor}"
+						         VerticalAlignment="Center"
+						         CornerRadius="4"
+						         Margin="0 2"
+						         ItemsSource="{Binding Items}"
+						         SelectedItem="{Binding SelectedListItem}"
+						         Classes="customList">
+							<ListBox.ItemTemplate>
+								<DataTemplate DataType="{x:Type  vm:ListViewTemplate}">
+									<StackPanel Spacing="18"  VerticalAlignment="Center" Orientation="Horizontal">
+										<material:MaterialIcon Margin="3 0 5 0" Kind="{Binding ListItemIcon}"/>
+										<TextBlock Text="{Binding Label}"/>
+									</StackPanel>
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+						</ListBox>
+					</StackPanel>
+
+				</Border>
 			</SplitView.Pane>
 
 			<SplitView.Content>

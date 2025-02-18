@@ -20,11 +20,14 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel.Data
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
-        public string Nama { get; set; }
-        public char JenisKelamin { get; set; }
-        public string AlamatPenumpang { get; set; }
-        public DateTime TanggalLahir { get; set; }
-        public string NoTelepon { get; set; }
+        public string? Nama { get; set; }
+        public char? JenisKelamin { get; set; }
+        public string? AlamatPenumpang { get; set; }
+        public DateTime? TanggalLahir { get; set; }
+        public string? NoTelepon { get; set; }
+        
+        public Roles Role { get; set; }
+        public int IdRole { get; set; }
 
         public List<Pemesanan> Pemesanans { get; set; }
 

@@ -13,4 +13,5 @@ public class Roles
     [Required]
     public string RoleName { get; set; }
     public List<Petugas> Petugas { get; set; }
+    public List<Penumpang> Penumpangs { get; set; }
 }

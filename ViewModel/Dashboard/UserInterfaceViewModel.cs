@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Avalonia.Media;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.EntityFrameworkCore;
 using Tiket_Penerbangan_n_Kereta.Data;
 using Tiket_Penerbangan_n_Kereta.Services;
@@ -8,7 +9,7 @@ using Tiket_Penerbangan_n_Kereta.ViewModel.Data;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard;
 
-public class UserInterfaceViewModel : ViewModelBase
+public partial class UserInterfaceViewModel : ViewModelBase
 {
     private readonly ApplicationDbContext _context;
     private ObservableCollection<Penumpang> _data;
@@ -22,6 +23,5 @@ public class UserInterfaceViewModel : ViewModelBase
     public UserInterfaceViewModel(ApplicationDbContext context)
     {
         _context = context;
-        Data = new ObservableCollection<Penumpang>();
     }
 }

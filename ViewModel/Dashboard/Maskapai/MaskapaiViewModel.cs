@@ -25,20 +25,51 @@ public partial class MaskapaiViewModel : PageViewModelBase
 {
     private ApplicationDbContext _context;
 
-    [ObservableProperty] [Required(ErrorMessage = "Kode is reuqired")]
     private string _kode;
 
-    [ObservableProperty] [Required(ErrorMessage = "Jumlah Kursi is required")]
     private int _jumlahKursi;
 
-    [ObservableProperty] [Required(ErrorMessage = "Description is required")]
     private string desc;
 
-    [ObservableProperty] [Required(ErrorMessage = "Image is required")]
     private byte[] _imageData;
 
-    [ObservableProperty] [Required(ErrorMessage = "Type Transportasi is required")]
     private string _selectedItem;
+
+    [Required(ErrorMessage = "Kode is required")]
+    public string Kode
+    {
+        get => _kode;
+        set => SetProperty(ref _kode, value);
+    }
+    
+    [Required(ErrorMessage = "Description is required")]
+    public string Desc
+    {
+        get => desc;
+        set => SetProperty(ref desc, value);
+    }
+    
+    [Required(ErrorMessage = "Jumlah Kursi is required")]
+    [Range(1, int.MaxValue, ErrorMessage = "Jumlah kursi must be greater then 0")]
+    public int JumlahKursi
+    {
+        get => _jumlahKursi;
+        set => SetProperty(ref _jumlahKursi, value);
+    }
+
+    [Required(ErrorMessage = "Type Transportasi is required")]
+    public string SelectedItem
+    {
+        get => _selectedItem;
+        set => SetProperty(ref _selectedItem, value);
+    }
+    
+    [Required(ErrorMessage = "Image is required")]
+    public byte[] Image
+    {
+        get => _imageData;
+        set => SetProperty<byte[]>(ref _imageData, value, validate: true);
+    }
 
     [ObservableProperty] private ViewModelBase _createMaskapaiPage;
 
@@ -46,6 +77,9 @@ public partial class MaskapaiViewModel : PageViewModelBase
 
     [ObservableProperty] private string nameFile;
     public ObservableCollection<int> AvailableNumbers { get; } = new(Enumerable.Range(1, 34));
+
+    public ValidationUsingDataAnnotationsViewModel ValidationUsingDataAnnotationsViewModel { get; }
+        = new ValidationUsingDataAnnotationsViewModel();
 
     public MaskapaiViewModel(ApplicationDbContext context)
     {
@@ -73,7 +107,7 @@ public partial class MaskapaiViewModel : PageViewModelBase
     private async Task<bool> SubmitData()
     {
 
-        if (ImageData == null || ImageData.Length == 0)
+        if (Image == null || Image.Length == 0)
         {
             Console.WriteLine("Image data is required");
             return false;
@@ -87,9 +121,9 @@ public partial class MaskapaiViewModel : PageViewModelBase
         var transport = new Transportasi
         {
             Kode = Kode,
-            Keterangan = Desc,
+            Keterangan = desc,
             JumlahKursi = JumlahKursi,
-            Imagedata = ImageData,
+            Imagedata = Image,
             NamaType = SelectedItem,
             IdTypeTransportasi = typeTransportasi.IdTypeTransportasi
         };
@@ -145,12 +179,12 @@ public partial class MaskapaiViewModel : PageViewModelBase
             await using var stream = await file.OpenReadAsync();
             using var memoryStream = new MemoryStream();
             await stream.CopyToAsync(memoryStream);
-            ImageData = memoryStream.ToArray();
+            Image = memoryStream.ToArray();
         }
         else
         {
             Console.WriteLine("No Image Selected");
-            ImageData = null;
+            Image = null;
         }
     }
 

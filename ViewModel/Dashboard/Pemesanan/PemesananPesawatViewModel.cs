@@ -64,6 +64,7 @@ public partial class PemesananPesawatViewModel : ViewModelBase
 
     public async Task LoadDataAsync()
     {
+        var random = new Random();
         var pesawat = await _context.Pemesanan
             .Include(p => p.Tujuan)
             .ThenInclude(p => p.Transportasi)
@@ -74,7 +75,11 @@ public partial class PemesananPesawatViewModel : ViewModelBase
             {
                 _namaPesawat = p.Tujuan.Transportasi.NamaType,
                 _imagePesawat = p.Tujuan.Transportasi.Imagedata,
-                _hargaPesawat = p.TotalBayar,
+                _hargaPesawat = p.Tujuan.Transportasi.NamaType == "Garuda Indonesia" ? random.Next(
+                    1000000, 1075000) : p.Tujuan.Transportasi.NamaType == "Batik Airlanes"
+                    ? random.Next(500000, 1200000) : p.Tujuan.Transportasi.NamaType == "Lion Air" ?
+                random.Next(600000, 1275000) : p.Tujuan.Transportasi.NamaType == "Air Asia"
+                ? random.Next(550000, 1100000) : p.TotalBayar,
                 _jamBerangkat = p.JamBerangkat.ToString("HH:mm"),
                 _jamTiba = p.JamTiba.ToString("HH:mm"),
                 _tempatSekarang = p.Tujuan.RuteAwal,

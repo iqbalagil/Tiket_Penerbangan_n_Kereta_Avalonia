@@ -13,12 +13,16 @@
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceInclude Source="/TemplateUI/DynamicColor.axaml"/>
+				<ResourceInclude Source="/TemplateUI/FluentThemeResource.axaml"/>
+				<ResourceInclude Source="/TemplateUI/TextBoxFluent.axaml"/>
+				<ResourceInclude Source="/TemplateUI/IconTemplate.axaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>
 	
     <Application.Styles>
-        <FluentTheme />
+	    <FluentTheme DensityStyle="Compact" />
+	    <StyleInclude Source="avares://Avalonia.Themes.Fluent/FluentTheme.xaml"/>
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
 		<StyleInclude Source="avares://Material.Icons.Avalonia/MaterialIconStyles.axaml"/>
 		<StyleInclude Source="/TemplateUI/DashboardUI.axaml"/>

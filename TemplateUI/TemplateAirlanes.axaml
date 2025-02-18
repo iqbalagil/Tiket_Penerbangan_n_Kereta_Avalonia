@@ -7,7 +7,7 @@
 	              <!-- /> -->
     </Border>
   </Design.PreviewWith>
-
+	
 	<Style Selector="ComboBox.changeLocation">
 		 <Setter Property="Template"> 
 		   <ControlTemplate> 
@@ -207,6 +207,34 @@
 		<Setter Property="Background" Value="LightGray"/>
 	</Style>
 	
+	<Style Selector="ListBoxItem.customList:pointerover/template/ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource SecondaryColor2}"/>
+		<Setter Property="Foreground" Value="{DynamicResource PrimaryColor}"/>
+	</Style>
+	
+	<Style Selector="ListBoxItem.customList:pressed/template/ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource SecondaryColor2}"/>
+		<Setter Property="Foreground" Value="{DynamicResource PrimaryColor}"/>
+	</Style>
+	
+	<Style Selector="Button.primaryButtonBlue">
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Border
+					Padding="{TemplateBinding Padding}"
+					Background="{DynamicResource PrimaryColor2}"
+					Margin="10"
+					CornerRadius="4"
+					BoxShadow="0 0.5 0.8 DimGray"
+					BorderThickness="2">
+					<ContentPresenter
+						Content="{TemplateBinding Content}"
+						ContentTemplate="{TemplateBinding ContentTemplate}"/>
+				</Border>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+	
 	<Style Selector="Button.backButton">
 		<Setter Property="Template">
 			<ControlTemplate>
@@ -297,5 +325,6 @@
 			</ControlTemplate>
 		</Setter>
 	</Style>
+	
 	
 </Styles>

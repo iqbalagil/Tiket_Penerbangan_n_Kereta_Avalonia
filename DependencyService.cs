@@ -30,13 +30,13 @@ namespace Tiket_Penerbangan_n_Kereta
             services.AddScoped<IRegisterService, RegisterService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<ViewLocator>();
+            services.AddScoped<ValidationUsingDataAnnotationsViewModel>();
             return services;
         }
 
         public static IServiceCollection AddViewModels(this IServiceCollection services)
         {
             services.AddScoped<MainMaskapaiViewModel>();
-            services.AddScoped<DataAnalyticalViewModel>();
             services.AddScoped<ViewModelBase>();
             services.AddScoped<CreateMaskapaiViewModel>();
             services.AddScoped<MaskapaiViewModel>();
@@ -52,7 +52,6 @@ namespace Tiket_Penerbangan_n_Kereta
         {
             services.AddScoped<MainMaskapaiView>();
             services.AddScoped<PemesananPesawatView>();
-            services.AddScoped<DataAnalyticalView>();
             services.AddScoped<UserInterfaceView>();
             services.AddScoped<LoginView>();
             services.AddScoped<RegisterView>();
