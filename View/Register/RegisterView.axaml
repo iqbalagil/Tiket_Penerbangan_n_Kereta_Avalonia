@@ -14,7 +14,7 @@
 		<StackPanel></StackPanel>
 		<Border Grid.Column="0"
 		><Image
-			 Source="E:/Tiket_penerbangan_UKK/Tiket_Penerbangan_n_Kereta/Assets/aircraft.jpg"
+			 Source="/Assets/aircraft.jpg"
 			 Stretch="UniformToFill"
 		 />
 		</Border>

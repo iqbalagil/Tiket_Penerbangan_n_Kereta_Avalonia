@@ -8,15 +8,17 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Tiket_Penerbangan_n_Kereta.Services;
 using Tiket_Penerbangan_n_Kereta.View.Dashboard;
+using Tiket_Penerbangan_n_Kereta.ViewModel.Data;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel
 {
     public partial class LoginViewModel : ValidationUsingDataAnnotationsViewModel
     {
+        private readonly AuthState _authState;
         private readonly ILoginService _loginService;
-        private string _email;
-        private string _password;
-        private Window? _currentWindow;
+        private readonly INavigationService _navigation;
+
+        public Penumpang? LoggedInUser => _authState.CurrentUser;
         
         public LoginViewModel(ILoginService loginService)
         {
@@ -29,30 +31,16 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel
             var result = await _loginService.Auth(Email, Password);
             if (result.IsAuthenticated)
             {
-                if (Avalonia.Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopApplication)
-                {
-                    Window? window = desktopApplication.Windows.FirstOrDefault(w => w.IsActive);
-                    window?.Hide();
-                    var windows = new WindowDashboardView();
-                    windows.Show();
-                }
+                OnPropertyChanged(nameof(LoggedInUser));
+                _navigation.NavigateToAny(new WindowDashboardView());
             }
         }
 
         [RelayCommand]
         public void Register()
         {
-            if (Avalonia.Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopApplication)
-            {
-                Window? windows = desktopApplication.Windows.FirstOrDefault(w => w.IsActive);
-                windows?.Hide();
-                var window = new RegisterView();
-                window.Show();
-            }
-
+            _navigation.NavigateToAny(new RegisterView());
         }
-
-
 
     }
 }

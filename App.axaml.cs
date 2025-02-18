@@ -33,7 +33,7 @@ public partial class App : Application
             
             .ConfigureServices((context, services) =>
             {
-                services.AddDatabase(@"DataSource=E:\Tiket_penerbangan_UKK\Tiket_Penerbangan_n_Kereta\Penerbangan.db")
+                services.AddDatabase(@"DataSource=D:\Tiket_Penerbangan_n_Kereta_Avalonia\Penerbangan.db")
                     .AddServices()
                     .AddViewModels()
                     .AddApplication()
@@ -51,7 +51,7 @@ public partial class App : Application
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = AppHost.Services.GetRequiredService<LoginView>();
+            desktop.MainWindow = AppHost.Services.GetRequiredService<WindowDashboardView>();
         }
         
         base.OnFrameworkInitializationCompleted();

@@ -6,6 +6,7 @@ using CommunityToolkit.Mvvm.Input;
 using Material.Icons;
 using Microsoft.Extensions.DependencyInjection;
 using Tiket_Penerbangan_n_Kereta.Data;
+using Tiket_Penerbangan_n_Kereta.Services;
 using Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard.Maskapai;
 using Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard.Pemesanan;
 
@@ -13,13 +14,17 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard
 {
     public partial class DashboardViewModel : ViewModelBase
     {
+        private ILoginService _loginService;
         private IServiceProvider _service;
         public static ApplicationDbContext _context;
+        public LoginViewModel Login { get; }
 
-        public DashboardViewModel(IServiceProvider service, ApplicationDbContext context)
+        public DashboardViewModel(IServiceProvider service, ApplicationDbContext context, ILoginService loginService)
         {
             _context = context;
             _service = service;
+            _loginService = loginService;
+            Login = new LoginViewModel(_loginService);
         } 
         
         [ObservableProperty] private bool _isOpenPane = true;

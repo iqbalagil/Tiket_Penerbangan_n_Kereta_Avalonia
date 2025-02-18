@@ -6,6 +6,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using ReactiveUI;
+using Tiket_Penerbangan_n_Kereta.ViewModel.Data;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel;
 
@@ -82,6 +83,7 @@ public class ValidationUsingDataAnnotationsViewModel : ViewModelBase, INotifyDat
         private string? _password;
         private string? _email;
 
+
         public string Email
         {
             get => _email;
@@ -93,6 +95,8 @@ public class ValidationUsingDataAnnotationsViewModel : ViewModelBase, INotifyDat
             get => _password;
             set => SetProperty(ref _password, value);
         }
+        
+
         
         
 }

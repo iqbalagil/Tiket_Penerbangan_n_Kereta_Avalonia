@@ -15,7 +15,7 @@ namespace Tiket_Penerbangan_n_Kereta.Services
     public class LoginService : ILoginService
     {
         private readonly DataServicesApp _data;
-
+        private readonly AuthState _authState;
         public LoginService(DataServicesApp data)
         {
             _data = data;
@@ -26,6 +26,7 @@ namespace Tiket_Penerbangan_n_Kereta.Services
             var user = await _data.LoginAsync(username, password);
             if (user != null)
             {
+                _authState.SetUser(user);
                 return new AuthenticationResult
                 {
                     IsAuthenticated = true,
@@ -37,12 +38,13 @@ namespace Tiket_Penerbangan_n_Kereta.Services
                 IsAuthenticated = false
             };
         }
+
     }
 
         public class AuthenticationResult
         {
             public bool IsAuthenticated { get; set; }
-            public Penumpang User { get; set; }
+            public Penumpang? User { get; set; }
         }
  
 }

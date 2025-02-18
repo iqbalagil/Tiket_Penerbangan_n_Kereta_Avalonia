@@ -8,13 +8,13 @@
         Classes="card"
         Padding="10"
         Margin="10">
-        <Grid ShowGridLines="True" ColumnDefinitions="Auto, Auto" RowDefinitions="Auto, Auto">
+        <Grid ShowGridLines="True" ColumnDefinitions="Auto, Auto" RowDefinitions="Auto, Auto, Auto, Auto, Auto">
             <StackPanel Spacing="10" Margin="5">
                 <TextBlock Text="Kode Pesawat"/>
                 <TextBox Classes="inputField" Width="350"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Grid.Column="1" Spacing="10" Margin="5">
-                <TextBlock Text="Test"/>
+                <TextBlock Text="Total Bayar"/>
                 <TextBox Classes="inputField" Width="350"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="0" Spacing="10" Margin="5">
@@ -25,6 +25,24 @@
                 <TextBlock Text="Tempat Tujuan"/>
                 <ComboBox Width="350" Height="40"/>
             </StackPanel>
+            <StackPanel Grid.Row="2" Grid.Column="0" Spacing="10" Margin="5">
+                <TextBlock Text="Jam Berangkat"/>
+                <TimePicker Width="350" Height="40"
+                            ClockIdentifier="24HourClock"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Grid.Column="1" Spacing="10" Margin="5">
+                <TextBlock Text="Jam Tiba"/>
+                <TimePicker Width="350" Height="40"
+                            ClockIdentifier="24HourClock"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Grid.Column="0" Spacing="10" Margin="5">
+                <TextBlock Text="Tanggal Berangkat"/>
+                <DatePicker DayFormat="ddd dd"
+                    />
+            </StackPanel>
+            <Button Grid.Row="4" Grid.Column="0"  Classes="buttonCustom" Width="100" Height="40" Margin="0 10 0 0" 
+                     FontSize="16" >Create</Button>
         </Grid>
+        
     </Border>
 </UserControl>

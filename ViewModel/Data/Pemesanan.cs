@@ -10,10 +10,11 @@ public class Pemesanan
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int IdPemesanan { get; set; }
-    [Required]
-    public string KodePemesanan { get; set; }
-
-    [Required] public DateTime TanggalPemesanan { get; set; } = DateTime.UtcNow;
+    
+    public string? KodePemesanan { get; set; }
+    
+    public DateTime? TanggalPemesanan { get; set; } = DateTime.UtcNow;
+    
     public string TempatPemesanan { get; set; }
     
     [ForeignKey("Penumpang")]

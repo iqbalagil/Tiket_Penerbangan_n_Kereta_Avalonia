@@ -22,7 +22,7 @@ namespace Tiket_Penerbangan_n_Kereta.Data
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"DataSource=E:\Tiket_penerbangan_UKK\Tiket_Penerbangan_n_Kereta\Penerbangan.db");
+            optionsBuilder.UseSqlite(@"DataSource=D:\Tiket_Penerbangan_n_Kereta_Avalonia\Penerbangan.db");
         }
         
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)

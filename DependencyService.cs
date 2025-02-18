@@ -31,6 +31,7 @@ namespace Tiket_Penerbangan_n_Kereta
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<ViewLocator>();
             services.AddScoped<ValidationUsingDataAnnotationsViewModel>();
+            services.AddSingleton<AuthState>();
             return services;
         }
 
