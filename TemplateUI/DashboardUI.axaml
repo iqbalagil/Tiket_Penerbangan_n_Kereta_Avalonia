@@ -1,83 +1,123 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		>
-  <Design.PreviewWith>
-    <Border Padding="20">
-		<Button Classes="buttonCustom"/>
-	</Border>
-  </Design.PreviewWith>
-	
-	<Style Selector="Button.blueButton">
-		<Setter Property="Width" Value="40"/>
-		<Setter Property="Height" Value="40"/>
-		<Setter Property="Background" Value="{DynamicResource PrimaryColor2}"/>
-		<Setter Property="Padding" Value="10"/>
-		<Setter Property="CornerRadius" Value="8"/>
-	</Style>
-	
-	<Style Selector="Button.blueButton:pointerover/template/ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
-	</Style>
+        xmlns:material="using:Material.Icons.Avalonia">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <Button Classes="googleLogin" Content="Sign in with Google" />
+        </Border>
+    </Design.PreviewWith>
 
-	<Style Selector="Button.blueButton:pressed/template/ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource DarkColorBlue}"/>
-	</Style>
-	
-	<Style Selector="TextBox.searchField[UseFloatingWatermark=True]:empty/template/TextBlock#PART_FloatingWatermark">
-		<Setter Property="Foreground" Value="Gray"/>
-		<Setter Property="RenderTransform">
-			<Setter.Value>
-				<TranslateTransform Y="1"/>
-			</Setter.Value>
-		</Setter>
-		<Setter Property="FontSize" Value="16"/>
-		<Setter Property="Opacity" Value="0"/>
-	</Style>
-	
-	<Style Selector="TextBox.searchField[UseFloatingWatermark=True]:not(:empty)/template/TextBlock#PART_FloatingWatermark">
-		<Setter Property="Foreground" Value="{DynamicResource SecondaryColor}"/>
-		<Setter Property="RenderTransform">
-			<Setter.Value>
-				<TranslateTransform Y="0"/>
-			</Setter.Value>
-		</Setter>
-		<Setter Property="FontSize" Value="12"/>
-		<Setter Property="Opacity" Value="1"/>
-	</Style>
-	
-	<Style Selector="TextBox.searchField">
-		<Setter Property="Width" Value="400"/>
-		<Setter Property="Height" Value="40"/>
-		<Setter Property="Watermark" Value="Search"/>
-	</Style>
+    <Style Selector="Button.blueButton">
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Background" Value="{DynamicResource PrimaryColor2}" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="CornerRadius" Value="8" />
+    </Style>
 
-	<Style Selector="ComboBox.changeLocation:focus/template/ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource PrimaryColor}"/>
-	</Style>
+    <Style Selector="Button.blueButton:pointerover/template/ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SecondaryColor}" />
+    </Style>
 
-	<Style Selector="ListBox.dashboardPanel">
-		<Setter Property="Background" Value="#f5f5f5"/>
-		<Setter Property="Foreground" Value="Black"/>
-	</Style>
+    <Style Selector="Button.blueButton:pressed/template/ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource DarkColorBlue}" />
+    </Style>
 
-	<Style Selector="ListBox.dashboardPanel:focus/template/ContentPresenter">
-		<Setter Property="Background" Value="#F8FAFB"/>
-		<Setter Property="Foreground" Value="Black"/>
-	</Style>
+    <Style Selector="TextBox.searchField[UseFloatingWatermark=True]:empty/template/TextBlock#PART_FloatingWatermark">
+        <Setter Property="Foreground" Value="Gray" />
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TranslateTransform Y="1" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Opacity" Value="0" />
+    </Style>
 
-	<Style Selector="ListBox.dashboardPanel:pointerover/template/ContentPresenter">
-		<Setter Property="Background" Value="#F8FAFB"/>
-		<Setter Property="Foreground" Value="Black"/>
-	</Style>
-	
-	<Style Selector="ListBox.dashboardPanel:pressed/template/ContentPresenter">
-		<Setter Property="Background" Value="#F8FAFB"/>
-		<Setter Property="Foreground" Value="Black"/>
-	</Style>
-	
-	<Style Selector="Button.closeBtn:pointerover/template/ContentPresenter">
-		<Setter Property="Background" Value="Red"/>
-		<Setter Property="Foreground" Value="{DynamicResource PrimaryColor}"/>
-	</Style>
-	
+    <Style
+        Selector="TextBox.searchField[UseFloatingWatermark=True]:not(:empty)/template/TextBlock#PART_FloatingWatermark">
+        <Setter Property="Foreground" Value="{DynamicResource SecondaryColor}" />
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TranslateTransform Y="0" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+
+    <Style Selector="TextBox.searchField">
+        <Setter Property="Width" Value="400" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Watermark" Value="Search" />
+    </Style>
+
+    <Style Selector="ComboBox.changeLocation:focus/template/ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource PrimaryColor}" />
+    </Style>
+
+    <Style Selector="ListBox.dashboardPanel">
+        <Setter Property="Background" Value="#f5f5f5" />
+        <Setter Property="Foreground" Value="Black" />
+    </Style>
+
+    <Style Selector="ListBox.dashboardPanel:focus/template/ContentPresenter">
+        <Setter Property="Background" Value="#F8FAFB" />
+        <Setter Property="Foreground" Value="Black" />
+    </Style>
+
+    <Style Selector="ListBox.dashboardPanel:pointerover/template/ContentPresenter">
+        <Setter Property="Background" Value="#F8FAFB" />
+        <Setter Property="Foreground" Value="Black" />
+    </Style>
+
+    <Style Selector="ListBox.dashboardPanel:pressed/template/ContentPresenter">
+        <Setter Property="Background" Value="#F8FAFB" />
+        <Setter Property="Foreground" Value="Black" />
+    </Style>
+
+    <Style Selector="Button.closeBtn:pointerover/template/ContentPresenter">
+        <Setter Property="Background" Value="Red" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryColor}" />
+    </Style>
+
+    <Style Selector="Button.googleLogin">
+        <Setter Property="Template">
+            <ControlTemplate>
+                    <Border
+                        Background="{DynamicResource PrimaryColor}"
+                        CornerRadius="4"
+                        Padding="{TemplateBinding Padding}"
+                        BorderThickness="2"
+                        Margin="10">
+                        <StackPanel
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Spacing="5">
+                            <Image Source="avares://Tiket_Penerbangan_n_Kereta/Assets/google.png" Width="20" Margin="0 0 5 0"/>
+                            <ContentPresenter
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                        </StackPanel>
+                    </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="Button.googleLogin:pointerover/template/ContentPresenter">
+        <Setter Property="Foreground" Value="DodgerBlue"/>
+    </Style>
+    <Style Selector="Button.googleLogin:pointerover/template/Border">
+        <Setter Property="BorderBrush" Value="DodgerBlue"/>
+    </Style>
+
+    <Style Selector="Button.appleLogin">
+        <Setter Property="Template">
+            <ControlTemplate>
+                
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
 </Styles>

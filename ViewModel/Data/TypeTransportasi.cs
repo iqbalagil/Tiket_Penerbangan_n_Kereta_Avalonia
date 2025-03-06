@@ -10,9 +10,10 @@ public class TypeTransportasi
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int IdTypeTransportasi { get; set; }
-    [Required]
-    public string NamaType { get; set; }
+
+    [Required] public string NamaType { get; set; }
+
     public string Keterangan { get; set; }
-    [Required]
-    public List<Transportasi> Transports { get; set; }
+
+    [Required] public List<Transportasi> Transports { get; set; }
 }

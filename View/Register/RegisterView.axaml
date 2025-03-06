@@ -1,61 +1,61 @@
 <Window xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:Tiket_Penerbangan_n_Kereta.ViewModel"
-			 mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="1080"
-			x:DataType="vm:RegisterViewModels"
-			 x:Class="Tiket_Penerbangan_n_Kereta.RegisterView"
-             ExtendClientAreaChromeHints="NoChrome"
-             ExtendClientAreaTitleBarHeightHint="-1"
-             ExtendClientAreaToDecorationsHint="False">
-	
-	<Grid ColumnDefinitions="*, *">
-		<StackPanel></StackPanel>
-		<Border Grid.Column="0"
-		><Image
-			 Source="/Assets/aircraft.jpg"
-			 Stretch="UniformToFill"
-		 />
-		</Border>
-			<Border Grid.Column="1"
-				Padding="50"
-				VerticalAlignment="Stretch"
-				>
-				<Grid ColumnDefinitions="350" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto" 
-				      Margin="0 10 0 0" HorizontalAlignment="Center" VerticalAlignment="Stretch">
-					<StackPanel Grid.Column="0" Grid.Row="0" Margin="0 0 0 25">
-						<PathIcon Data="{StaticResource icon_plane}" Foreground="{DynamicResource SecondaryColor}"
-						          Width="50" Height="50"/>
-						<TextBlock  FontWeight="Medium" Text="Welcome Back!" HorizontalAlignment="Center" Padding="5" FontFamily="Poppins" FontSize="32"/>
-						<TextBlock Text="Please enter your credentials" HorizontalAlignment="Center"/>
-					</StackPanel>
-					<StackPanel Grid.Column="0" Grid.Row="1">
-						<TextBlock Text="Username" Margin="0 10"/>
-						<TextBox Text="{Binding Username}" />
-					</StackPanel>
-					<StackPanel Grid.Column="0" Grid.Row="2">
-						<TextBlock Text="Email" Margin="0 10"/>
-						<TextBox Text="{Binding Email}"/>
-					</StackPanel>
-					<StackPanel Grid.Column="0" Grid.Row="3">
-						<TextBlock Text="Password" Margin="0 10"/>
-						<TextBox Text="{Binding Password}" PasswordChar="*" Classes="revealPasswordButton"/>
-					</StackPanel>
-					<StackPanel Grid.Row="4" Grid.Column="0">
-						<TextBlock Text="Verify Password" Margin="0 10"/>
-						<TextBox  Text="{Binding VerifyPassword}"  PasswordChar="*" Classes="revealPasswordButton"/>
-					</StackPanel>
-					<Button  Command="{Binding RegisterCommand}" Classes="buttonCustom"  Height="45" HorizontalAlignment="Stretch" 
-					         Grid.Column="0" Grid.Row="5" Margin="0 25 0 0">
-						Log in
-						<Button.Transitions>
-							<Transitions>
-								<DoubleTransition Property="Opacity" Duration="0:0:0.5"/>
-							</Transitions>
-						</Button.Transitions>
-					</Button>
-				</Grid>
-			</Border>
-	</Grid>
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Tiket_Penerbangan_n_Kereta.ViewModel"
+        mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="1080"
+        x:DataType="vm:RegisterViewModels"
+        x:Class="Tiket_Penerbangan_n_Kereta.RegisterView"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        ExtendClientAreaToDecorationsHint="False">
+
+    <Grid ColumnDefinitions="*, *">
+        <StackPanel />
+        <Border Grid.Column="0">
+            <Image
+                Source="D:/Tiket_Penerbangan_n_Kereta_Avalonia/Assets/aircraft.jpg"
+                Stretch="UniformToFill" />
+        </Border>
+        <Border Grid.Column="1"
+                Padding="50"
+                VerticalAlignment="Stretch">
+            <Grid ColumnDefinitions="350" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
+                  Margin="0 10 0 0" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+                <StackPanel Grid.Column="0" Grid.Row="0" Margin="0 0 0 25">
+                    <PathIcon Data="{StaticResource icon_plane}" Foreground="{DynamicResource SecondaryColor}"
+                              Width="50" Height="50" />
+                    <TextBlock FontWeight="Medium" Text="Welcome Back!" HorizontalAlignment="Center" Padding="5"
+                               FontFamily="Poppins" FontSize="32" />
+                    <TextBlock Text="Please enter your credentials" HorizontalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Grid.Column="0" Grid.Row="1">
+                    <TextBlock Text="Username" Margin="0 10" />
+                    <TextBox Text="{Binding Username}" />
+                </StackPanel>
+                <StackPanel Grid.Column="0" Grid.Row="2">
+                    <TextBlock Text="Email" Margin="0 10" />
+                    <TextBox Text="{Binding Email}" />
+                </StackPanel>
+                <StackPanel Grid.Column="0" Grid.Row="3">
+                    <TextBlock Text="Password" Margin="0 10" />
+                    <TextBox Text="{Binding Password}" PasswordChar="*" Classes="revealPasswordButton" />
+                </StackPanel>
+                <StackPanel Grid.Row="4" Grid.Column="0">
+                    <TextBlock Text="Verify Password" Margin="0 10" />
+                    <TextBox Text="{Binding VerifyPassword}" PasswordChar="*" Classes="revealPasswordButton" />
+                </StackPanel>
+                <Button Command="{Binding RegisterCommand}" Classes="buttonCustom" Height="45"
+                        HorizontalAlignment="Stretch"
+                        Grid.Column="0" Grid.Row="5" Margin="0 25 0 0">
+                    Registration
+                    <Button.Transitions>
+                        <Transitions>
+                            <DoubleTransition Property="Opacity" Duration="0:0:0.5" />
+                        </Transitions>
+                    </Button.Transitions>
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
 </Window>

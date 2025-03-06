@@ -10,8 +10,9 @@ public class Roles
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int IdRole { get; set; }
-    [Required]
-    public string RoleName { get; set; }
+
+    [Required] public string RoleName { get; set; }
+
     public List<Petugas> Petugas { get; set; }
     public List<Penumpang> Penumpangs { get; set; }
 }

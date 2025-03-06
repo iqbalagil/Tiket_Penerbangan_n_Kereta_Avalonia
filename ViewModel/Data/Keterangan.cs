@@ -8,5 +8,6 @@ public class Keterangan
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int IdKeterangan { get; set; }
+
     public string Tags { get; set; }
 }

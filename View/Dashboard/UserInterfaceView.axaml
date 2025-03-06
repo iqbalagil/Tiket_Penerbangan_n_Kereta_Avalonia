@@ -8,21 +8,21 @@
              x:DataType="vm:UserInterfaceViewModel"
              x:CompileBindings="True"
              x:Class="Tiket_Penerbangan_n_Kereta.View.Dashboard.UserInterfaceView">
-    
-    <Border 
-        Opacity="10" CornerRadius="8" Padding="12 12 12 0"  
+
+    <Border
+        Opacity="10" CornerRadius="8" Padding="12 12 12 0"
         VerticalAlignment="Top"
         Background="{DynamicResource PrimaryColor}">
-        <controls:DataGrid  ItemsSource="{Binding Data}"
+        <controls:DataGrid ItemsSource="{Binding Data}"
                            AutoGenerateColumns="True"
                            CanUserResizeColumns="False"
                            GridLinesVisibility="None"
                            BorderBrush="Transparent"
                            IsReadOnly="True">
             <controls:DataGrid.Columns>
-                <controls:DataGridTextColumn Header="Username" Binding="{Binding Username}"/>
-                <controls:DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
-                <controls:DataGridTextColumn Header="Password" Binding="{Binding Password}"/>
+                <controls:DataGridTextColumn Header="Username" Binding="{Binding Username}" />
+                <controls:DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+                <controls:DataGridTextColumn Header="Password" Binding="{Binding Password}" />
             </controls:DataGrid.Columns>
         </controls:DataGrid>
     </Border>

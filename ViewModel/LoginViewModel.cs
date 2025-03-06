@@ -1,46 +1,153 @@
-﻿
-using CommunityToolkit.Mvvm.Input;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using Avalonia.Controls;
+using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.EntityFrameworkCore;
+using Tiket_Penerbangan_n_Kereta.Data;
 using Tiket_Penerbangan_n_Kereta.Services;
 using Tiket_Penerbangan_n_Kereta.View.Dashboard;
-using Tiket_Penerbangan_n_Kereta.ViewModel.Data;
 
-namespace Tiket_Penerbangan_n_Kereta.ViewModel
+namespace Tiket_Penerbangan_n_Kereta.ViewModel;
+
+public partial class LoginViewModel : ViewModelBase
 {
-    public partial class LoginViewModel : ValidationUsingDataAnnotationsViewModel
+    private readonly AuthState _authState;
+
+    private readonly ApplicationDbContext _context;
+
+    private readonly Dictionary<string, List<ValidationResult>> _errors = new();
+
+    private string _email;
+
+    private string _password;
+
+
+    public LoginViewModel(ApplicationDbContext context)
     {
-        private readonly AuthState _authState;
-        private readonly ILoginService _loginService;
-        private readonly INavigationService _navigation;
+        _context = context;
+    }
 
-        public Penumpang? LoggedInUser => _authState.CurrentUser;
-        
-        public LoginViewModel(ILoginService loginService)
-        {
-            _loginService = loginService;
-        }
+    public bool HasErrors => _errors.Any();
 
-        [RelayCommand]
-        public async Task LoginAsync()
+    [Required(ErrorMessage = "Email is required")]
+    [EmailAddress(ErrorMessage = "Invalid email address")]
+    public string Email
+    {
+        get => _email;
+        set
         {
-            var result = await _loginService.Auth(Email, Password);
-            if (result.IsAuthenticated)
+            if (value != _email)
             {
-                OnPropertyChanged(nameof(LoggedInUser));
-                _navigation.NavigateToAny(new WindowDashboardView());
+                _email = value;
+                ValidateProperty(value, nameof(Email));
             }
         }
-
-        [RelayCommand]
-        public void Register()
-        {
-            _navigation.NavigateToAny(new RegisterView());
-        }
-
     }
+
+    [Required(ErrorMessage = "Password is required")]
+    [DataType(DataType.Password)]
+    public string Password
+    {
+        get => _password;
+        set
+        {
+            if (value != _password)
+            {
+                _password = value;
+                ValidateProperty(value, nameof(Password));
+            }
+        }
+    }
+
+    protected void ValidateProperty(object value, string propertyName)
+    {
+        var validationContext = new ValidationContext(this) { MemberName = propertyName };
+        var validationResults = new List<ValidationResult>();
+
+        ClearErrors();
+
+        if (!Validator.TryValidateProperty(value, validationContext, validationResults))
+            foreach (var validationResult in validationResults)
+                AddErrors(propertyName, validationResult.ErrorMessage);
+    }
+
+    protected void ClearErrors(string propertyName)
+    {
+        if (_errors.ContainsKey(propertyName)) _errors.Remove(propertyName);
+    }
+
+    protected void AddErrors(string propertyName, string errorMessage)
+    {
+        if (!_errors.ContainsKey(propertyName)) _errors[propertyName] = new List<ValidationResult>();
+        _errors[propertyName].Add(new ValidationResult(errorMessage));
+    }
+
+    public async Task<string?> LoginAsync(string email, string password)
+    {
+        var penumpang = await _context.Penumpang
+            .Include(p => p.Role)
+            .FirstOrDefaultAsync(p => p.Email == email);
+
+        if (penumpang == null)
+            if (BCrypt.Net.BCrypt.Verify(password, penumpang.Password))
+            {
+                var token = _authState.GenerateToken(penumpang.IdPenumpang.ToString(), penumpang.Email,
+                    penumpang.Role.RoleName);
+                return token;
+            }
+
+        var petugas = await _context.Petugas
+            .Include(p => p.Roles)
+            .FirstOrDefaultAsync(p => p.Email == email);
+
+        if (petugas == null)
+            if (BCrypt.Net.BCrypt.Verify(password, petugas.Password))
+            {
+                var token = _authState.GenerateToken(petugas.idPetugas.ToString(), petugas.Email,
+                    petugas.Roles.RoleName);
+                return token;
+            }
+
+        return null;
+    }
+
+    [RelayCommand]
+    public async Task LoginAsync()
+    {
+        var result = await LoginAsync(Email, Password);
+        ValidateAllProperties();
+
+        if (!HasErrors)
+            if (result != null)
+                if (Application.Current?.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime
+                    applicationLifetime)
+                {
+                    var window = applicationLifetime.Windows.FirstOrDefault(
+                        w => w.IsActive);
+                    window?.Hide();
+                    var windows = new WindowDashboardView();
+                    windows.Show();
+                }
+    }
+
+    [RelayCommand]
+    public void Register()
+    {
+        if (Application.Current?.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime applicationLifetime)
+        {
+            var window = applicationLifetime.Windows.FirstOrDefault(
+                w => w.IsActive);
+            window?.Hide();
+            var windows = new RegisterView();
+            windows.Show();
+        }
+    }
+}
+
+public class CurrentUser
+{
+    public static int Id { get; set; }
 }

@@ -1,77 +1,160 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Tiket_Penerbangan_n_Kereta.Services;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.EntityFrameworkCore;
+using Tiket_Penerbangan_n_Kereta.Data;
+using Tiket_Penerbangan_n_Kereta.ViewModel.Data;
 
-namespace Tiket_Penerbangan_n_Kereta.ViewModel
+namespace Tiket_Penerbangan_n_Kereta.ViewModel;
+
+public partial class RegisterViewModels : ViewModelBase
 {
-    public partial class RegisterViewModels : ValidationUsingDataAnnotationsViewModel
+    private readonly ApplicationDbContext _context;
+
+    private readonly Dictionary<string, List<ValidationResult>> _errors = new();
+
+    public string _email;
+
+    public string _password;
+
+    private string _registerMessage;
+    private string _username;
+
+    private string _verifyPassword;
+
+
+    public RegisterViewModels(ApplicationDbContext context)
     {
-        private readonly IRegisterService _registerService;
-        private string _username;
-        
-        [Required]
-        public string Username
-        {
-            get => _username;
-            set => SetProperty(ref _username, value, true);
-        }
-        
-        private string _verifyPassword;
+        _context = context;
+    }
 
-        [Required]
-        public string VerifyPassword
+    public bool HasErrors => _errors.Any();
+
+    [Required]
+    public string Username
+    {
+        get => _username;
+        set
         {
-            get => _verifyPassword;
-            set
+            if (value != _username)
             {
-                if (string.IsNullOrEmpty(value)) ValidateProperty(_verifyPassword);
-                else SetProperty(ref _verifyPassword, value, true);
-
+                _username = value;
+                ValidateProperty(value, nameof(Username));
             }
         }
+    }
 
-        private string _registerMessage;
-
-         public string RegisterMessage
-         {
-             get => _registerMessage;
-             set => SetProperty(ref _registerMessage, value);
-         }
-
-         public IEnumerable<ValidationResult> GetValidationErrors()
-         {
-             return GetErrors();
-         }
-
-         public RegisterViewModels(IRegisterService registerService)
+    [Required]
+    public string Email
+    {
+        get => _email;
+        set
         {
-            _registerService = registerService;
-            GetValidationErrors();
+            if (value != _email)
+            {
+                _email = value;
+                ValidateProperty(value, nameof(Email));
+            }
+        }
+    }
+
+    [Required]
+    public string Password
+    {
+        get => _password;
+        set
+        {
+            if (value != _password)
+            {
+                _password = value;
+                ValidateProperty(value, nameof(Password));
+            }
+        }
+    }
+
+    [Required]
+    [Compare(nameof(Password), ErrorMessage = "Password and Confirmation Password must match.")]
+    public string VerifyPassword
+    {
+        get => _verifyPassword;
+        set
+        {
+            if (value != _verifyPassword)
+            {
+                _verifyPassword = value;
+                ValidateProperty(value, nameof(VerifyPassword));
+            }
+        }
+    }
+
+    public string RegisterMessage
+    {
+        get => _registerMessage;
+        set => SetProperty(ref _registerMessage, value);
+    }
+
+    protected void ValidateProperty(object value, string propertyName)
+    {
+        var validationContext = new ValidationContext(this) { MemberName = propertyName };
+        var validationResults = new List<ValidationResult>();
+
+        ClearErrors();
+
+        if (!Validator.TryValidateProperty(value, validationContext, validationResults))
+            foreach (var validationResult in validationResults)
+                AddErrors(propertyName, validationResult.ErrorMessage);
+    }
+
+    protected void ClearErrors(string propertyName)
+    {
+        if (_errors.ContainsKey(propertyName)) _errors.Remove(propertyName);
+    }
+
+    protected void AddErrors(string propertyName, string errorMessage)
+    {
+        if (!_errors.ContainsKey(propertyName)) _errors[propertyName] = new List<ValidationResult>();
+        _errors[propertyName].Add(new ValidationResult(errorMessage));
+    }
+
+    public async Task<bool> UsernameExists(string username)
+    {
+        return await _context.Penumpang.AnyAsync(u => u.Username == username);
+    }
+
+    public async Task<Penumpang> RegisterAsync(string username, string email, string password)
+    {
+        var userRole = _context.Role.FirstOrDefault(r => r.RoleName == "User");
+        if (userRole == null)
+        {
+            userRole = new Roles { RoleName = "User" };
+            _context.Role.Add(userRole);
         }
 
-        [RelayCommand]
-        public async Task RegisterAsync()
+        if (await UsernameExists(username)) RegisterMessage = "Username already exists";
+
+        var user = new Penumpang
         {
-            if (Password != VerifyPassword)
-            {
-                RegisterMessage = "Password and Verify Password must be the same";
-            }
+            Username = username,
+            Email = email,
+            Password = BCrypt.Net.BCrypt.HashPassword(password),
+            Role = userRole
+        };
 
-            if (await _registerService.UsernameExists(Username))
-            {
-                RegisterMessage = "Username already exists";
-            }
-            
-            var result = await _registerService.RegisterAsync(Username, Email, Password);
-            RegisterMessage = result ? "Registration Succed" : "Registration Failed";
+        _context.Penumpang.Add(user);
+        await _context.SaveChangesAsync();
+        return user;
+    }
+
+    [RelayCommand]
+    public async Task RegisterAsync()
+    {
+        ValidateAllProperties();
+        if (!HasErrors)
+        {
+            await RegisterAsync(Username, Email, Password);
+            RegisterMessage = "Registration successful";
         }
-
     }
 }

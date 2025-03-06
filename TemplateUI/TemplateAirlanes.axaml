@@ -1,330 +1,329 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:material="using:Material.Icons.Avalonia">
-  <Design.PreviewWith>
-    <Border Background="White" Padding="20">
-	    <!-- <ComboBox Classes="buttonRute" Tag="From" DisplayMemberBinding="Hello" -->
-	              <!-- /> -->
-    </Border>
-  </Design.PreviewWith>
-	
-	<Style Selector="ComboBox.changeLocation">
-		 <Setter Property="Template"> 
-		   <ControlTemplate> 
-		     <DataValidationErrors> 
-		       <Grid ColumnDefinitions="*,32"> 
-		         <Border x:Name="Background" 
-		                 Grid.Column="0" 
-		                 Grid.ColumnSpan="2" 
-		                 Background="{TemplateBinding Background}" 
-		                 BorderBrush="{TemplateBinding BorderBrush}" 
-		                 BorderThickness="0" 
-		                 CornerRadius="{TemplateBinding CornerRadius}" 
-		                 MinWidth="110"/> 
-		         <Border x:Name="HighlightBackground" 
-		                 Grid.Column="0" 
-		                 Grid.ColumnSpan="2" 
-		                 Background="{DynamicResource ComboBoxBackgroundUnfocused}" 
-		                 BorderBrush="{DynamicResource ComboBoxBackgroundBorderBrushUnfocused}" 
-		                 BorderThickness="{TemplateBinding BorderThickness}" 
-		                 CornerRadius="{TemplateBinding CornerRadius}" 
-		                 IsVisible="False"/> 
-		         <TextBlock x:Name="PlaceholderTextBlock" 
-		                    Grid.Column="0" 
-		                    HorizontalAlignment="Center" 
-		                    VerticalAlignment="Center" 
-		                    Margin="{TemplateBinding Padding}" 
-		                    Text="{TemplateBinding PlaceholderText}" 
-		                    Foreground="{TemplateBinding PlaceholderForeground}" 
-		                    IsVisible="{TemplateBinding SelectionBoxItem, Converter={x:Static ObjectConverters.IsNull}}" /> 
-		         <ContentControl x:Name="ContentPresenter" 
-		                         Content="{TemplateBinding SelectionBoxItem}" 
-		                         Grid.Column="0" 
-		                         Margin="{TemplateBinding Padding}" 
-		                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
-		                         ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
-		                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"> 
-		         </ContentControl> 
-		         
-		         <Popup Name="PART_Popup" 
-		                WindowManagerAddShadowHint="False" 
-		                IsOpen="{TemplateBinding IsDropDownOpen, Mode=TwoWay}" 
-		                MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}" 
-		                MaxHeight="{TemplateBinding MaxDropDownHeight}" 
-		                PlacementTarget="Background" 
-		                IsLightDismissEnabled="True" 
-		                InheritsTransform="True"> 
-		           <Border x:Name="PopupBorder" 
-		                   Background="{DynamicResource ComboBoxDropDownBackground}" 
-		                   BorderBrush="{DynamicResource ComboBoxDropDownBorderBrush}" 
-		                   BorderThickness="{DynamicResource ComboBoxDropdownBorderThickness}" 
-		                   Padding="{DynamicResource ComboBoxDropdownBorderPadding}" 
-		                   HorizontalAlignment="Stretch" 
-		                   CornerRadius="{DynamicResource OverlayCornerRadius}"> 
-		             <ScrollViewer HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" 
-		                           VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" 
-		                           IsDeferredScrollingEnabled="{TemplateBinding (ScrollViewer.IsDeferredScrollingEnabled)}"> 
-		               <ItemsPresenter Name="PART_ItemsPresenter" 
-		                               Margin="{DynamicResource ComboBoxDropdownContentMargin}" 
-		                               ItemsPanel="{TemplateBinding ItemsPanel}" /> 
-		             </ScrollViewer> 
-		           </Border> 
-		         </Popup> 
-		       </Grid> 
-		     </DataValidationErrors> 
-		   </ControlTemplate> 
-		 </Setter> 
-	</Style>
+    <Design.PreviewWith>
+        <Border Background="White" Padding="20">
+            <!-- <ComboBox Classes="buttonRute" Tag="From" DisplayMemberBinding="Hello" -->
+            <!-- /> -->
+        </Border>
+    </Design.PreviewWith>
 
-	<Style Selector="Button.hrefLink">
-		<Setter Property="Template">
-			<ControlTemplate>
-				<TextBlock Text="{TemplateBinding Content}" Foreground="{StaticResource SystemAccentColor}" TextDecorations="Underline">
-					<TextBlock.Styles>
-						<Style Selector="TextBlock:pointrover/template/ContentPresenter">
-							<Setter Property="Foreground" Value="{StaticResource SystemAccentColorLight1}"/>
-						</Style>
-					</TextBlock.Styles>
-				</TextBlock>
-			</ControlTemplate>
-		</Setter>
-		<Setter Property="Background" Value="Transparent"/>
-		<Setter Property="BorderThickness" Value="0"/>
-	</Style>
+    <Style Selector="ComboBox.changeLocation">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <DataValidationErrors>
+                    <Grid ColumnDefinitions="*,32">
+                        <Border x:Name="Background"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="0"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                MinWidth="110" />
+                        <Border x:Name="HighlightBackground"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Background="{DynamicResource ComboBoxBackgroundUnfocused}"
+                                BorderBrush="{DynamicResource ComboBoxBackgroundBorderBrushUnfocused}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                IsVisible="False" />
+                        <TextBlock x:Name="PlaceholderTextBlock"
+                                   Grid.Column="0"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Margin="{TemplateBinding Padding}"
+                                   Text="{TemplateBinding PlaceholderText}"
+                                   Foreground="{TemplateBinding PlaceholderForeground}"
+                                   IsVisible="{TemplateBinding SelectionBoxItem, Converter={x:Static ObjectConverters.IsNull}}" />
+                        <ContentControl x:Name="ContentPresenter"
+                                        Content="{TemplateBinding SelectionBoxItem}"
+                                        Grid.Column="0"
+                                        Margin="{TemplateBinding Padding}"
+                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
 
-<Style Selector="ComboBox.changeLocation:dropdownopen/template/ContentPresenter">
-	<Setter Property="Background" Value="WhiteSmoke"/>
-</Style>
-	
-	<Style Selector="TextBox.inputField[UseFloatingWatermark=True]:empty/template/TextBlock#PART_FloatingWatermark">
-		<Setter Property="Foreground" Value="Gray"/>
-		<Setter Property="RenderTransform">
-			<Setter.Value>
-				<TranslateTransform Y="1"/>
-			</Setter.Value>
-		</Setter>
-		<Setter Property="FontSize" Value="16"/>
-		<Setter Property="Opacity" Value="0"/>
-	</Style>
+                        <Popup Name="PART_Popup"
+                               WindowManagerAddShadowHint="False"
+                               IsOpen="{TemplateBinding IsDropDownOpen, Mode=TwoWay}"
+                               MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
+                               MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                               PlacementTarget="Background"
+                               IsLightDismissEnabled="True"
+                               InheritsTransform="True">
+                            <Border x:Name="PopupBorder"
+                                    Background="{DynamicResource ComboBoxDropDownBackground}"
+                                    BorderBrush="{DynamicResource ComboBoxDropDownBorderBrush}"
+                                    BorderThickness="{DynamicResource ComboBoxDropdownBorderThickness}"
+                                    Padding="{DynamicResource ComboBoxDropdownBorderPadding}"
+                                    HorizontalAlignment="Stretch"
+                                    CornerRadius="{DynamicResource OverlayCornerRadius}">
+                                <ScrollViewer
+                                    HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                    VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                    IsDeferredScrollingEnabled="{TemplateBinding (ScrollViewer.IsDeferredScrollingEnabled)}">
+                                    <ItemsPresenter Name="PART_ItemsPresenter"
+                                                    Margin="{DynamicResource ComboBoxDropdownContentMargin}"
+                                                    ItemsPanel="{TemplateBinding ItemsPanel}" />
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                </DataValidationErrors>
+            </ControlTemplate>
+        </Setter>
+    </Style>
 
-	<Style Selector="TextBox.inputField[UseFloatingWatermark=True]:not(:empty)/template/TextBlock#PART_FloatingWatermark">
-		<Setter Property="Foreground" Value="{DynamicResource SecondaryColor}"/>
-		<Setter Property="RenderTransform">
-			<Setter.Value>
-				<TranslateTransform Y="0"/>
-			</Setter.Value>
-		</Setter>
-		<Setter Property="FontSize" Value="12"/>
-		<Setter Property="Opacity" Value="1"/>
-	</Style>
+    <Style Selector="Button.hrefLink">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <TextBlock Text="{TemplateBinding Content}" Foreground="{StaticResource SystemAccentColor}"
+                           TextDecorations="Underline">
+                    <TextBlock.Styles>
+                        <Style Selector="TextBlock:pointrover/template/ContentPresenter">
+                            <Setter Property="Foreground" Value="{StaticResource SystemAccentColorLight1}" />
+                        </Style>
+                    </TextBlock.Styles>
+                </TextBlock>
+            </ControlTemplate>
+        </Setter>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
 
-	<Style Selector="TextBox.inputField">
-		<Setter Property="Width" Value="400"/>
-		<Setter Property="Height" Value="40"/>
-	</Style>
-	
-	<Style Selector="Button.buttonCustom">
-		<Setter Property="Padding" Value="10"/>
-		<Setter Property="HorizontalContentAlignment" Value="Center"/>
-		<Setter Property="CornerRadius" Value="4"/>
-		<Setter Property="Background" Value="{DynamicResource PrimaryColor2}"/>
-	</Style>
+    <Style Selector="ComboBox.changeLocation:dropdownopen/template/ContentPresenter">
+        <Setter Property="Background" Value="WhiteSmoke" />
+    </Style>
 
-	<Style Selector="Button.buttonCustom:pointerover/template/ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
-		<Setter Property="Opacity" Value="1"/>
-	</Style>
+    <Style Selector="TextBox.inputField[UseFloatingWatermark=True]:empty/template/TextBlock#PART_FloatingWatermark">
+        <Setter Property="Foreground" Value="Gray" />
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TranslateTransform Y="1" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Opacity" Value="0" />
+    </Style>
 
-	<Style Selector="Button.buttonCustom:pressed/template/ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
-		<Setter Property="Opacity" Value="0.5"/>
-	</Style>
-	
-	<Style Selector="Button.buttonCreate">
-		<Setter Property="Template">
-			<ControlTemplate>
-				<Border
-					Background="{DynamicResource PrimaryColor2}"
-					CornerRadius="4"
-					Padding="{TemplateBinding Padding}"
-					BorderThickness="2"
-					Margin="10"
-					>
-					<StackPanel Orientation="Horizontal"
-					            HorizontalAlignment="Center"
-					            VerticalAlignment="Center"
-					            Spacing="5">
-						<material:MaterialIcon Kind="Plus" 
-						                       Foreground="{DynamicResource PrimaryColor}" />
-						<ContentPresenter
-							Content="{TemplateBinding Content}"
-							ContentTemplate="{TemplateBinding ContentTemplate}"/>
-					</StackPanel>
-				</Border>
-			</ControlTemplate>
-		</Setter>
-	</Style>
-	
-	<Style Selector="Button.buttonGlow:pointerover/template/Border">
-		<Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
-	</Style>
-	
-	<Style Selector="DataGrid.costumData">
-		<Setter Property="Template">
-			<ControlTemplate>
-				<Border BorderBrush="{TemplateBinding BorderBrush}" Background="DimGray">
-					<ScrollViewer>
-						<ItemsPresenter/>
-					</ScrollViewer>
-				</Border>
-			</ControlTemplate>
-		</Setter>
-	</Style>
-	
-	<Style Selector="Button.primaryButton">
-		<Setter Property="Template">
-			<ControlTemplate>
-				<Border
-					Padding="{TemplateBinding Padding}"
-					Background="White"
-					Margin="10"
-					CornerRadius="4"
-					BoxShadow="0 0.5 0.8 DimGray"
-					BorderThickness="2">
-						<ContentPresenter
-							Content="{TemplateBinding Content}"
-							ContentTemplate="{TemplateBinding ContentTemplate}"/>
-				</Border>
-			</ControlTemplate>
-		</Setter>
-	</Style>
-	
-	<Style Selector="Button.primaryButton:pressed/template/Border">
-		<Setter Property="Background" Value="DimGray"/>
-	</Style>
-	
-	<Style Selector="Button.primaryButton:pointerover/template/Border">
-		<Setter Property="Background" Value="LightGray"/>
-	</Style>
-	
-	<Style Selector="ListBoxItem.customList:pointerover/template/ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource SecondaryColor2}"/>
-		<Setter Property="Foreground" Value="{DynamicResource PrimaryColor}"/>
-	</Style>
-	
-	<Style Selector="ListBoxItem.customList:pressed/template/ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource SecondaryColor2}"/>
-		<Setter Property="Foreground" Value="{DynamicResource PrimaryColor}"/>
-	</Style>
-	
-	<Style Selector="Button.primaryButtonBlue">
-		<Setter Property="Template">
-			<ControlTemplate>
-				<Border
-					Padding="{TemplateBinding Padding}"
-					Background="{DynamicResource PrimaryColor2}"
-					Margin="10"
-					CornerRadius="4"
-					BoxShadow="0 0.5 0.8 DimGray"
-					BorderThickness="2">
-					<ContentPresenter
-						Content="{TemplateBinding Content}"
-						ContentTemplate="{TemplateBinding ContentTemplate}"/>
-				</Border>
-			</ControlTemplate>
-		</Setter>
-	</Style>
-	
-	<Style Selector="Button.backButton">
-		<Setter Property="Template">
-			<ControlTemplate>
-				<Border
-					Padding="{TemplateBinding Padding}"
-					Background="White"
-					Margin="10"
-					CornerRadius="4"
-					BoxShadow="0 0.5 0.8 DimGray"
-					BorderThickness="2">
-					<Grid ColumnDefinitions="*,Auto">
-					<StackPanel Orientation="Horizontal"
-					            HorizontalAlignment="Center"
-					            VerticalAlignment="Center"
-					            Spacing="5">
-						<material:MaterialIcon Kind="ArrowLeft"/>
-						<ContentPresenter
-							Content="{TemplateBinding Content}"
-							ContentTemplate="{TemplateBinding ContentTemplate}"/>
-					</StackPanel>
-					
-					<ToggleButton Name="ToggleButton"
-					              ></ToggleButton>
-					</Grid>
-				</Border>
-			</ControlTemplate>
-		</Setter>
-	</Style>
-	
-	<Style Selector="Button.backButton:pressed/template/Border">
-		<Setter Property="Background" Value="#f2f2f2"/>
-	</Style>
-	
-	<Style Selector="Button.backButton:pointerover/template/Border">
-		<Setter Property="Background" Value="#f7f7f7"/>
-	</Style>
-	
-	<Style Selector="Border.card">
-		<Setter Property="BoxShadow" Value="0 0.5 0.8 DimGray"/>
-	</Style>
-	
-	<Style Selector="Button.primaryButtonCenter">
-		<Setter Property="Template">
-			<ControlTemplate>
-				<Border
-					Padding="{TemplateBinding Padding}"
-					Background="White"
-					Margin="10"
-					CornerRadius="4"
-					BoxShadow="0 0.5 0.8 DimGray"
-					BorderThickness="2">
-					<ContentPresenter
-						TextAlignment="Center"
-						Content="{TemplateBinding Content}"
-						ContentTemplate="{TemplateBinding ContentTemplate}"/>
-				</Border>
-			</ControlTemplate>
-		</Setter>
-	</Style>
-	
-	<Style Selector="Button.primaryButtonCenter:pressed/template/Border">
-		<Setter Property="Background" Value="DimGray"/>
-	</Style>
-	
-	<Style Selector="Button.primaryButtonCenter:pointerover/template/Border">
-		<Setter Property="Background" Value="LightGray"/>
-	</Style>
-	
-	<Style Selector="Button.buttonBlue">
-		<Setter Property="Template">
-			<ControlTemplate>
-				<Border
-					Background="{DynamicResource PrimaryColor2}"
-					CornerRadius="4"
-					Padding="{TemplateBinding Padding}"
-					BorderThickness="2"
-				>
-					<StackPanel Orientation="Horizontal"
-					            HorizontalAlignment="Center"
-					            VerticalAlignment="Center">
-						<ContentPresenter
-							VerticalAlignment="Center"
-							HorizontalAlignment="Center"
-							Content="{TemplateBinding Content}"
-							ContentTemplate="{TemplateBinding ContentTemplate}"/>
-					</StackPanel>
-				</Border>
-			</ControlTemplate>
-		</Setter>
-	</Style>
-	
-	
+    <Style
+        Selector="TextBox.inputField[UseFloatingWatermark=True]:not(:empty)/template/TextBlock#PART_FloatingWatermark">
+        <Setter Property="Foreground" Value="{DynamicResource SecondaryColor}" />
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TranslateTransform Y="0" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+
+    <Style Selector="TextBox.inputField">
+        <Setter Property="Width" Value="400" />
+        <Setter Property="Height" Value="40" />
+    </Style>
+
+    <Style Selector="Button.buttonCustom">
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="Background" Value="{DynamicResource PrimaryColor2}" />
+    </Style>
+
+    <Style Selector="Button.buttonCustom:pointerover/template/ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SecondaryColor}" />
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+
+    <Style Selector="Button.buttonCustom:pressed/template/ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SecondaryColor}" />
+        <Setter Property="Opacity" Value="0.5" />
+    </Style>
+
+    <Style Selector="Button.buttonCreate">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border
+                    Background="{DynamicResource PrimaryColor2}"
+                    CornerRadius="4"
+                    Padding="{TemplateBinding Padding}"
+                    BorderThickness="2"
+                    Margin="10">
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Spacing="5">
+                        <material:MaterialIcon Kind="Plus"
+                                               Foreground="{DynamicResource PrimaryColor}" />
+                        <ContentPresenter
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}" />
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button.buttonGlow:pointerover/template/Border">
+        <Setter Property="Background" Value="{DynamicResource SecondaryColor}" />
+    </Style>
+
+    <Style Selector="DataGrid.costumData">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border BorderBrush="{TemplateBinding BorderBrush}" Background="DimGray">
+                    <ScrollViewer>
+                        <ItemsPresenter />
+                    </ScrollViewer>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button.primaryButton">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border
+                    Padding="{TemplateBinding Padding}"
+                    Background="White"
+                    Margin="10"
+                    CornerRadius="4"
+                    BoxShadow="0 0.5 0.8 DimGray"
+                    BorderThickness="2">
+                    <ContentPresenter
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button.primaryButton:pressed/template/Border">
+        <Setter Property="Background" Value="DimGray" />
+    </Style>
+
+    <Style Selector="Button.primaryButton:pointerover/template/Border">
+        <Setter Property="Background" Value="LightGray" />
+    </Style>
+
+    <Style Selector="ListBoxItem.customList:pointerover/template/ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SecondaryColor2}" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryColor}" />
+    </Style>
+
+    <Style Selector="ListBoxItem.customList:pressed/template/ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SecondaryColor2}" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryColor}" />
+    </Style>
+
+    <Style Selector="Button.primaryButtonBlue">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border
+                    Padding="{TemplateBinding Padding}"
+                    Background="{DynamicResource PrimaryColor2}"
+                    Margin="10"
+                    CornerRadius="4"
+                    BoxShadow="0 0.5 0.8 DimGray"
+                    BorderThickness="2">
+                    <ContentPresenter
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button.backButton">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border
+                    Padding="{TemplateBinding Padding}"
+                    Background="White"
+                    Margin="10"
+                    CornerRadius="4"
+                    BoxShadow="0 0.5 0.8 DimGray"
+                    BorderThickness="2">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Spacing="5">
+                            <material:MaterialIcon Kind="ArrowLeft" />
+                            <ContentPresenter
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        </StackPanel>
+
+                        <ToggleButton Name="ToggleButton" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button.backButton:pressed/template/Border">
+        <Setter Property="Background" Value="#f2f2f2" />
+    </Style>
+
+    <Style Selector="Button.backButton:pointerover/template/Border">
+        <Setter Property="Background" Value="#f7f7f7" />
+    </Style>
+
+    <Style Selector="Border.card">
+        <Setter Property="BoxShadow" Value="0 0.5 0.8 DimGray" />
+    </Style>
+
+    <Style Selector="Button.primaryButtonCenter">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border
+                    Padding="{TemplateBinding Padding}"
+                    Background="White"
+                    Margin="10"
+                    CornerRadius="4"
+                    BoxShadow="0 0.5 0.8 DimGray"
+                    BorderThickness="2">
+                    <ContentPresenter
+                        TextAlignment="Center"
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button.primaryButtonCenter:pressed/template/Border">
+        <Setter Property="Background" Value="DimGray" />
+    </Style>
+
+    <Style Selector="Button.primaryButtonCenter:pointerover/template/Border">
+        <Setter Property="Background" Value="LightGray" />
+    </Style>
+
+    <Style Selector="Button.buttonBlue">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border
+                    Background="{DynamicResource PrimaryColor2}"
+                    CornerRadius="4"
+                    Padding="{TemplateBinding Padding}"
+                    BorderThickness="2">
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <ContentPresenter
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}" />
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+
 </Styles>

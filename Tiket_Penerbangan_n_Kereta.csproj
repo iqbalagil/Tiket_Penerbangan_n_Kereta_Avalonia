@@ -1,63 +1,70 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.2.4" />
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.2.3" />
-    <PackageReference Include="Avalonia.Desktop" Version="11.2.3" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="11.2.3" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.4" />
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.3" />
-    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-    <PackageReference Include="Avalonia.Diagnostics" Version="11.2.3">
-      <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
-      <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="FluentAvaloniaUI" Version="2.2.0" />
-    <PackageReference Include="jp2masa.Avalonia.Flexbox" Version="0.3.0-beta.4" />
-    <PackageReference Include="LiveChartsCore" Version="2.0.0-rc5.1" />
-    <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.0.0-rc5.1" />
-    <PackageReference Include="Material.Icons.Avalonia" Version="2.1.11" />
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.1" />
-    <PackageReference Include="ReactiveUI" Version="20.1.63" />
-    <PackageReference Include="Russkyc.AvaloniaAutoGrid" Version="1.0.0" />
-    <PackageReference Include="SukiUI" Version="6.0.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.2.4"/>
+        <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.2.3"/>
+        <PackageReference Include="Avalonia.Desktop" Version="11.2.3"/>
+        <PackageReference Include="Avalonia.ReactiveUI" Version="11.2.3"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.4"/>
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.3"/>
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Include="Avalonia.Diagnostics" Version="11.2.3">
+            <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+            <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="BCrypt.Net-Next" Version="4.0.3"/>
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
+        <PackageReference Include="FluentAvaloniaUI" Version="2.2.0"/>
+        <PackageReference Include="jp2masa.Avalonia.Flexbox" Version="0.3.0-beta.4"/>
+        <PackageReference Include="LiveChartsCore" Version="2.0.0-rc5.1"/>
+        <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.0.0-rc5.1"/>
+        <PackageReference Include="Material.Icons.Avalonia" Version="2.4.1"/>
+        <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.4"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.4"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.4">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.4"/>
+        <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.4"/>
+        <PackageReference Include="ReactiveUI" Version="20.1.63"/>
+        <PackageReference Include="Russkyc.AvaloniaAutoGrid" Version="1.0.0"/>
+        <PackageReference Include="SukiUI" Version="6.0.0"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="View\Dashboard\WindowDashboardView.axaml.cs">
-      <DependentUpon>WindowDashboard.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="View\Dashboard\Maskapai\MaskapaiView.axaml.cs">
-      <DependentUpon>MaskapaiView.axaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Dashboard\Maskapai\CreateMaskapaiView.axaml.cs">
-      <DependentUpon>CreateMaskapaiView.axaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Dashboard\Pemesanan\PemesananPesawatView.axaml.cs">
-      <DependentUpon>PemesananPesawatView.axaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  
+    <ItemGroup>
+        <Compile Update="View\Dashboard\WindowDashboardView.axaml.cs">
+            <DependentUpon>WindowDashboard.axaml</DependentUpon>
+        </Compile>
+        <Compile Update="View\Dashboard\Maskapai\MaskapaiView.axaml.cs">
+            <DependentUpon>MaskapaiView.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Dashboard\Maskapai\CreateMaskapaiView.axaml.cs">
+            <DependentUpon>CreateMaskapaiView.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Dashboard\Pemesanan\PemesananPesawatView.axaml.cs">
+            <DependentUpon>PemesananPesawatView.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Migrations\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <AvaloniaResource Include="Assets\**"/>
+    </ItemGroup>
 </Project>

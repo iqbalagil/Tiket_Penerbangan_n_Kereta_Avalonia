@@ -1,10 +1,7 @@
+using System;
 using Avalonia;
 using FluentAvalonia.UI.Windowing;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using CommunityToolkit.Mvvm.ComponentModel;
-using Tiket_Penerbangan_n_Kereta.Services;
-using Tiket_Penerbangan_n_Kereta.ViewModel;
 using Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard;
 
 namespace Tiket_Penerbangan_n_Kereta.View.Dashboard;
@@ -22,4 +19,3 @@ public partial class WindowDashboardView : AppWindow
                       ?? throw new InvalidOperationException("AppHost or Services is not initialized.");
     }
 }
-
