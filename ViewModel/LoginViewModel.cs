@@ -1,46 +1,95 @@
 ﻿
 using CommunityToolkit.Mvvm.Input;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using Tiket_Penerbangan_n_Kereta.Services;
+using Microsoft.EntityFrameworkCore;
+using Tiket_Penerbangan_n_Kereta.Data;
 using Tiket_Penerbangan_n_Kereta.View.Dashboard;
 using Tiket_Penerbangan_n_Kereta.ViewModel.Data;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel
 {
-    public partial class LoginViewModel : ValidationUsingDataAnnotationsViewModel
+    public partial class LoginViewModel : ViewModelBase
     {
-        private readonly AuthState _authState;
-        private readonly ILoginService _loginService;
-        private readonly INavigationService _navigation;
 
-        public Penumpang? LoggedInUser => _authState.CurrentUser;
+        private readonly ApplicationDbContext _context;
         
-        public LoginViewModel(ILoginService loginService)
+        private string _email;
+        
+        [Required(ErrorMessage = "Email is required")]
+        public string Email
         {
-            _loginService = loginService;
+            get => _email;
+            set => TrySetProperty(ref _email, value, out _);
         }
 
+        private string _password;
+
+        [Required(ErrorMessage = "Password is required")]
+        public string Password
+        {
+            get => _password;
+            set => TrySetProperty(ref _password, value, out _);
+        }
+        
+        
+        public LoginViewModel(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<Penumpang?> LoginAsync(string email, string password)
+        {
+            var user = await _context.Penumpang.ToListAsync();
+            int index = user.FindIndex(u => u.Email == email && BCrypt.Net.BCrypt.Verify(password, u.Password));
+            CurrentUser.Id = index;
+            return null;
+        }
+        
         [RelayCommand]
         public async Task LoginAsync()
         {
-            var result = await _loginService.Auth(Email, Password);
-            if (result.IsAuthenticated)
+            var result = await LoginAsync(Email, Password);
+            ValidateAllProperties();
+            
+            if (!HasErrors)
             {
-                OnPropertyChanged(nameof(LoggedInUser));
-                _navigation.NavigateToAny(new WindowDashboardView());
+                if (result != null)
+                {
+                    if (Application.Current?.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime applicationLifetime)
+                    {
+                        Window? window = applicationLifetime.Windows.FirstOrDefault(
+                            w => w.IsActive);
+                        window?.Hide();
+                        var windows = new WindowDashboardView();
+                        windows.Show();
+                    }
+                }
             }
         }
 
         [RelayCommand]
         public void Register()
         {
-            _navigation.NavigateToAny(new RegisterView());
+            if (Application.Current?.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime applicationLifetime)
+            {
+                Window? window = applicationLifetime.Windows.FirstOrDefault(
+                    w => w.IsActive);
+                window?.Hide();
+                var windows = new RegisterView();
+                windows.Show();
+            }
         }
 
     }
+
+    public class CurrentUser
+    {
+        public static int Id { get; set; }
+    }
+    
 }

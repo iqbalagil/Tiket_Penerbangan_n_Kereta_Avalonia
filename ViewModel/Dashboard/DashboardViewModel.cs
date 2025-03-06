@@ -14,17 +14,14 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard
 {
     public partial class DashboardViewModel : ViewModelBase
     {
-        private ILoginService _loginService;
         private IServiceProvider _service;
         public static ApplicationDbContext _context;
         public LoginViewModel Login { get; }
 
-        public DashboardViewModel(IServiceProvider service, ApplicationDbContext context, ILoginService loginService)
+        public DashboardViewModel(IServiceProvider service, ApplicationDbContext context)
         {
             _context = context;
             _service = service;
-            _loginService = loginService;
-            Login = new LoginViewModel(_loginService);
         } 
         
         [ObservableProperty] private bool _isOpenPane = true;

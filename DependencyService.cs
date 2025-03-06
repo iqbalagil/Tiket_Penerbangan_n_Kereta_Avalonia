@@ -26,9 +26,7 @@ namespace Tiket_Penerbangan_n_Kereta
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddHttpClient();
-            services.AddScoped<DataServicesApp>();
             services.AddScoped<IRegisterService, RegisterService>();
-            services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<ViewLocator>();
             services.AddScoped<ValidationUsingDataAnnotationsViewModel>();
             services.AddSingleton<AuthState>();

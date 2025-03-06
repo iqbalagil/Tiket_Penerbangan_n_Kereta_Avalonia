@@ -116,7 +116,7 @@
 							<Image  x:Name="User" Source="D:\Tiket_Penerbangan_n_Kereta_Avalonia\Assets\users.jpg" 
 							        RenderTransform="" />
 							<Ellipse Grid.Column="0" Width="32" Fill="{Binding ElementName=User}"/>
-							<TextBlock Grid.Column="1" DataContext="{Binding Login}" Text="{Binding LoggedInUser.Username}"/>
+							<TextBlock Grid.Column="1" DataContext="{Binding Login}"/>
 						</Grid>
 					</Border>
 					<Border
