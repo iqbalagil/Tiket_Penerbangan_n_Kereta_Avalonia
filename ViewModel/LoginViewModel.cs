@@ -1,153 +1,95 @@
-﻿using System.Collections.Generic;
+﻿
+using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
 using Tiket_Penerbangan_n_Kereta.Data;
-using Tiket_Penerbangan_n_Kereta.Services;
 using Tiket_Penerbangan_n_Kereta.View.Dashboard;
+using Tiket_Penerbangan_n_Kereta.ViewModel.Data;
 
-namespace Tiket_Penerbangan_n_Kereta.ViewModel;
-
-public partial class LoginViewModel : ViewModelBase
+namespace Tiket_Penerbangan_n_Kereta.ViewModel
 {
-    private readonly AuthState _authState;
-
-    private readonly ApplicationDbContext _context;
-
-    private readonly Dictionary<string, List<ValidationResult>> _errors = new();
-
-    private string _email;
-
-    private string _password;
-
-
-    public LoginViewModel(ApplicationDbContext context)
+    public partial class LoginViewModel : ViewModelBase
     {
-        _context = context;
-    }
 
-    public bool HasErrors => _errors.Any();
-
-    [Required(ErrorMessage = "Email is required")]
-    [EmailAddress(ErrorMessage = "Invalid email address")]
-    public string Email
-    {
-        get => _email;
-        set
+        private readonly ApplicationDbContext _context;
+        
+        private string _email;
+        
+        [Required(ErrorMessage = "Email is required")]
+        public string Email
         {
-            if (value != _email)
-            {
-                _email = value;
-                ValidateProperty(value, nameof(Email));
-            }
+            get => _email;
+            set => TrySetProperty(ref _email, value, out _);
         }
-    }
 
-    [Required(ErrorMessage = "Password is required")]
-    [DataType(DataType.Password)]
-    public string Password
-    {
-        get => _password;
-        set
+        private string _password;
+
+        [Required(ErrorMessage = "Password is required")]
+        public string Password
         {
-            if (value != _password)
-            {
-                _password = value;
-                ValidateProperty(value, nameof(Password));
-            }
+            get => _password;
+            set => TrySetProperty(ref _password, value, out _);
         }
-    }
+        
+        
+        public LoginViewModel(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
-    protected void ValidateProperty(object value, string propertyName)
-    {
-        var validationContext = new ValidationContext(this) { MemberName = propertyName };
-        var validationResults = new List<ValidationResult>();
-
-        ClearErrors();
-
-        if (!Validator.TryValidateProperty(value, validationContext, validationResults))
-            foreach (var validationResult in validationResults)
-                AddErrors(propertyName, validationResult.ErrorMessage);
-    }
-
-    protected void ClearErrors(string propertyName)
-    {
-        if (_errors.ContainsKey(propertyName)) _errors.Remove(propertyName);
-    }
-
-    protected void AddErrors(string propertyName, string errorMessage)
-    {
-        if (!_errors.ContainsKey(propertyName)) _errors[propertyName] = new List<ValidationResult>();
-        _errors[propertyName].Add(new ValidationResult(errorMessage));
-    }
-
-    public async Task<string?> LoginAsync(string email, string password)
-    {
-        var penumpang = await _context.Penumpang
-            .Include(p => p.Role)
-            .FirstOrDefaultAsync(p => p.Email == email);
-
-        if (penumpang == null)
-            if (BCrypt.Net.BCrypt.Verify(password, penumpang.Password))
+        public async Task<Penumpang?> LoginAsync(string email, string password)
+        {
+            var user = await _context.Penumpang.ToListAsync();
+            int index = user.FindIndex(u => u.Email == email && BCrypt.Net.BCrypt.Verify(password, u.Password));
+            CurrentUser.Id = index;
+            return null;
+        }
+        
+        [RelayCommand]
+        public async Task LoginAsync()
+        {
+            var result = await LoginAsync(Email, Password);
+            ValidateAllProperties();
+            
+            if (!HasErrors)
             {
-                var token = _authState.GenerateToken(penumpang.IdPenumpang.ToString(), penumpang.Email,
-                    penumpang.Role.RoleName);
-                return token;
-            }
-
-        var petugas = await _context.Petugas
-            .Include(p => p.Roles)
-            .FirstOrDefaultAsync(p => p.Email == email);
-
-        if (petugas == null)
-            if (BCrypt.Net.BCrypt.Verify(password, petugas.Password))
-            {
-                var token = _authState.GenerateToken(petugas.idPetugas.ToString(), petugas.Email,
-                    petugas.Roles.RoleName);
-                return token;
-            }
-
-        return null;
-    }
-
-    [RelayCommand]
-    public async Task LoginAsync()
-    {
-        var result = await LoginAsync(Email, Password);
-        ValidateAllProperties();
-
-        if (!HasErrors)
-            if (result != null)
-                if (Application.Current?.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime
-                    applicationLifetime)
+                if (result != null)
                 {
-                    var window = applicationLifetime.Windows.FirstOrDefault(
-                        w => w.IsActive);
-                    window?.Hide();
-                    var windows = new WindowDashboardView();
-                    windows.Show();
+                    if (Application.Current?.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime applicationLifetime)
+                    {
+                        Window? window = applicationLifetime.Windows.FirstOrDefault(
+                            w => w.IsActive);
+                        window?.Hide();
+                        var windows = new WindowDashboardView();
+                        windows.Show();
+                    }
                 }
-    }
-
-    [RelayCommand]
-    public void Register()
-    {
-        if (Application.Current?.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime applicationLifetime)
-        {
-            var window = applicationLifetime.Windows.FirstOrDefault(
-                w => w.IsActive);
-            window?.Hide();
-            var windows = new RegisterView();
-            windows.Show();
+            }
         }
-    }
-}
 
-public class CurrentUser
-{
-    public static int Id { get; set; }
+        [RelayCommand]
+        public void Register()
+        {
+            if (Application.Current?.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime applicationLifetime)
+            {
+                Window? window = applicationLifetime.Windows.FirstOrDefault(
+                    w => w.IsActive);
+                window?.Hide();
+                var windows = new RegisterView();
+                windows.Show();
+            }
+        }
+
+    }
+
+    public class CurrentUser
+    {
+        public static int Id { get; set; }
+    }
+    
 }
