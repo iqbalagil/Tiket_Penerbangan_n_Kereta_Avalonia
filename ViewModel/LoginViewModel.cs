@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Tiket_Penerbangan_n_Kereta.Data;
 using Tiket_Penerbangan_n_Kereta.View.Dashboard;
 using Tiket_Penerbangan_n_Kereta.ViewModel.Data;
+using Tiket_Penerbangan_n_Kereta.Services;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel
 {
@@ -44,9 +45,12 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel
 
         public async Task<Penumpang?> LoginAsync(string email, string password)
         {
-            var user = await _context.Penumpang.ToListAsync();
-            int index = user.FindIndex(u => u.Email == email && BCrypt.Net.BCrypt.Verify(password, u.Password));
-            CurrentUser.Id = index;
+            var user = await _context.Penumpang.FirstOrDefaultAsync(u => u.Email == email);
+            if(user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
+            {
+                AuthState.LoggedInUser = user;
+            } 
+
             return null;
         }
         

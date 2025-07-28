@@ -33,7 +33,7 @@ public partial class App : Application
             
             .ConfigureServices((context, services) =>
             {
-                services.AddDatabase(@"DataSource=D:\Tiket_Penerbangan_n_Kereta_Avalonia\Penerbangan.db")
+                services.AddDatabase(@"DataSource=E:\Project\PenerbanganApplication\Penerbangan.db")
                     .AddServices()
                     .AddViewModels()
                     .AddApplication()

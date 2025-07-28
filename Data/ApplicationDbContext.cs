@@ -19,7 +19,7 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite(@"DataSource=D:\Tiket_Penerbangan_n_Kereta_Avalonia\Penerbangan.db");
+        optionsBuilder.UseSqlite(@"DataSource=E:\Project\PenerbanganApplication\Penerbangan.db");
     }
 
     protected override void OnModelCreating(ModelBuilder builder)

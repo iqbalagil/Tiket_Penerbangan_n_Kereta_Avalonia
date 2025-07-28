@@ -11,7 +11,7 @@
         <StackPanel />
         <Border Grid.Column="0">
             <Image
-                Source="D:\Tiket_Penerbangan_n_Kereta_Avalonia\Assets\aircraft.jpg"
+                Source="/Assets/aircraft.jpg"
                 Stretch="UniformToFill" />
         </Border>
         <Border Grid.Column="1"
