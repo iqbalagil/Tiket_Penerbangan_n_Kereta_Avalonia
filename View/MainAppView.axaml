@@ -1,0 +1,21 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:rxui="http://reactiveui.net"
+		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:vm ="clr-namespace:Tiket_Penerbangan_n_Kereta.ViewModel"
+		xmlns:local="clr-namespace:Tiket_Penerbangan_n_Kereta"
+		x:DataType="vm:MainAppViewModel"
+		x:CompileBindings="True"
+		x:Class="Tiket_Penerbangan_n_Kereta.MainAppView"
+        Title="MainAppView">
+
+	<rxui:RoutedViewHost Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+		x:Name="RoutedViewHost" Router="{Binding Router}">
+		<rxui:RoutedViewHost.ViewLocator>
+			<local:AppViewLocator />
+		</rxui:RoutedViewHost.ViewLocator>
+	</rxui:RoutedViewHost>
+	
+</Window>

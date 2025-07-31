@@ -1,0 +1,72 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard"
+             xmlns:felx="clr-namespace:Avalonia.Flexbox;assembly=Avalonia.Flexbox"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Tiket_Penerbangan_n_Kereta.View.Dashboard.MaskapaiView"
+             x:DataType="vm:MaskapaiViewModel"
+             x:CompileBindings="True">
+
+    <DockPanel>
+        <Border DockPanel.Dock="Top"
+                Background="#ffff">
+            <felx:FlexPanel
+                JustifyContent="SpaceBetween">
+                <TextBlock Margin="10" FontSize="20"
+                           TextAlignment="Center" FontFamily="Poppins" />
+                <Button Classes="buttonCreate" Content="Create Maskapai"
+                        Command="{Binding CreateMasakapaiShowCommand}" />
+            </felx:FlexPanel>
+        </Border>
+        <Border DockPanel.Dock="Bottom" Background="Transparent">
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical">
+                    <Border>
+                        <TransitioningContentControl Content="{Binding CreateMaskapaiPage}" />
+                    </Border>
+                    <Border Background="{DynamicResource PrimaryColor}"
+                            Classes="card"
+                            CornerRadius="4"
+                            Padding="10"
+                            Margin="10">
+                        <ItemsControl>
+                            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*">
+                                <ItemsControl Grid.Row="0" Padding="10">
+                                    <TextBlock Text="Kode" Margin="0 0 0  10" />
+                                    <TextBox Classes="inputField" Text="{Binding Kode }" Width="350" />
+                                </ItemsControl>
+                                <ItemsControl Grid.Column="1" Grid.Row="0" Padding="10">
+                                    <TextBlock Text="Jumlah Kursi" Margin="0 0 0 10" />
+                                    <ComboBox Width="360" Height="40" SelectedItem="{Binding JumlahKursi}"
+                                              ItemsSource="{Binding AvailableNumbers}" />
+                                </ItemsControl>
+                            </Grid>
+                            <StackPanel Orientation="Vertical">
+                                <ItemsControl Padding="10">
+                                    <TextBlock Text="Keterangan" Margin="0 0 0 10" />
+                                    <TextBox Classes="inputField" Text="{Binding Desc}" HorizontalAlignment="Left"
+                                             TextWrapping="Wrap" AcceptsReturn="True" Width="730"
+                                             Height="75" />
+                                </ItemsControl>
+                                <ItemsControl Padding="10">
+                                    <TextBlock Text="Jenis Maskapai" Margin="0 0  0 10" />
+                                    <ComboBox Width="350" SelectedItem="{Binding SelectedItem}"
+                                              ItemsSource="{Binding SelectedTypeTransportasi}" />
+                                </ItemsControl>
+                                <Button Classes="primaryButton" Content="Upload File"
+                                        Command="{Binding UploadImageCommand}" />
+                                <TextBlock Margin="10" Padding="10" Text="{Binding NameFile }" />
+                                <Button Classes="buttonCustom" Margin="10" Padding="10" Width="100" Height="40"
+                                        Content="Submit" Command="{Binding SubmitDataCommand}" />
+                            </StackPanel>
+                        </ItemsControl>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+    </DockPanel>
+
+</UserControl>

@@ -1,0 +1,63 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			xmlns:vm="clr-namespace:Tiket_Penerbangan_n_Kereta.ViewModel"
+			mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="1080"
+			x:DataType="vm:LoginViewModel"
+			x:Class="Tiket_Penerbangan_n_Kereta.LoginView"
+			x:CompileBindings="True">
+
+	<Grid ColumnDefinitions="*, *">
+		<StackPanel />
+		<Border Grid.Column="0">
+			<Image
+                Source="/Assets/aircraft.jpg"
+                Stretch="UniformToFill" />
+		</Border>
+		<Border Grid.Column="1"
+                VerticalAlignment="Stretch"
+                Background="{DynamicResource PrimaryColor}"
+                Padding="50">
+			<Grid ColumnDefinitions="350" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+                  Margin="0 10 0 0" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+				<StackPanel Grid.Column="0" Grid.Row="0" Margin="0 0 0 25">
+					<PathIcon Data="{StaticResource icon_plane}" Foreground="{DynamicResource SecondaryColor}"
+                              Width="50" Height="50" />
+					<TextBlock FontWeight="Medium" Text="Welcome Back!" HorizontalAlignment="Center" Padding="5"
+                               FontFamily="Poppins" FontSize="32" />
+					<TextBlock FontFamily="Poppins" FontSize="16" Text="Please enter your credentials" HorizontalAlignment="Center" />
+				</StackPanel>
+				<StackPanel Grid.Column="0" Grid.Row="1">
+
+				</StackPanel>
+				<StackPanel Grid.Column="0" Grid.Row="2">
+					<TextBlock Text="OR" FontFamily="Poppins" FontSize="14" HorizontalAlignment="Center" Padding="10"/>
+				</StackPanel>
+
+				<StackPanel Grid.Column="0" Grid.Row="3" Width="500">
+					<TextBlock Text="Email" FontFamily="Poppins" FontSize="16" Margin="0 10" />
+					<TextBox Text="{Binding Email}" Height="40" />
+				</StackPanel>
+				<StackPanel Grid.Column="0" Grid.Row="4" Width="500">
+					<TextBlock Text="Password" FontFamily="Poppins" FontSize="16" Margin="0 10" />
+					<TextBox Text="{Binding Password}" Height="40" PasswordChar="*" Classes="revealPasswordButton" />
+				</StackPanel>
+				<TextBlock Grid.Column="0" Grid.Row="5" Width="500" Margin="0 10" >
+					<Button Command="{Binding NavigateToRegister}"
+							x:Name="NavigateButtonRegister" Classes="hrefLink" Content="Sign up" /> Don't Have Account
+				</TextBlock>
+				<Button Command="{Binding LoginCommand}" Classes="buttonCustom" Height="50"
+                        HorizontalAlignment="Stretch" FontFamily="Poppins" FontSize="16" Width="500" Grid.Column="0" Grid.Row="6" Margin="0 10 0 0">
+					Log in
+					<Button.Transitions>
+						<Transitions>
+							<DoubleTransition Property="Opacity" Duration="0:0:0.5" />
+						</Transitions>
+					</Button.Transitions>
+				</Button>
+			</Grid>
+		</Border>
+	</Grid>
+	
+</UserControl>
