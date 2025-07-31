@@ -16,12 +16,14 @@ using System.Reactive;
 using Microsoft.Extensions.DependencyInjection;
 using DynamicData.Binding;
 using Splat;
+using Microsoft.Extensions.Hosting;
+using Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard.Maskapai;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel
 {
     public partial class LoginViewModel : ViewModels, IRoutableViewModel
     {
-        private readonly AuthState _authState;
+        private  AuthState _authState;
         public IScreen HostScreen { get; }
         public string UrlPathSegment => "Login";
 
@@ -48,12 +50,14 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel
 
         public LoginViewModel(IScreen screen) 
         {
+            _authState = App.AppHost.Services.GetRequiredService<AuthState>();
+
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
             if(HostScreen == null) throw new Exception ("Host screen is null");
 
             NavigateToRegister = ReactiveCommand.CreateFromObservable(() =>
-            HostScreen.Router.Navigate.Execute(new RegisterViewModel(HostScreen))
+            HostScreen.Router.Navigate.Execute(new RegisterViewModel(HostScreen, _authState))
             );
 
         }
@@ -62,20 +66,13 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel
         [RelayCommand]
         public async Task LoginAsync()
         {
-            
-                var result = await _authState.LoginAsync(Email, Password);
-
-                if (result != null)
-                {
-
-                }
+            var result = await _authState.LoginAsync(Email, Password);
+            if (result != null)
+            {
+                //HostScreen.Router.Navigate.Execute(new MainMaskapaiViewModel(HostScreen));
+            }
         }
 
-    }
-
-    public class CurrentUser
-    {
-        public static int Id { get; set; }
     }
     
 }

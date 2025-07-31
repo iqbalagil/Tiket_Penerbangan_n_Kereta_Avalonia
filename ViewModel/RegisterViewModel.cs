@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Reactive;
-using System.Reactive.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
 using ReactiveUI;
@@ -15,7 +14,7 @@ public partial class RegisterViewModel : ViewModels, IRoutableViewModel
     AuthState _authState;
     public IScreen HostScreen { get; }
     public string UrlPathSegment => "Register";
-    public IReactiveCommand<Unit, IRoutableViewModel> NavigateBack { get; }
+    public ReactiveCommand<Unit, IRoutableViewModel> NavigateBack { get; }
 
     public string _email;
 
@@ -26,8 +25,10 @@ public partial class RegisterViewModel : ViewModels, IRoutableViewModel
     private string _verifyPassword;
 
 
-    public RegisterViewModel(IScreen screen)
+    public RegisterViewModel(IScreen screen, AuthState auth)
     {
+        _authState = auth;
+
         HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
         if (HostScreen == null) throw new Exception("Host screen is null");

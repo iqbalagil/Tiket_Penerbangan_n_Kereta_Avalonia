@@ -9,6 +9,8 @@ using System.Linq;
 using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
+using Tiket_Penerbangan_n_Kereta.Data;
+using Tiket_Penerbangan_n_Kereta.Services;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel
 {
@@ -16,12 +18,15 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel
     {
         public RoutingState Router { get; } = new RoutingState();
 
-        public MainAppViewModel()
+        public MainAppViewModel(AuthState auth)
         {
+            //AuthState authState = auth;
+
             Locator.CurrentMutable.Register(() => new AppViewLocator(), typeof(IViewLocator));
 
             Router.Navigate.Execute(new LoginViewModel(this));
         }
+
 
     }
 }

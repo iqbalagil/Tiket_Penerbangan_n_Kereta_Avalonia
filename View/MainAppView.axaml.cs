@@ -13,9 +13,7 @@ public partial class MainAppView : ReactiveWindow<MainAppViewModel>
     {
         InitializeComponent();
 
-        ViewModel = new MainAppViewModel();
-
-        Debug.WriteLine("MainAppView initialized with ViewModel: " + ViewModel.GetType().Name);
+        //ViewModel = new MainAppViewModel();
 
         this.WhenActivated((disposable) =>
         {
