@@ -29,19 +29,19 @@
 				</StackPanel>
 				<StackPanel HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Width="500" >
 					<TextBlock Text="Username" Margin="0 10" FontFamily="Poppins" FontSize="16" />
-					<TextBox Text="{Binding Username}" HorizontalAlignment="Stretch" Height="40" FontFamily="Poppins" FontSize="14"/>
+					<TextBox x:Name="Username" Text="{Binding Username}" HorizontalAlignment="Stretch" Height="40" FontFamily="Poppins" FontSize="14"/>
 				</StackPanel>
 				<StackPanel Grid.Column="0" Grid.Row="2" Width="500">
 					<TextBlock Text="Email" Margin="0 10" FontFamily="Poppins" FontSize="16"/>
-					<TextBox Text="{Binding Email}" Height="40" FontFamily="Poppins" FontSize="14" />
+					<TextBox x:Name="Email" Text="{Binding Email}" Height="40" FontFamily="Poppins" FontSize="14" />
 				</StackPanel>
 				<StackPanel Grid.Column="0" Grid.Row="3" Width="500">
 					<TextBlock Text="Password" Margin="0 10" FontFamily="Poppins" FontSize="16" />
-					<TextBox Text="{Binding Password}" Height="40" FontFamily="Poppins" FontSize="14" PasswordChar="*" Classes="revealPasswordButton" />
+					<TextBox x:Name="Password" Text="{Binding Password}" Height="40" FontFamily="Poppins" FontSize="14" PasswordChar="*" Classes="revealPasswordButton" />
 				</StackPanel>
 				<StackPanel Grid.Row="4" Grid.Column="0" Width="500">
 					<TextBlock Text="Verify Password" Margin="0 10" FontFamily="Poppins" FontSize="16" />
-					<TextBox Text="{Binding VerifyPassword}" Height="40" FontFamily="Poppins" FontSize="14" PasswordChar="*" Classes="revealPasswordButton" />
+					<TextBox x:Name="VeifyPassword" Text="{Binding VerifyPassword}" Height="40" FontFamily="Poppins" FontSize="14" PasswordChar="*" Classes="revealPasswordButton" />
 				</StackPanel>
 				<Button Command="{Binding RegisterCommand}" Classes="buttonCustom" Height="50"
                         HorizontalAlignment="Stretch" Width="500"

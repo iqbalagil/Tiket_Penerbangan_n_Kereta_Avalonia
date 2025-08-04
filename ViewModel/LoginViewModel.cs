@@ -1,63 +1,57 @@
 ﻿
 using CommunityToolkit.Mvvm.Input;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading.Tasks;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
-using Tiket_Penerbangan_n_Kereta.View.Dashboard;
 using Tiket_Penerbangan_n_Kereta.Services;
-using System;
-using System.Reactive.Linq;
 using ReactiveUI;
-using System.Reactive.Disposables;
 using System.Reactive;
 using Microsoft.Extensions.DependencyInjection;
-using DynamicData.Binding;
-using Splat;
-using Microsoft.Extensions.Hosting;
-using Tiket_Penerbangan_n_Kereta.ViewModel.Dashboard.Maskapai;
+using ReactiveUI.Validation.Abstractions;
+using ReactiveUI.Validation.Contexts;
+using ReactiveUI.Validation.Extensions;
+using ReactiveUI.Validation.Helpers;
+using System.Text.RegularExpressions;
+using ReactiveUI.Validation.States;
+using System;
+using System.Reactive.Linq;
+using System.ComponentModel;
+using System.Linq;
+using System.Collections;
+using System.Reactive.Disposables;
 
 namespace Tiket_Penerbangan_n_Kereta.ViewModel
 {
-    public partial class LoginViewModel : ViewModels, IRoutableViewModel
+    public partial class LoginViewModel : ReactiveValidationObject, IRoutableViewModel, IValidatableViewModel
     {
         private  AuthState _authState;
         public IScreen HostScreen { get; }
         public string UrlPathSegment => "Login";
 
-        private string _email;
-        
-        [Required(ErrorMessage = "Email is required")]
+        public ValidationContext validationContext { get; } = new ValidationContext();
+
+        private string _email = string.Empty;
         public string Email
         {
-            get => _email;
-            set => this.RaiseAndSetIfChanged(ref _email, value);
+            get => _email; 
+            set => this.RaiseAndSetIfChanged(ref _email, value); 
         }
 
-        private string _password;
-
-        [Required(ErrorMessage = "Password is required")]
+        private string _password = string.Empty;
         public string Password
         {
             get => _password;
             set => this.RaiseAndSetIfChanged(ref _password, value);
         }
 
-       public ReactiveCommand<Unit, IRoutableViewModel> NavigateToRegister { get; }
-
+        public ReactiveCommand<Unit, IRoutableViewModel> NavigateToRegister { get; }
 
         public LoginViewModel(IScreen screen) 
         {
             _authState = App.AppHost.Services.GetRequiredService<AuthState>();
 
-            HostScreen = screen ?? Locator.Current.GetService<IScreen>();
-
-            if(HostScreen == null) throw new Exception ("Host screen is null");
+            HostScreen = screen;
 
             NavigateToRegister = ReactiveCommand.CreateFromObservable(() =>
-            HostScreen.Router.Navigate.Execute(new RegisterViewModel(HostScreen, _authState))
+            HostScreen!.Router.Navigate.Execute(new RegisterViewModel(HostScreen, _authState))
             );
 
         }
@@ -66,13 +60,41 @@ namespace Tiket_Penerbangan_n_Kereta.ViewModel
         [RelayCommand]
         public async Task LoginAsync()
         {
-            var result = await _authState.LoginAsync(Email, Password);
-            if (result != null)
+
+            this.ValidationRule(
+                ViewModel => ViewModel.Email,
+                email => !string.IsNullOrWhiteSpace(email),
+                "Email field is required");
+
+            this.ValidationRule(
+                ViewModel => ViewModel.Email,
+                email => !string.IsNullOrWhiteSpace(email) && MyRegex.EmailRegex().IsMatch(email),
+                "Please enter a valid email address ('name@example.com')");
+
+            this.ValidationRule(
+                ViewModel => ViewModel.Password,
+                password => !string.IsNullOrWhiteSpace(password),
+                "Password field is required");
+
+            if (validationContext.IsValid)
             {
-                //HostScreen.Router.Navigate.Execute(new MainMaskapaiViewModel(HostScreen));
+                var result = await _authState.LoginAsync(Email, Password);
+
+                if(result != null)
+                {
+
+                }
+
             }
+
         }
 
     }
-    
+
+    public static partial class MyRegex
+    {
+        [GeneratedRegex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$", RegexOptions.IgnoreCase)]
+        public static partial Regex EmailRegex();
+    }
+
 }
